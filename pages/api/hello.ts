@@ -7,9 +7,4 @@ type Data = {
 
 export default (req: NextApiRequest, res: NextApiResponse<Data>) => {
   res.status(200).json({ name: 'John Doe' })
-
-  return res.status(200)
-    .send({
-      test: 'This is test API'
-    })
 }

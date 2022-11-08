@@ -1,26 +1,19 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect } from 'react';
-import styles from '../styles/Home.module.css'
+import React from "react";
+import Link from 'next/link'
+import Head from "next/head";
 
-export default function Home() {
-
-  const title = `이것은 SEO 용 타이틀`;
-
-  useEffect(() => {
-    fetch('api/hello')
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        console.log(`json ==>`, json);
-      })
-  }, [])
-
-
+export default function IndexPage() {
   return (
-    <div className={styles.container}>
-      Hello Next.js !
+    <div>
+        <Head>
+            <title>Create Next App</title>
+            <meta name="description" content="Generate by create next app" />
+            <link rel='icon' href='/favicon.ico' />
+        </Head>
+
+        <Link href="posts/first-post">
+            Learn Next.JS.
+        </Link>
     </div>
-  )
+  );
 }
