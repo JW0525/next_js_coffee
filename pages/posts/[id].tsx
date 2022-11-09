@@ -1,30 +1,49 @@
-const postData = [
-    { id: 1, title: "New Post", description: "Post data From Server"},
-    { id: 2, title: "New Post", description: "Post data From Server"}
-];
+import {GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType} from 'next'
+import { getAllPost } from '../lib/helper';
+import {useRouter} from "next/router";
 
-export default function Post(post: any) {
+const Post = ({posts}: InferGetStaticPropsType<typeof getStaticProps>) => {
+    const router = useRouter();
+    const { id } = router.query;
+
     return (
         <article>
-            {post.map((p: any) => (
-                <div>
-                    <h1>{p.id}</h1>
-                    <h1>{p.title}</h1>
-                    <h1>{p.description}</h1>
+            <button onClick={() => router.push('/posts/user')}>
+                post
+            </button>
+            {posts.map((post: any) => (
+                <div key={post.id}>
+                    <h1>{post.id}</h1>
+                    <h1>{post.title}</h1>
+                    <h1>{post.description}</h1>
                 </div>
             ))}
         </article>
     )
 }
 
-export async function getStaticProps() {
-    const post = postData;
+export default Post;
+
+export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
+    // https://kkj6670.github.io/board/typescript/getStaticProps-typescript 참조
+    const id = params?.id?.toString() || '';
+    const posts = getAllPost(id);
 
     return {
-        props: { post }
+        props: {
+            posts
+        }
     }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
+    const posts = getAllPost();
+    const paths = posts.map(post => ({
+        params: { id: post.id.toString() }
+    }))
 
+    return {
+        paths,
+        fallback: false
+    }
 }
