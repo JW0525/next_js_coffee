@@ -7,18 +7,22 @@ import styled from "@emotion/styled";
 
 const LayoutContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 400px;
   height: 100vh;
-  background-color: green;
+  //background-color: green;
+  
+  footer {
+    position: absolute;
+    bottom: 0;
+  }
 `
 
 export const Layout: FC<{children: ReactNode}> = ({ children }) => {
   return (
     <LayoutContainer>
-      <Navbar />
+      {/*<Navbar />*/}
       <main>{children}</main>
       <footer>This is Footer</footer>
     </LayoutContainer>
