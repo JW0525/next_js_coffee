@@ -1,18 +1,18 @@
 import Head from "next/head";
 import type { AppProps } from 'next/app'
-import Navbar from "./posts/navbar";
-import {Home_nav, Layout} from "./layout/Layout";
+import Navbar from "./components/navbar";
+import { Layout } from "./components/layout";
+import { Global } from '@emotion/react';
+import { global } from "../styles/global";
+
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Global styles={global} />
       <Layout>
-        <Home_nav />
-        {/*<Navbar />*/}
         <Component {...pageProps} />
       </Layout>
-
-
     </>
   );
 }
