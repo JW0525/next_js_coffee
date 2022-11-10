@@ -47,11 +47,9 @@ export const useForm = (props: {
 
       const errors = validate(form);
       setErrors(errors);
-      if (Object.values(errors).some(v => v)) {
-        return
-      }
+      if (Object.values(errors).some(v => v)) return;
 
-      alert('안녕!');
+      alert('회원가입이 완료되었습니다.');
     }, [form]
   );
 
