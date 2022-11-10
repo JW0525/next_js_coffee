@@ -1,8 +1,7 @@
 import Head from "next/head";
-import navLinks from "../lib/navLinks";
+import navLinks from "../../pages/lib/navLinks";
 import Link from "next/link";
 import {FC, ReactNode} from "react";
-import Navbar from "./navbar";
 import styled from "@emotion/styled";
 
 const LayoutContainer = styled.div`
@@ -11,7 +10,6 @@ const LayoutContainer = styled.div`
   align-items: center;
   width: 400px;
   height: 100vh;
-  //background-color: green;
   
   footer {
     position: absolute;
@@ -24,7 +22,7 @@ export const Layout: FC<{children: ReactNode}> = ({ children }) => {
     <LayoutContainer>
       {/*<Navbar />*/}
       <main>{children}</main>
-      <footer>This is Footer</footer>
+      {/*<footer>This is Footer</footer>*/}
     </LayoutContainer>
   )
 }

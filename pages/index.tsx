@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Head from "next/head";
 import styled from '@emotion/styled'
 import Image from 'next/image'
-import coffeeImage from '../public/images/free-icon-coffee-cup-3361135.png'
+import coffeeImage from '../public/asset/images/free-icon-coffee-cup-3361135.png'
 
 const SplashContainer = styled.div`
   .contents {

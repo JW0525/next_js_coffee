@@ -1,4 +1,4 @@
-import navLinks from "../lib/navLinks";
+import navLinks from "../../pages/lib/navLinks";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -23,7 +23,7 @@ const Navbar = () => {
     <div className='container'>
       <ul>
         <li>
-          <a href='./'>Home</a>
+          <a href='..'>Home</a>
         </li>
       </ul>
     </div>
