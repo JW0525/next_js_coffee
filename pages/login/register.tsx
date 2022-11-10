@@ -1,7 +1,7 @@
-import {useCallback, useEffect, useState} from "react";
+import styled from "@emotion/styled";
 import InputBox from "@/components/common/inputBox";
 import {Layout} from "@/components/layout/layout";
-import styled from "@emotion/styled";
+import {IRegisterForm, useForm} from "@/hooks/useForm";
 
 const RegisterContainer = styled.div`
   width: 400px;
@@ -15,43 +15,7 @@ const SubmitBtn = styled.button`
   height: 100%;
 `
 
-export interface IRegisterForm {
-  email: string,
-  pwd: string,
-  pwdCheck?: string,
-  name?: string
-}
-
-export interface ICheckTouched {
-  email: boolean,
-  pwd: boolean,
-  pwdCheck?: boolean,
-  name?: boolean
-}
-
 const Register = () => {
-  const [form, setForm] = useState<IRegisterForm>({
-    email: '',
-    pwd: '',
-    pwdCheck: '',
-    name: ''
-  });
-
-  const [errors, setErrors] = useState({
-    email: "",
-    pwd: "",
-    pwdCheck: "",
-    name: ""
-  });
-
-  const [isTouched, setTouched] = useState<ICheckTouched>({
-    email: false,
-    pwd: false,
-    pwdCheck: false,
-    name: false
-  })
-
-  // 필드값을 검증한다.
   const validate = (values: IRegisterForm) => {
     const errors = { email: "", pwd: "", pwdCheck: "", name: "" }
 
@@ -63,55 +27,46 @@ const Register = () => {
     return errors
   }
 
-  const submitHandler = useCallback(
-    (e: any) => {
-      e.preventDefault();
-
-      const errors = validate(form);
-      // 에러 값을 설정하고,
-      setErrors(errors);
-      // 잘못된 값이면 제출 처리를 중단한다.
-      if (Object.values(errors).some(v => v)) {
-        return
-      }
-    }, [form]
-  );
-
-  // 입력값에 따라 검증 함수를 실행하는 함수를 정의한다
-  const runValidator = useCallback(() => validate(form), [form]);
-
-  useEffect(() => {
-    const errors = runValidator();
-    setErrors(errors)
-  }, [runValidator]);
+  const { form, errors, isTouched, submitHandler, getFieldProps } = useForm({
+  initialForm: { email: '', pwd: '', pwdCheck: '', name: ''},
+    initialError: { email: '', pwd: '', pwdCheck: '', name: ''},
+    initialIsTouched: { email: false, pwd: false, pwdCheck: false, name: false},
+    validate
+  });
 
   return (
     <Layout>
       <RegisterContainer>
         <form onSubmit={ submitHandler }>
           <InputBox
-            title='email'
+            title='이메일'
             type='email'
             name='email'
-            setForm={setForm}
-            form={form}
-            setTouched={setTouched}
-            isTouched={isTouched}
+            getFieldProps={getFieldProps}
           />
           {isTouched.email && errors.email && <span>{errors.email}</span>}
           <InputBox
             title='비밀번호'
             type='password'
             name='pwd'
-            setForm={setForm}
-            form={form}
-            setTouched={setTouched}
-            isTouched={isTouched}
+            getFieldProps={getFieldProps}
           />
           {isTouched.pwd && errors.pwd && <span>{errors.pwd}</span>}
+          <InputBox
+            title='비밀번호 확인'
+            type='password'
+            name='pwdCheck'
+            getFieldProps={getFieldProps}
+          />
+          {isTouched.pwdCheck && errors.pwdCheck && <span>{errors.pwdCheck}</span>}
+          <InputBox
+            title='사명'
+            type='text'
+            name='name'
+            getFieldProps={getFieldProps}
+          />
+          {isTouched.name && errors.name && <span>{errors.name}</span>}
 
-          {/*<InputBox title='비밀번호 확인' type='password' keyName='pwdCheck' setForm={setForm} form={form} />*/}
-          {/*<InputBox title='사명' type='text' keyName='name' setForm={setForm} form={form} />*/}
           <SubmitBtn type="submit">Register</SubmitBtn>
         </form>
       </RegisterContainer>

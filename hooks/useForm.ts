@@ -1,14 +1,29 @@
 import React, {useCallback, useEffect, useState} from "react";
 
+export interface IRegisterForm {
+  email: string,
+  pwd: string,
+  pwdCheck?: string,
+  name?: string
+}
+
+export interface ICheckTouched {
+  email: boolean,
+  pwd: boolean,
+  pwdCheck?: boolean,
+  name?: boolean
+}
 
 export const useForm = (props: {
-  initialForm : any,
-  validate: any
+  initialForm : IRegisterForm,
+  initialError: IRegisterForm,
+  initialIsTouched: ICheckTouched,
+  validate: Function,
 }) => {
-  const { initialForm, validate } = props;
-  const [form, setForm] = useState(initialForm);
-  const [errors, setErrors] = useState({});
-  const [isTouched, setTouched] = useState({});
+  const { initialForm, initialError, initialIsTouched, validate } = props;
+  const [form, setForm] = useState<IRegisterForm>(initialForm);
+  const [errors, setErrors] = useState<IRegisterForm>(initialError);
+  const [isTouched, setTouched] = useState<ICheckTouched>(initialIsTouched);
 
   const changeHandler = (e: React.FormEvent<HTMLInputElement>) => {
     let { value, name } = e.currentTarget;
@@ -35,10 +50,12 @@ export const useForm = (props: {
       if (Object.values(errors).some(v => v)) {
         return
       }
+
+      alert('안녕!');
     }, [form]
   );
 
-  // 입력값에 따라 검증 함수를 실행하는 함수를 정의한다
+  // 입력값에 따라 검증 함수를 실행하는 함수
   const runValidator = useCallback(() => validate(form), [form]);
 
   useEffect(() => {
@@ -46,14 +63,23 @@ export const useForm = (props: {
     setErrors(errors)
   }, [runValidator]);
 
+  const getFieldProps = (name: string) => {
+    // @ts-ignore
+    const value = form[name];
+
+    return {
+      value,
+      blurHandler,
+      changeHandler,
+    }
+  }
 
   return {
     form,
     errors,
     isTouched,
-    changeHandler,
-    blurHandler,
-    submitHandler
+    submitHandler,
+    getFieldProps
   }
 }
 
