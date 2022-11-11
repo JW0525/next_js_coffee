@@ -39,6 +39,8 @@ const Register = () => {
     validate
   });
 
+  console.log(form);
+
   return (
     <Layout>
       <RegisterContainer>

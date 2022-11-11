@@ -31,4 +31,9 @@ export const global = css`
     border: 0;
     outline: 0 !important;
   }
+  
+  .link {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
