@@ -12,6 +12,10 @@ const LayoutContainer = styled.div`
   height: 100vh;
   background-color: floralwhite;
   
+  main {
+    width: 400px;
+  }
+  
   footer {
     position: absolute;
     bottom: 0;

@@ -6,7 +6,6 @@ export default function get_Users(req: NextApiRequest, res: NextApiResponse) {
   main().catch(error => console.error(error));
 
   const { method } = req;
-  console.log(main());
   // switch(method) {
   //   case 'GET':
   //     res.status(200).json({ method: 'GET', endpoint: 'Users' });
@@ -20,10 +19,10 @@ export default function get_Users(req: NextApiRequest, res: NextApiResponse) {
   //     break;
   // }
 
-  // res.status(200).json([
-  //   {id: 1, name: "John Smith"},
-  //   {id: 2, name: "Samuel"}
-  // ])
+  res.status(200).json([
+    {id: 1, name: "John Smith"},
+    {id: 2, name: "Samuel"}
+  ])
 
 
 

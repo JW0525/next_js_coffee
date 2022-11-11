@@ -1,12 +1,13 @@
 import {GetStaticProps, InferGetStaticPropsType} from "next";
 import getData from "pages/lib/getData";
+import {Loading} from "@/components/common/loading";
 
 // const Users = ({ users }: InferGetStaticPropsType<typeof getStaticProps>) => {
 const Users = () => {
   const { user, isLoading, isError } = getData('http://localhost:3000/api/users');
 
   if (isError) return <div>Error fetching data</div>
-  if (isLoading) return <div>...loading</div>
+  if (isLoading) return <Loading />
 
   return (
     <article>
@@ -22,14 +23,3 @@ const Users = () => {
 }
 
 export default Users;
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   const res = await fetch('http://localhost:3000/api/users');
-//   const users = await res.json();
-//
-//   return {
-//     props: {
-//       users
-//     }
-//   }
-// }

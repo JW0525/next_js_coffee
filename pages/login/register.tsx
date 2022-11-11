@@ -3,17 +3,11 @@ import InputBox from "@/components/common/inputBox";
 import {Layout} from "@/components/layout/layout";
 import {IRegisterForm, useForm} from "@/hooks/useForm";
 import {regExp} from "../../utils/regExp";
+import ButtonBox from "@/components/common/btn";
 
 const RegisterContainer = styled.div`
   width: 400px;
   padding: 0 20px;
-`
-
-const SubmitBtn = styled.button`
-  margin: 30px 0;
-  padding: 15px 0;
-  width: 100%;
-  height: 100%;
 `
 
 const Register = () => {
@@ -38,8 +32,6 @@ const Register = () => {
     initialIsTouched: { email: false, pwd: false, pwdCheck: false, name: false},
     validate
   });
-
-  console.log(form);
 
   return (
     <Layout>
@@ -74,7 +66,7 @@ const Register = () => {
           />
           {isTouched.name && errors.name && <span>{errors.name}</span>}
 
-          <SubmitBtn type="submit">Register</SubmitBtn>
+          <ButtonBox content='Register' type="submit" />
         </form>
       </RegisterContainer>
     </Layout>

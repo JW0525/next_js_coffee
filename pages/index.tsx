@@ -3,6 +3,7 @@ import { Loading } from "@/components/common/loading";
 import HeadComponent from "@/components/common/head";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import ButtonBox from "@/components/common/btn";
 
 
 const IndexContainer = styled.div`
@@ -16,18 +17,6 @@ const IndexContainer = styled.div`
     flex-direction: column;
   }
 `;
-
-
-const Button = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 44px;
-  border-radius: 26px;
-  background-color: ${(props) => props.color};
-  color: white;
-`
 
 export default function IndexPage() {
   const [loading, setLoading] = useState(true);
@@ -44,15 +33,15 @@ export default function IndexPage() {
   },[]);
 
   const main = () => {
-    if (loading) <Loading />
+    if (loading) return <Loading />
 
     return (
       <div className='btn-container'>
         <Link className='link' href='/login'>
-          <Button color='green'>Log In</Button>
+          <ButtonBox content='Log In' type='button'/>
         </Link>
         <Link className='link' href='/login/register'>
-          <Button color='green'>Register</Button>
+          <ButtonBox content='Register' type='button'/>
         </Link>
       </div>
     )
@@ -61,11 +50,7 @@ export default function IndexPage() {
   return (
     <IndexContainer>
       <HeadComponent title='coffee' name='description' content='coffee app' />
-
-      {
-        main()
-      }
-
+      { main() }
     </IndexContainer>
   );
 }
