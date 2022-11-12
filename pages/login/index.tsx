@@ -5,17 +5,22 @@ import ButtonBox from "@/components/common/btn";
 import {IRegisterForm, useForm} from "@/hooks/useForm";
 import {regExp} from "../../utils/regExp";
 import InputBox from "@/components/common/inputBox";
+import Navbar from "@/components/common/navbar";
 
-const LoginContainer = styled.div`
-  width: 100%;
-  padding: 0 30px;
-  
-  .find-password {
-    margin-top: 10px;
+const LoginContainer = styled.form`
+  display: flex;
+  align-items: center;
 
-    p {
-      text-align: right;
-      color: green;
+  form {
+    width: 100%;
+
+    .find-password {
+      margin-top: 10px;
+
+      p {
+        text-align: right;
+        color: green;
+      }
     }
   }
 `
@@ -39,31 +44,29 @@ const LoginPage = () => {
   });
 
   return (
-    <Layout>
-      <LoginContainer>
-        <form onSubmit={ submitHandler }>
-          <InputBox
-            title='이메일'
-            type='email'
-            name='email'
-            getFieldProps={getFieldProps}
-          />
-          {isTouched.email && errors.email && <span>{errors.email}</span>}
-          <InputBox
-            title='비밀번호'
-            type='password'
-            name='pwd'
-            getFieldProps={getFieldProps}
-          />
-          {isTouched.pwd && errors.pwd && <span>{errors.pwd}</span>}
-
-          <div className='find-password'>
-            <p>Forgot password?</p>
-          </div>
-          <ButtonBox content='Log In' type="submit" />
-        </form>
-      </LoginContainer>
-    </Layout>
+    <LoginContainer className='page-container'>
+      <Navbar text='LogIn' />
+      <form onSubmit={ submitHandler }>
+        <InputBox
+          title='이메일'
+          type='email'
+          name='email'
+          getFieldProps={getFieldProps}
+        />
+        {isTouched.email && errors.email && <span>{errors.email}</span>}
+        <InputBox
+          title='비밀번호'
+          type='password'
+          name='pwd'
+          getFieldProps={getFieldProps}
+        />
+        {isTouched.pwd && errors.pwd && <span>{errors.pwd}</span>}
+        <div className='find-password'>
+          <p>Forgot password?</p>
+        </div>
+        <ButtonBox content='Log In' type="submit" />
+      </form>
+    </LoginContainer>
   )
 };
 

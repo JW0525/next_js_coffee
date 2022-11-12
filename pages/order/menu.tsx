@@ -1,8 +1,5 @@
 import {useRouter} from "next/router";
 import {InferGetStaticPropsType} from "next";
-import styled from "@emotion/styled";
-import Link from "next/link";
-
 
 const OrderMenu = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
@@ -14,7 +11,7 @@ const OrderMenu = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => 
   const menu = category.list[`${menuIdx}`];
 
   return (
-    <div>
+    <div className='page-container'>
       <div>{menu.name}</div>
       <ul>
         {

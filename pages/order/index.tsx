@@ -1,18 +1,24 @@
 import {InferGetStaticPropsType} from "next";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import Navbar from "@/components/common/navbar";
 
-const ListBox = styled.div`   
-  display: grid;
-  grid-template-columns: 1fr 3fr 20px;
-  align-items: center;
-  height: 70px;
-  cursor: pointer;
+const OrderPageContainer = styled.div`
+  .category-list-container {
+    margin-top: 70px;
 
-  background-color: yellow;
+    .category-list-box {
+      display: grid;
+      grid-template-columns: 120px 1fr 20px;
+      align-items: center;
+      height: 120px;
+      border-bottom: 1px solid wheat;
+      cursor: pointer;
 
-  .arrow {
-    width: 20px;
+      .arrow {
+        width: 20px;
+      }
+    }
   }
 `
 
@@ -21,32 +27,34 @@ const OrderPage = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => 
   const pathname = '/order/category';
 
   return (
-    <div>
-      {
-        categoryList.map((category: any, idx: number) => {
-          return (
-            <Link
-              className='link'
-              href={{
-                pathname: pathname,
-                query: {
-                  categoryIdx: idx
-                },
-              }}
-              as={`${pathname}?type=${category.name}`}
-              key={idx}
-            >
-              <ListBox>
-                <img src='' alt='' />
-                <p>{category.name}</p>
-                <div className='arrow'> 이동 </div>
-              </ListBox>
-            </Link>
-
-          )
-        })
-      }
-    </div>
+    <OrderPageContainer className='page-container'>
+      <Navbar text='MENU'/>
+      <div className='category-list-container'>
+        {
+          categoryList.map((category: any, idx: number) => {
+            return (
+              <Link
+                className='link'
+                href={{
+                  pathname: pathname,
+                  query: {
+                    categoryIdx: idx
+                  },
+                }}
+                as={`${pathname}?type=${category.name}`}
+                key={idx}
+              >
+                <div className='category-list-box'>
+                  <img src='' alt='' />
+                  <p>{category.name}</p>
+                  <div className='arrow'> 이동 </div>
+                </div>
+              </Link>
+            )
+          })
+        }
+      </div>
+    </OrderPageContainer>
   )
 }
 export default OrderPage;

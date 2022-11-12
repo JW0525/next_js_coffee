@@ -1,11 +1,9 @@
-import Head from "next/head";
-import navLinks from "../../pages/lib/navLinks";
-import Link from "next/link";
 import {FC, ReactNode} from "react";
 import styled from "@emotion/styled";
 
 const LayoutContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
@@ -14,9 +12,11 @@ const LayoutContainer = styled.div`
 
   main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
+    padding: 0 25px;
   }
   
   @media screen and (max-width: 480px) {
@@ -29,7 +29,7 @@ const LayoutContainer = styled.div`
   @media screen and (min-width: 480px) {
     main {
       width: 480px;
-      background-color: darkgray;
+      background-color: white;
     }
   }
   
@@ -37,13 +37,23 @@ const LayoutContainer = styled.div`
     position: absolute;
     bottom: 0;
   }
+  
+ // 컴포넌트 CSS 
+  .page-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-height: 1536px;
+    overflow: auto;
+  }
 `
 
 export const Layout: FC<{children: ReactNode}> = ({ children }) => {
   return (
     <LayoutContainer>
-      {/*<Navbar />*/}
-      <main>{children}</main>
+      <main>
+        {children}
+      </main>
       {/*<footer>This is Footer</footer>*/}
     </LayoutContainer>
   )

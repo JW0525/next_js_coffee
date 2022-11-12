@@ -10,6 +10,7 @@ const Button = styled.button`
   border-radius: 26px;
   background-color: gray;
   color: white;
+  cursor: pointer;
 `
 
 const ButtonBox = (props: {

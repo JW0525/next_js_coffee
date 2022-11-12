@@ -2,15 +2,21 @@ import {useRouter} from "next/router";
 import {InferGetStaticPropsType} from "next";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import Navbar from "@/components/common/navbar";
 
-const ListBox = styled.div`
-  display: grid;
-  grid-template-columns: 3.5fr 6.5fr;
-  align-items: center;
-  height: 85px;
-  cursor: pointer;
+const OrderCategoryContainer = styled.div`
+  .menu-list-container {
+    margin-top: 70px;
 
-  background-color: skyblue;
+    .menu-list-box {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      align-items: center;
+      height: 100px;
+      border-bottom: 1px solid wheat;
+      cursor: pointer;
+    }
+  }
 `
 
 const OrderCategory = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -25,31 +31,34 @@ const OrderCategory = ({ data }: InferGetStaticPropsType<typeof getStaticProps>)
   const pathname = '/order/menu';
 
   return (
-    <div>
-      {
-        list.map((menu: any, idx: number) => {
-          return (
-            <Link
-              className='link'
-              href={{
-                pathname: pathname,
-                query: {
-                  categoryIdx: categoryIdx,
-                  menuIdx: idx
-                },
-              }}
-              as={`${pathname}?name=${menu.name}`}
-              key={idx}
-            >
-              <ListBox>
-                <img src='' alt='' />
-                <p>{menu.name}</p>
-              </ListBox>
-            </Link>
-          )
-        })
-      }
-    </div>
+    <OrderCategoryContainer className='page-container'>
+      <Navbar text={category.name.toUpperCase()} />
+      <div className='menu-list-container'>
+        {
+          list.map((menu: any, idx: number) => {
+            return (
+              <Link
+                className='link'
+                href={{
+                  pathname: pathname,
+                  query: {
+                    categoryIdx: categoryIdx,
+                    menuIdx: idx
+                  },
+                }}
+                as={`${pathname}?name=${menu.name}`}
+                key={idx}
+              >
+                <div className='menu-list-box'>
+                  <img src='' alt='' />
+                  <p>{menu.name}</p>
+                </div>
+              </Link>
+            )
+          })
+        }
+      </div>
+    </OrderCategoryContainer>
   )
 }
 
