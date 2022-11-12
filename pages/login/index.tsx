@@ -2,12 +2,12 @@ import React from "react";
 import styled from "@emotion/styled";
 import {Layout} from "@/components/layout/layout";
 import ButtonBox from "@/components/common/btn";
-import {IRegisterForm, useForm} from "@/hooks/useForm";
 import {regExp} from "../../utils/regExp";
 import InputBox from "@/components/common/inputBox";
 import Navbar from "@/components/common/navbar";
+import {IRegisterForm, useForm} from "utils/hooks/useForm";
 
-const LoginContainer = styled.form`
+const LoginPageContainer = styled.form`
   display: flex;
   align-items: center;
 
@@ -44,7 +44,7 @@ const LoginPage = () => {
   });
 
   return (
-    <LoginContainer className='page-container'>
+    <LoginPageContainer className='page-container'>
       <Navbar text='LogIn' />
       <form onSubmit={ submitHandler }>
         <InputBox
@@ -66,7 +66,7 @@ const LoginPage = () => {
         </div>
         <ButtonBox content='Log In' type="submit" />
       </form>
-    </LoginContainer>
+    </LoginPageContainer>
   )
 };
 

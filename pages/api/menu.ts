@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import main from '../database/connection';
 
 export default function get_Menu(req: NextApiRequest, res: NextApiResponse) {
 

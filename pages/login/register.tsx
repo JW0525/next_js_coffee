@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
 import InputBox from "@/components/common/inputBox";
-import {Layout} from "@/components/layout/layout";
-import {IRegisterForm, useForm} from "@/hooks/useForm";
+import {IRegisterForm, useForm} from "../../utils/hooks/useForm";
 import {regExp} from "../../utils/regExp";
 import ButtonBox from "@/components/common/btn";
 import Navbar from "@/components/common/navbar";
 import React from "react";
 
-const RegisterContainer = styled.div`
+const LoginegisterContainer = styled.div`
   display: flex;
   align-items: center;
 
@@ -40,7 +39,7 @@ const Register = () => {
   });
 
   return (
-    <RegisterContainer className='page-container'>
+    <LoginegisterContainer className='page-container'>
       <Navbar text='Register' />
       <form onSubmit={ submitHandler }>
         <InputBox
@@ -74,7 +73,7 @@ const Register = () => {
 
         <ButtonBox content='Register' type="submit" />
       </form>
-    </RegisterContainer>
+    </LoginegisterContainer>
 
   )
 }

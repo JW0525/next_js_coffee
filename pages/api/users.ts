@@ -19,17 +19,17 @@ export default function get_Users(req: NextApiRequest, res: NextApiResponse) {
   //     break;
   // }
 
-  res.status(200).json([
-    {id: 1, name: "John Smith"},
-    {id: 2, name: "Samuel"}
-  ])
+  // res.status(200).json([
+  //   {id: 1, name: "John Smith"},
+  //   {id: 2, name: "Samuel"}
+  // ])
 
 
 
-  // const create = new Kitten({
-  //   id: 2, name: "Samuel"
-  // });
-  // create.save().then(() => {
-  //   res.status(200).json(create)
-  // })
+  const create = new Kitten({
+    id: 2, name: "Samuel"
+  });
+  create.save().then(() => {
+    res.status(200).json(create)
+  })
 }

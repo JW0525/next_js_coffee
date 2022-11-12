@@ -23,7 +23,7 @@ const OrderPageContainer = styled.div`
 `
 
 const OrderPage = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { categoryList } = data;
+  const categoryList  = data;
   const pathname = '/order/category';
 
   return (
@@ -60,7 +60,7 @@ const OrderPage = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => 
 export default OrderPage;
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/api/menu');
+  const res = await fetch('http://localhost:3000/api/order');
   const data = await res.json();
 
   return {

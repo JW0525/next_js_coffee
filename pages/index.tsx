@@ -2,27 +2,17 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import { Loading } from "@/components/common/loading";
 import HeadComponent from "@/components/common/head";
-import styled from "@emotion/styled";
-import Link from "next/link";
-import ButtonBox from "@/components/common/btn";
-
-const IndexContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-
-  .btn-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-`;
 
 export default function IndexPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [firstPage, setFirstPage] = useState('order');
 
   useEffect(() => {
+    // Hydration failed because the initial UI does not match what was rendered on the server.
+    // 위의 문구를 피하기 위해서는 useState 를 이용해 초기값을 설정하고, 후에 useEffect 안에서 바꿔주는 방법을 택해야 한다.
+    if (false) setFirstPage('main');
+
     const timer = setTimeout(() =>
       setLoading(false), 1000
     );
@@ -33,32 +23,18 @@ export default function IndexPage() {
     }
   },[]);
 
-
   const main = () => {
     if (loading) return <Loading />
 
-    // 로그인이 되어 있다면 주문페이지로 이동한다.
-    if (true) {
-      router.push('order');
-    } else {
-      return (
-        <div className='btn-container'>
-          <Link className='link' href='login' style={{marginBottom: '20px'}}>
-            <ButtonBox content='Log In' type='button' />
-          </Link>
-          <Link className='link' href='login/register'>
-            <ButtonBox content='Register' type='button'/>
-          </Link>
-        </div>
-      )
-    }
+    router.push(firstPage).then();
   };
 
+
   return (
-    <IndexContainer>
+    <div>
       <HeadComponent title='coffee' name='description' content='coffee app' />
       { main() }
-    </IndexContainer>
+    </div>
   );
 }
 
