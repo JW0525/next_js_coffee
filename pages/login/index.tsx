@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "@emotion/styled";
+import {Layout} from "@/components/layout/layout";
 import ButtonBox from "@/components/common/btn";
-import {Layout} from "../../components/layout/layout";
 import {IRegisterForm, useForm} from "@/hooks/useForm";
 import {regExp} from "../../utils/regExp";
 import InputBox from "@/components/common/inputBox";
 
 const LoginContainer = styled.div`
-  width: 400px;
-  padding: 0 20px;
+  width: 100%;
+  padding: 0 30px;
   
   .find-password {
     margin-top: 10px;
@@ -57,9 +57,9 @@ const LoginPage = () => {
           />
           {isTouched.pwd && errors.pwd && <span>{errors.pwd}</span>}
 
-          {/*<div className='find-password'>*/}
-          {/*  <p>Forgot password?</p>*/}
-          {/*</div>*/}
+          <div className='find-password'>
+            <p>Forgot password?</p>
+          </div>
           <ButtonBox content='Log In' type="submit" />
         </form>
       </LoginContainer>

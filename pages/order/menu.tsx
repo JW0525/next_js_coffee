@@ -1,43 +1,34 @@
 import {useRouter} from "next/router";
 import {InferGetStaticPropsType} from "next";
 import styled from "@emotion/styled";
+import Link from "next/link";
 
-const ListBox = styled.div`
-  display: grid;
-  grid-template-columns: 3.5fr 6.5fr;
-  align-items: center;
-  height: 85px;
-  cursor: pointer;
 
-  background-color: skyblue;
-`
-
-const Menu = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const OrderMenu = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   const query = router.query;
-  const { idx, categoryName } = query;
-  const category = data.categoryList[`${idx}`];
+  const { categoryIdx, menuIdx } = query;
 
+  const category = data.categoryList[`${categoryIdx}`];
   if (!category) return;
-  const { list } = category;
+  const menu = category.list[`${menuIdx}`];
 
   return (
     <div>
-      {
-        list.map((menu: any, idx: number) => {
-          return (
-            <ListBox key={idx}>
-              <img src='' alt='' />
-              <p>{menu.name}</p>
-            </ListBox>
-          )
-        })
-      }
+      <div>{menu.name}</div>
+      <ul>
+        {
+          menu.option.map((option: string, idx: number) => {
+            return <li key={idx}>{option}</li>
+          })
+        }
+      </ul>
+      <div>{menu.price}</div>
     </div>
   )
 }
 
-export default Menu;
+export default OrderMenu;
 
 export async function getStaticProps() {
   const res = await fetch('http://localhost:3000/api/menu');

@@ -22,6 +22,7 @@ export const Loading = () => {
           alt='coffee image'
           width={75}
           height={75}
+          priority
         />
         <h1>CoffeeTEK</h1>
       </div>

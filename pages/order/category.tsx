@@ -1,55 +1,59 @@
+import {useRouter} from "next/router";
 import {InferGetStaticPropsType} from "next";
 import styled from "@emotion/styled";
 import Link from "next/link";
 
-const ListBox = styled.div`   
+const ListBox = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 20px;
+  grid-template-columns: 3.5fr 6.5fr;
   align-items: center;
-  height: 70px;
+  height: 85px;
   cursor: pointer;
 
-  background-color: yellow;
-
-  .arrow {
-    width: 20px;
-  }
+  background-color: skyblue;
 `
 
-const OrderPage = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { categoryList } = data;
-  const pathname = '/order/category';
+const OrderCategory = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const router = useRouter();
+  const query = router.query;
+  const { categoryIdx } = query;
+
+  const category = data.categoryList[`${categoryIdx}`];
+  if (!category) return;
+
+  const { list } = category;
+  const pathname = '/order/menu';
 
   return (
     <div>
       {
-        categoryList.map((category: any, idx: number) => {
+        list.map((menu: any, idx: number) => {
           return (
             <Link
               className='link'
               href={{
                 pathname: pathname,
                 query: {
-                  categoryIdx: idx
+                  categoryIdx: categoryIdx,
+                  menuIdx: idx
                 },
               }}
-              as={`${pathname}?type=${category.name}`}
+              as={`${pathname}?name=${menu.name}`}
               key={idx}
             >
               <ListBox>
                 <img src='' alt='' />
-                <p>{category.name}</p>
-                <div className='arrow'> 이동 </div>
+                <p>{menu.name}</p>
               </ListBox>
             </Link>
-
           )
         })
       }
     </div>
   )
 }
-export default OrderPage;
+
+export default OrderCategory;
 
 export async function getStaticProps() {
   const res = await fetch('http://localhost:3000/api/menu');

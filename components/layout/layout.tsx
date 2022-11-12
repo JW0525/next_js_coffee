@@ -8,12 +8,29 @@ const LayoutContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 100vw;
   height: 100vh;
   background-color: floralwhite;
-  
+
   main {
-    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  @media screen and (max-width: 480px) {
+    main {
+      width: 100vw;
+      background-color: green;
+    }
+  }
+  
+  @media screen and (min-width: 480px) {
+    main {
+      width: 480px;
+      background-color: darkgray;
+    }
   }
   
   footer {

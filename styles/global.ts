@@ -32,6 +32,13 @@ export const global = css`
     outline: 0 !important;
   }
   
+  ul,
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
   .link {
     color: inherit;
     text-decoration: none;
