@@ -4,7 +4,7 @@ import {Loading} from "@/components/common/loading";
 
 // const Users = ({ users }: InferGetStaticPropsType<typeof getStaticProps>) => {
 const Users = () => {
-  const { user, isLoading, isError } = getData('http://localhost:3000/api/users');
+  const { data, isLoading, isError } = getData('http://localhost:3000/api/users');
 
   if (isError) return <div>Error fetching data</div>
   if (isLoading) return <Loading />
@@ -12,7 +12,7 @@ const Users = () => {
   return (
     <article>
       {
-        user.map((u: {id: number, name: string}, idx: number) => (
+        data.map((u: {id: number, name: string}, idx: number) => (
           <div key={idx}>
             <h1>{u.name}</h1>
           </div>

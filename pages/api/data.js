@@ -7,6 +7,7 @@ export default {
         {
           menuId: 1,
           name: "아메리카노",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -15,6 +16,7 @@ export default {
         {
           menuId: 2,
           name: "헤이즐넛 아메리카노",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -23,6 +25,7 @@ export default {
         {
           menuId: 3,
           name: "카페라떼",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -31,6 +34,7 @@ export default {
         {
           menuId: 4,
           name: "헤이즐넛 라떼",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -39,6 +43,7 @@ export default {
         {
           menuId: 5,
           name: "카푸치노",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -47,6 +52,7 @@ export default {
         {
           menuId: 6,
           name: "카라멜마끼야또",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -55,6 +61,7 @@ export default {
         {
           menuId: 7,
           name: "바닐라라떼",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -63,6 +70,7 @@ export default {
         {
           menuId: 8,
           name: "연유라떼",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -71,6 +79,7 @@ export default {
         {
           menuId: 9,
           name: "카페모까",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -85,6 +94,7 @@ export default {
         {
           menuId: 10,
           name: "복숭아 아이스티",
+          description: "ㅁ",
           price: 1000,
           option: ['ice'],
           imageUrl: "url",
@@ -93,6 +103,7 @@ export default {
         {
           menuId: 11,
           name: "자몽에이드",
+          description: "ㅁ",
           price: 1000,
           option: ['ice'],
           imageUrl: "url",
@@ -101,6 +112,7 @@ export default {
         {
           menuId: 12,
           name: "복숭아에이드",
+          description: "ㅁ",
           price: 1000,
           option: ['ice'],
           imageUrl: "url",
@@ -109,6 +121,7 @@ export default {
         {
           menuId: 13,
           name: "청포도에이드",
+          description: "ㅁ",
           price: 1000,
           option: ['ice'],
           imageUrl: "url",
@@ -117,6 +130,7 @@ export default {
         {
           menuId: 14,
           name: "그린티라떼",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -125,6 +139,7 @@ export default {
         {
           menuId: 15,
           name: "초코라떼",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -133,6 +148,7 @@ export default {
         {
           menuId: 16,
           name: "청귤차",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -141,6 +157,7 @@ export default {
         {
           menuId: 17,
           name: "얼그레이",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -149,6 +166,7 @@ export default {
         {
           menuId: 18,
           name: "캐모마일",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -157,6 +175,7 @@ export default {
         {
           menuId: 19,
           name: "제주녹차",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -165,6 +184,7 @@ export default {
         {
           menuId: 20,
           name: "페퍼민트",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -173,6 +193,7 @@ export default {
         {
           menuId: 21,
           name: "밀크티",
+          description: "ㅁ",
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
@@ -187,6 +208,7 @@ export default {
         {
           menuId: 22,
           name: "초코 머핀",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -195,6 +217,7 @@ export default {
         {
           menuId: 23,
           name: "블루베리머핀",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -203,6 +226,7 @@ export default {
         {
           menuId: 24,
           name: "치즈머핀",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -211,6 +235,7 @@ export default {
         {
           menuId: 25,
           name: "플레인베이글",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -219,6 +244,7 @@ export default {
         {
           menuId: 26,
           name: "치즈베이글",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -227,6 +253,7 @@ export default {
         {
           menuId: 27,
           name: "블루베리베이글",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -235,6 +262,7 @@ export default {
         {
           menuId: 28,
           name: "어니언베이글",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -243,6 +271,7 @@ export default {
         {
           menuId: 29,
           name: "레드벨벳스틱케익",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -251,6 +280,7 @@ export default {
         {
           menuId: 30,
           name: "초코스틱케익",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -259,6 +289,7 @@ export default {
         {
           menuId: 31,
           name: "치즈스틱케익",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -267,6 +298,7 @@ export default {
         {
           menuId: 32,
           name: "마카다미아쿠키",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -275,6 +307,7 @@ export default {
         {
           menuId: 33,
           name: "초코쿠키",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -283,6 +316,7 @@ export default {
         {
           menuId: 34,
           name: "브라우니쿠키",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -297,6 +331,7 @@ export default {
         {
           menuId: 35,
           name: "아몬드",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -305,6 +340,7 @@ export default {
         {
           menuId: 36,
           name: "초코첵스",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -313,6 +349,7 @@ export default {
         {
           menuId: 37,
           name: "우유",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -327,6 +364,7 @@ export default {
         {
           menuId: 38,
           name: "콜드브루",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",
@@ -335,6 +373,7 @@ export default {
         {
           menuId: 39,
           name: "탄산수",
+          description: "ㅁ",
           price: 1000,
           option: [],
           imageUrl: "url",

@@ -9,6 +9,7 @@ const categoryListSchema = new mongoose.Schema({
         {
           menuId: Number,
           name: String,
+          description: String,
           price: Number,
           option: {any: []},
           imageUrl: String,
@@ -19,4 +20,4 @@ const categoryListSchema = new mongoose.Schema({
   ]
 })
 
-export const CategoryList = mongoose.model('category-list', categoryListSchema);
+export const CategoryList = mongoose.model('category-a', categoryListSchema);

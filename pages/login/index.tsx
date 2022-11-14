@@ -1,13 +1,13 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "@emotion/styled";
-import {Layout} from "@/components/layout/layout";
 import ButtonBox from "@/components/common/btn";
 import {regExp} from "../../utils/regExp";
 import InputBox from "@/components/common/inputBox";
 import Navbar from "@/components/common/navbar";
 import {IRegisterForm, useForm} from "utils/hooks/useForm";
+import dynamic from "next/dynamic";
 
-const LoginPageContainer = styled.form`
+const LoginPageContainer = styled.div`
   display: flex;
   align-items: center;
 

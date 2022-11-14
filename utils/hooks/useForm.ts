@@ -1,4 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
+import axios from "axios";
+import {useRouter} from "next/router";
 
 export interface IRegisterForm {
   email: string,
@@ -21,6 +23,7 @@ export const useForm = (props: {
   validate: Function,
 }) => {
   const { initialForm, initialError, initialIsTouched, validate } = props;
+  const router = useRouter();
   const [form, setForm] = useState<IRegisterForm>(initialForm);
   const [errors, setErrors] = useState<IRegisterForm>(initialError);
   const [isTouched, setTouched] = useState<ICheckTouched>(initialIsTouched);
@@ -42,12 +45,22 @@ export const useForm = (props: {
   }
 
   const submitHandler = useCallback(
-    (e: any) => {
+    (e: any, ) => {
       e.preventDefault();
 
       const errors = validate(form);
       setErrors(errors);
-      if (Object.values(errors).some(v => v)) return;
+
+      if (Object.values(errors).some(v => v)) {
+        return;
+      }
+
+      axios.post('api/login').then((res) =>{
+        if (res.status === 200) {
+          // 로그인 성공
+          router.push('/admin').then();
+        }
+      })
 
       alert('회원가입이 완료되었습니다.');
     }, [form]
