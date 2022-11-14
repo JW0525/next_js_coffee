@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ImageS from "../../../../public/asset/images/cat-bassano-uCJHhrvG4QA-unsplash.jpg";
+import ImageS from "../../../../../public/asset/images/cat-bassano-uCJHhrvG4QA-unsplash.jpg";
 
 const MenuContainer = (props: any) => {
   const { menu } = props;

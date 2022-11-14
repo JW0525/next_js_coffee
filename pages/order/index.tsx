@@ -2,6 +2,8 @@ import {InferGetStaticPropsType} from "next";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import Navbar from "@/components/common/navbar";
+import { API } from "config";
+import getData from "pages/lib/getData";
 
 const OrderPageContainer = styled.div`
   .category-list-container {
@@ -22,10 +24,12 @@ const OrderPageContainer = styled.div`
   }
 `
 
-const OrderPage = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const categoryList  = data;
+const OrderPage = () => {
+  const { data, isLoading, isError } = getData(`${API.ORDER}`);
+  const categoryList = data;
   const pathname = '/order/category';
 
+  if (!data) return;
   return (
     <OrderPageContainer className='page-container'>
       <Navbar text='MENU'/>
@@ -58,15 +62,3 @@ const OrderPage = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => 
   )
 }
 export default OrderPage;
-
-export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/api/order');
-  const data = await res.json();
-
-  return {
-    props: {
-      data
-    }
-  }
-}
-

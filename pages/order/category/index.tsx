@@ -1,8 +1,9 @@
 import {useRouter} from "next/router";
-import {InferGetStaticPropsType} from "next";
+import {InferGetStaticPropsType, NextApiResponse} from "next";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import Navbar from "@/components/common/navbar";
+import { API } from "config";
 
 const OrderCategoryContainer = styled.div`
   .menu-list-container {
@@ -19,16 +20,16 @@ const OrderCategoryContainer = styled.div`
   }
 `
 
-const OrderCategory = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const OrderCategory = ({ categoryList }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   const query = router.query;
-  const { categoryIdx } = query;
+  const { categoryIdx} = query;
 
-  const category = data.categoryList[`${categoryIdx}`];
+  const category = categoryList[`${categoryIdx}`];
   if (!category) return;
 
   const { list } = category;
-  const pathname = '/order/menu';
+  const pathname = '/order/category/menu';
 
   return (
     <OrderCategoryContainer className='page-container'>
@@ -46,7 +47,7 @@ const OrderCategory = ({ data }: InferGetStaticPropsType<typeof getStaticProps>)
                     menuIdx: idx
                   },
                 }}
-                as={`${pathname}?name=${menu.name}`}
+                as={`/order/category/?type=${category.name}/menu?name=${menu.name}`}
                 key={idx}
               >
                 <div className='menu-list-box'>
@@ -65,12 +66,12 @@ const OrderCategory = ({ data }: InferGetStaticPropsType<typeof getStaticProps>)
 export default OrderCategory;
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/api/menu');
-  const data = await res.json();
+  const res = await fetch(`${API.ORDER}`);
+  const categoryList = await res.json();
 
   return {
     props: {
-      data
+      categoryList
     }
   }
 }

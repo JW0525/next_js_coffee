@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import {InferGetStaticPropsType} from "next";
 import Navbar from "@/components/common/navbar";
 import MenuContainer from "./components/menuContainer";
+import {API} from "../../../../config";
 
 const OrderMenuContainer = styled.div`
   .menu-container {
@@ -31,12 +32,12 @@ const OrderMenuContainer = styled.div`
   }
 `
 
-const OrderMenu = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   const query = router.query;
   const { categoryIdx, menuIdx } = query;
 
-  const category = data.categoryList[`${categoryIdx}`];
+  const category = categoryList[`${categoryIdx}`];
   if (!category) return;
   const menu = category.list[`${menuIdx}`];
 
@@ -50,12 +51,12 @@ const OrderMenu = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => 
 export default OrderMenu;
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/api/menu');
-  const data = await res.json();
+  const res = await fetch(`${API.ORDER}`);
+  const categoryList = await res.json();
 
   return {
     props: {
-      data
+      categoryList
     }
   }
 }

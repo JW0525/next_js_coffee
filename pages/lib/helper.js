@@ -1,12 +1,13 @@
-export function getAllPost(id) {
-  const postData = [
-    { id: 1, title: "New Post", description: "Post data From Server" },
-    { id: 2, title: "New Post", description: "Post data From Server" }
-  ];
+import {API} from "../../config";
 
-  if (id) {
-    return postData.filter(post => post.id == id)
+export default async function getIdData (id) {
+  const url = `${API.ORDER}/order`;
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if(id) {
+    return data.find(value => value.id === id);
   }
-  
-  return postData;
+
+  return data;
 }

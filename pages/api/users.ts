@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import main from '../database/connection';
-import Kitten from '../database/schema';
+import connectDB from '../database/connection';
+import { CategoryList } from '../database/schema';
+import data from './data'
 
 export default function get_Users(req: NextApiRequest, res: NextApiResponse) {
-  main().catch(error => console.error(error));
+  connectDB().catch(error => console.error(error));
 
-  const { method } = req;
+  // const { method } = req;
   // switch(method) {
   //   case 'GET':
   //     res.status(200).json({ method: 'GET', endpoint: 'Users' });
@@ -19,17 +20,13 @@ export default function get_Users(req: NextApiRequest, res: NextApiResponse) {
   //     break;
   // }
 
-  // res.status(200).json([
-  //   {id: 1, name: "John Smith"},
-  //   {id: 2, name: "Samuel"}
-  // ])
+  const { categoryList } = data;
 
-
-
-  const create = new Kitten({
-    id: 2, name: "Samuel"
+  const create = new CategoryList({
+    categoryList
   });
+
   create.save().then(() => {
-    res.status(200).json(create)
+    res.status(200).json(create);
   })
 }

@@ -1,10 +1,22 @@
 import mongoose from 'mongoose';
 
-const kittySchema = new mongoose.Schema({
-  id: Number,
-  name: String
+const categoryListSchema = new mongoose.Schema({
+  categoryList: [
+    {
+      id: Number,
+      name: String,
+      list: [
+        {
+          menuId: Number,
+          name: String,
+          price: Number,
+          option: {any: []},
+          imageUrl: String,
+          isSellYn: Boolean
+        }
+      ]
+    }
+  ]
 })
 
-const Kitten = mongoose.model('Kitten', kittySchema);
-
-export default Kitten;
+export const CategoryList = mongoose.model('category-list', categoryListSchema);

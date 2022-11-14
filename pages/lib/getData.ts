@@ -11,7 +11,7 @@ export default function getData (url: string) {
     }
   });
   return {
-    user: data,
+    data: data,
     isLoading: (!error && !data),
     isError: error
   }

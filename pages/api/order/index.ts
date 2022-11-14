@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import data from './data'
+import data from '../data'
 
 export default function get_Menu(req: NextApiRequest, res: NextApiResponse) {
   const { categoryList } = data;
