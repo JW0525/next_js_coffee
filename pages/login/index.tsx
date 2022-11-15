@@ -6,6 +6,7 @@ import InputBox from "@/components/common/inputBox";
 import Navbar from "@/components/common/navbar";
 import {IRegisterForm, useForm} from "utils/hooks/useForm";
 import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/dist/client/router";
 
 const LoginPageContainer = styled.div`
   display: flex;
@@ -26,7 +27,11 @@ const LoginPageContainer = styled.div`
 `
 
 const LoginPage = () => {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+
   const validate = (values: IRegisterForm) => {
+
     const errors = { email: "", pwd: "" }
 
     if (!values.email) errors.email = "이메일을 입력하세요"
@@ -44,14 +49,16 @@ const LoginPage = () => {
     validate
   });
 
-  const { data: session, status } = useSession();
 
-  if (session) {
+  if (status === "authenticated") {
+    router.push("/order");
     return (
       <div>
-        <button onClick={() => signOut()}>Sign Out</button>
+        <h1>Sign Up</h1>
+        <div>You are already signed up.</div>
+        <div>Now redirect to main page.</div>
       </div>
-    )
+    );
   }
 
   return (

@@ -1,7 +1,9 @@
 const CreateUser = async (
-  name: string, email: string, password: string
+  name: string,
+  email: string,
+  password: string
 ): Promise<any> => {
-  const response = await fetch("/api/auth/signup", {
+  const response = await fetch("/api/auth/signUp", {
     method: "POST",
     body: JSON.stringify({ name, email, password }),
     headers: {
@@ -10,10 +12,6 @@ const CreateUser = async (
   });
 
   const data = await response.json();
-
-
-
-
 
   if (!response.ok) {
     throw new Error(data.message || "Something went wrong!");

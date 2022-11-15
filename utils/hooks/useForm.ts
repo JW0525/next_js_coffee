@@ -37,15 +37,13 @@ export const useForm = (props: {
     });
   };
 
-  const blurHandler = (e: any) => {
+  const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     let { name } = e.currentTarget;
     setTouched({
       ...isTouched,
       [name]: true,
     })
   }
-
-
 
   const submitHandler = useCallback(
     async (e: any, ) => {
@@ -59,9 +57,10 @@ export const useForm = (props: {
       }
 
       // 회원가입 로직
-      // const data = await CreateUser(form.name as string, form.email, form.pwd);
+      // const signUpResponse = await CreateUser(form.name as string, form.email, form.pwd);
+
       // 로그인 로직
-      const response = await signIn("email-password-credential", {
+      const logInResponse = await signIn("email-password-credential", {
         email: form.email,
         password: form.pwd,
         // redirect: false,

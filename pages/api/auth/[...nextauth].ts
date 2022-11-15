@@ -1,5 +1,9 @@
 import NextAuth from "next-auth"
+import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
+import {verifyPassword} from "../../lib/auth";
+
+let prisma = new PrismaClient();
 
 export default NextAuth({
   // 로그인 인증 방식 설정
@@ -13,15 +17,22 @@ export default NextAuth({
         password: { label: "Password", type: "password" }
       },
 
-      async authorize(credentials: any, req) {
-        const { email, password } = credentials;
-        const user = { id: "1", email: "matthew@snaps.com", password: "xhfmqldys1!" }
+      // @ts-ignore
+      async authorize(credentials, req) {
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials!.email,
+          },
+          select: {
+            name: true, email: true, password: true
+          },
+        });
+        if (!user) throw new Error('No user found!');
 
-        if (email === user.email && password === user.password) {
-          return user;
-        }
+        const isValid = await verifyPassword(credentials!.password, user.password);
+        if (!isValid) throw new Error('Could not log you in!');
 
-        return null
+        return { name: user.name, email: user.email };
       }
     })
   ],
