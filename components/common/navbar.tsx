@@ -1,5 +1,7 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 
 const NavbarContainer = styled.div`
   position: absolute;
@@ -21,6 +23,8 @@ const NavbarContainer = styled.div`
 const Navbar = (props: { text: string }) =>{
   const { text } = props;
   const router = useRouter();
+  const [menuToggle, setMenuToggle] = useState(false);
+  const { data: session, status } = useSession();
 
   return (
     <NavbarContainer className='nav-bar'>
@@ -28,6 +32,8 @@ const Navbar = (props: { text: string }) =>{
         Back
       </span>
       <p>{text}</p>
+
+      { (status === "authenticated") && <div>authenticated</div>}
     </NavbarContainer>
   )
 }

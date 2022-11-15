@@ -1,6 +1,7 @@
-import React, {useCallback, useEffect, useState} from "react";
-import axios from "axios";
-import {useRouter} from "next/router";
+import React, { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
+import CreateUser from "utils/createUser";
 
 export interface IRegisterForm {
   email: string,
@@ -44,8 +45,10 @@ export const useForm = (props: {
     })
   }
 
+
+
   const submitHandler = useCallback(
-    (e: any, ) => {
+    async (e: any, ) => {
       e.preventDefault();
 
       const errors = validate(form);
@@ -55,15 +58,17 @@ export const useForm = (props: {
         return;
       }
 
-      axios.post('api/login').then((res) =>{
-        if (res.status === 200) {
-          // 로그인 성공
-          router.push('/admin').then();
-        }
-      })
+      // 회원가입 로직
+      // const data = await CreateUser(form.name as string, form.email, form.pwd);
+      // 로그인 로직
+      const response = await signIn("email-password-credential", {
+        email: form.email,
+        password: form.pwd,
+        // redirect: false,
+        callbackUrl: "/user"
+      });
 
-      alert('회원가입이 완료되었습니다.');
-    }, [form]
+      }, [form]
   );
 
   // 입력값에 따라 검증 함수를 실행하는 함수

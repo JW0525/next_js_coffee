@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import ButtonBox from "@/components/common/btn";
 import {regExp} from "../../utils/regExp";
 import InputBox from "@/components/common/inputBox";
 import Navbar from "@/components/common/navbar";
 import {IRegisterForm, useForm} from "utils/hooks/useForm";
-import dynamic from "next/dynamic";
+import { useSession, signOut } from "next-auth/react";
 
 const LoginPageContainer = styled.div`
   display: flex;
@@ -27,21 +27,32 @@ const LoginPageContainer = styled.div`
 
 const LoginPage = () => {
   const validate = (values: IRegisterForm) => {
-    const errors = { email: "", pwd: "", pwdCheck: "", name: "" }
+    const errors = { email: "", pwd: "" }
 
     if (!values.email) errors.email = "이메일을 입력하세요"
     if (!regExp.email.test(values.email)) errors.email = "이메일은 aws@snaps.com 형식으로 입력해주세요"
     if (!values.pwd) errors.pwd = "비밀번호를 입력하세요"
+    if (!regExp.pwd.test(values.pwd)) errors.pwd = "비밀번호는 8자 이상 영문, 숫자, 특수문자 조합으로 입력해주세요"
 
     return errors
   }
 
   const { form, errors, isTouched, submitHandler, getFieldProps } = useForm({
-    initialForm: { email: '', pwd: ''},
-    initialError: { email: '', pwd: ''},
-    initialIsTouched: { email: false, pwd: false},
+    initialForm: { email: '', pwd: '' },
+    initialError: { email: '', pwd: '' },
+    initialIsTouched: { email: false, pwd: false },
     validate
   });
+
+  const { data: session, status } = useSession();
+
+  if (session) {
+    return (
+      <div>
+        <button onClick={() => signOut()}>Sign Out</button>
+      </div>
+    )
+  }
 
   return (
     <LoginPageContainer className='page-container'>

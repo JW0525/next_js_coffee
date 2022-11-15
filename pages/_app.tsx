@@ -1,16 +1,22 @@
 import type { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react';
 import { Global } from '@emotion/react';
 import { global } from "../styles/global";
 import {Layout} from "@/components/layout/layout";
 
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps }
+}: AppProps) {
   return (
     <>
-      <Layout>
-        <Global styles={global} />
-        <Component {...pageProps} />
-      </Layout>
+      <SessionProvider session={ pageProps.session }>
+        <Layout>
+          <Global styles={global} />
+          <Component {...pageProps} />
+        </Layout>
+      </SessionProvider>
     </>
   );
 }
