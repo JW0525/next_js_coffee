@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
-import CreateUser from "utils/createUser";
+import CreateUser from "../createUser";
 
 export interface IRegisterForm {
   email: string,
@@ -17,13 +17,14 @@ export interface ICheckTouched {
   name?: boolean
 }
 
-export const useForm = (props: {
+export const useValidateForm = (props: {
   initialForm : IRegisterForm,
   initialError: IRegisterForm,
   initialIsTouched: ICheckTouched,
   validate: Function,
+  type: string
 }) => {
-  const { initialForm, initialError, initialIsTouched, validate } = props;
+  const { initialForm, initialError, initialIsTouched, validate, type } = props;
   const router = useRouter();
   const [form, setForm] = useState<IRegisterForm>(initialForm);
   const [errors, setErrors] = useState<IRegisterForm>(initialError);
@@ -46,28 +47,32 @@ export const useForm = (props: {
   }
 
   const submitHandler = useCallback(
-    async (e: any, ) => {
+    async (e: any) => {
       e.preventDefault();
 
       const errors = validate(form);
       setErrors(errors);
 
-      if (Object.values(errors).some(v => v)) {
-        return;
+      if (Object.values(errors).some(v => v)) return;
+
+      switch (type) {
+        case 'logIn': // 로그인 로직
+          const logInResponse = await signIn("email-password-credential", {
+            email: form.email,
+            password: form.pwd,
+            callbackUrl: "/home",
+            // redirect: false
+          });
+          break;
+        case 'register': // 회원가입 로직
+          const registerResponse = await CreateUser(form.name as string, form.email, form.pwd);
+
+          if (registerResponse) {
+            router.push('/login').then();
+          }
+          break;
       }
-
-      // 회원가입 로직
-      // const signUpResponse = await CreateUser(form.name as string, form.email, form.pwd);
-
-      // 로그인 로직
-      const logInResponse = await signIn("email-password-credential", {
-        email: form.email,
-        password: form.pwd,
-        // redirect: false,
-        callbackUrl: "/user"
-      });
-
-      }, [form]
+    }, [form]
   );
 
   // 입력값에 따라 검증 함수를 실행하는 함수

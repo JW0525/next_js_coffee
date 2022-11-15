@@ -1,9 +1,10 @@
 import {useRouter} from "next/router";
-import {InferGetStaticPropsType, NextApiResponse} from "next";
-import styled from "@emotion/styled";
 import Link from "next/link";
-import Navbar from "@/components/common/navbar";
+import styled from "@emotion/styled";
+import { InferGetStaticPropsType, NextApiResponse } from "next";
 import { API } from "config";
+import Navbar from "@/components/layout/navbar";
+
 
 const OrderCategoryContainer = styled.div`
   .menu-list-container {

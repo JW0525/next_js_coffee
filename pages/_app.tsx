@@ -1,9 +1,8 @@
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react';
-import { Global } from '@emotion/react';
 import { global } from "../styles/global";
+import { Global } from '@emotion/react';
 import {Layout} from "@/components/layout/layout";
-
 
 export default function App({
   Component,

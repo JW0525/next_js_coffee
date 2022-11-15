@@ -3,10 +3,9 @@ import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import {verifyPassword} from "../../lib/auth";
 
-let prisma = new PrismaClient();
-
+const prisma = new PrismaClient();
+// 로그인 인증 방식 설정
 export default NextAuth({
-  // 로그인 인증 방식 설정
   providers: [
     CredentialsProvider({
       id: "email-password-credential",
@@ -16,7 +15,6 @@ export default NextAuth({
         email: { label: "Email", type: "email", placeholder: "user@email.com" },
         password: { label: "Password", type: "password" }
       },
-
       // @ts-ignore
       async authorize(credentials, req) {
         const user = await prisma.user.findUnique({

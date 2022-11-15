@@ -3,7 +3,7 @@ const CreateUser = async (
   email: string,
   password: string
 ): Promise<any> => {
-  const response = await fetch("/api/auth/signUp", {
+  const response = await fetch("/api/auth/register", {
     method: "POST",
     body: JSON.stringify({ name, email, password }),
     headers: {

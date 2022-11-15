@@ -3,8 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { hashPassword } from 'pages/lib/auth';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Loading prisma client
-  let prisma = new PrismaClient();
+  const prisma = new PrismaClient();  // Loading prisma client
 
   if (req.method !== 'POST') return;
 
@@ -30,7 +29,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       password: hashedPassword,
     },
   });
-
 
   if (result) {
     res.status(201).json({ message: 'Created user!', error: false });

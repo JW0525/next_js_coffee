@@ -1,12 +1,13 @@
 import React from "react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import styled from "@emotion/styled";
+import { IRegisterForm, useValidateForm } from "utils/hooks/useValidateForm";
+import { regExp } from "../../utils/regExp";
 import ButtonBox from "@/components/common/btn";
-import {regExp} from "../../utils/regExp";
 import InputBox from "@/components/common/inputBox";
-import Navbar from "@/components/common/navbar";
-import {IRegisterForm, useForm} from "utils/hooks/useForm";
-import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/dist/client/router";
+import Navbar from "@/components/layout/navbar";
+import { Loading } from "@/components/common/loading";
 
 const LoginPageContainer = styled.div`
   display: flex;
@@ -31,7 +32,6 @@ const LoginPage = () => {
   const { data: session, status } = useSession();
 
   const validate = (values: IRegisterForm) => {
-
     const errors = { email: "", pwd: "" }
 
     if (!values.email) errors.email = "이메일을 입력하세요"
@@ -42,24 +42,16 @@ const LoginPage = () => {
     return errors
   }
 
-  const { form, errors, isTouched, submitHandler, getFieldProps } = useForm({
+  const { form, errors, isTouched, submitHandler, getFieldProps } = useValidateForm({
     initialForm: { email: '', pwd: '' },
     initialError: { email: '', pwd: '' },
     initialIsTouched: { email: false, pwd: false },
-    validate
+    validate,
+    type: 'logIn'
   });
 
-
-  if (status === "authenticated") {
-    router.push("/order");
-    return (
-      <div>
-        <h1>Sign Up</h1>
-        <div>You are already signed up.</div>
-        <div>Now redirect to main page.</div>
-      </div>
-    );
-  }
+  if (status === "authenticated") router.push("/home").then();
+  if (status !== 'unauthenticated') return <Loading />
 
   return (
     <LoginPageContainer className='page-container'>
