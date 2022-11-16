@@ -11,7 +11,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 2,
@@ -20,7 +21,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 3,
@@ -29,7 +31,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 4,
@@ -38,7 +41,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 5,
@@ -47,7 +51,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 6,
@@ -56,7 +61,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 7,
@@ -65,7 +71,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 8,
@@ -74,7 +81,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 9,
@@ -83,7 +91,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         }
       ]
     },
@@ -98,7 +107,8 @@ export default {
           price: 1000,
           option: ['ice'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 11,
@@ -107,7 +117,8 @@ export default {
           price: 1000,
           option: ['ice'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 12,
@@ -116,7 +127,8 @@ export default {
           price: 1000,
           option: ['ice'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 13,
@@ -125,7 +137,8 @@ export default {
           price: 1000,
           option: ['ice'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 14,
@@ -134,7 +147,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 15,
@@ -143,7 +157,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 16,
@@ -152,7 +167,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 17,
@@ -161,7 +177,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 18,
@@ -170,7 +187,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 19,
@@ -179,7 +197,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 20,
@@ -188,7 +207,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 21,
@@ -197,7 +217,8 @@ export default {
           price: 1000,
           option: ['ice', 'hot'],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         }
       ]
     },
@@ -212,7 +233,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 23,
@@ -221,7 +243,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 24,
@@ -230,7 +253,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 25,
@@ -239,7 +263,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 26,
@@ -248,7 +273,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 27,
@@ -257,7 +283,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 28,
@@ -266,7 +293,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 29,
@@ -275,7 +303,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 30,
@@ -284,7 +313,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 31,
@@ -293,7 +323,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 32,
@@ -302,7 +333,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 33,
@@ -311,7 +343,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 34,
@@ -320,7 +353,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         }
       ]
     },
@@ -335,7 +369,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 36,
@@ -344,7 +379,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 37,
@@ -353,7 +389,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         }
       ]
     },
@@ -368,7 +405,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         },
         {
           menuId: 39,
@@ -377,7 +415,8 @@ export default {
           price: 1000,
           option: [],
           imageUrl: "url",
-          isSellYn: true
+          isSellYn: true,
+          isRecommended: true
         }
       ]
     }

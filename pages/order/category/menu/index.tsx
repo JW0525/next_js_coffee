@@ -38,6 +38,7 @@ const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticPro
 
   const category = categoryList[`${categoryIdx}`];
   if (!category) return;
+
   const menu = category.list[`${menuIdx}`];
 
   return (

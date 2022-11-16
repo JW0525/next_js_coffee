@@ -24,11 +24,10 @@ const OrderPageContainer = styled.div`
 `
 
 const OrderPage = () => {
-  const { data, isLoading, isError } = getData(`${API.ORDER}`);
-  const categoryList = data;
+  const { data: categoryList, isLoading, isError } = getData(`${API.ORDER}`);
   const pathname = '/order/category';
 
-  if (!data) return;
+  if (!categoryList) return;
 
   return (
     <OrderPageContainer className='page-container'>
