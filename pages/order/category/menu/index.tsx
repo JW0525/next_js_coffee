@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { API } from "../../../../config";
 import { InferGetStaticPropsType } from "next";
 import MenuContainer from "./components/menuContainer";
+import Navbar from "@/components/layout/navbar";
 
 const OrderMenuContainer = styled.div`
   .menu-container {
@@ -44,6 +45,7 @@ const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticPro
 
   return (
     <OrderMenuContainer className='page-container'>
+      <Navbar text='안녕' />
       <MenuContainer menu={menu} />
     </OrderMenuContainer>
   )

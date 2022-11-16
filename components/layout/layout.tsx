@@ -1,5 +1,6 @@
 import {FC, ReactNode} from "react";
 import styled from "@emotion/styled";
+import Navbar from "./navbar";
 
 const LayoutContainer = styled.div`
   display: flex;

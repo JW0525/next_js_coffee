@@ -3,23 +3,25 @@ import styled from "@emotion/styled";
 import theme from "../../styles/theme";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
+import { backgroundIcons } from "public/asset/styles/baseSytle";
 
 const NavbarContainer = styled.div`
   position: absolute;
   top: 0;
   display: flex;
-  align-items: flex-end;
+  justify-content: center;
   width: 100%;
-  height: 85px;
+  height: 30px;
   text-align: left;
-  padding-left: 20px;
   box-shadow: 0 2px 5px 0 #cacaca;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
   
   span {
     position: absolute;
     left: 0;
+    width: 30px;
+    height: 30px;
+    ${backgroundIcons};
+    background-position: -29px -67px;
     cursor: pointer;
   }
   
@@ -38,13 +40,9 @@ const Navbar = (props: { text: string }) =>{
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  if (status === "authenticated") console.log("session", session);
-
   return (
     <NavbarContainer className='nav-bar'>
-      {/*<span onClick={() => router.back()}>*/}
-      {/*  Back*/}
-      {/*</span>*/}
+      <span onClick={() => router.back()} />
       <p>{text}</p>
 
       {

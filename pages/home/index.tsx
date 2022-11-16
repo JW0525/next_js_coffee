@@ -4,9 +4,9 @@ import Image from 'next/image';
 import Navigation from "../navigation";
 import Link from "next/link";
 import theme from "../../styles/theme";
-import Latte from "/public/asset/images/latte.png";
-import Americano from "/public/asset/images/americano.png";
-import Ham from "/public/asset/images/Ham.png";
+import Latte from "/public/asset/img/latte.png";
+import Americano from "/public/asset/img/americano.png";
+import Ham from "/public/asset/img/Ham.png";
 import getData from "../lib/getData";
 import {API} from "../../config";
 

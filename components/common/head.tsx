@@ -8,7 +8,7 @@ const HeadComponent = (props: {title: string, name: string, content: string}) =>
     <Head>
       <title>여긴어디?</title>
       <meta name={name} content={content} />
-      {/*<link rel='icon' href='./public/images/free-icon-coffee-cup-3361135.png' />*/}
+      {/*<link rel='icon' href='./public/img/free-icon-coffee-cup-3361135.png' />*/}
     </Head>
   )
 }

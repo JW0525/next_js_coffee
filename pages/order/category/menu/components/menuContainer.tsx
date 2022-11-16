@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ImageS from "../../../../../public/asset/images/cat-bassano-uCJHhrvG4QA-unsplash.jpg";
+import ImageS from "../../../../../public/asset/img/cat-bassano-uCJHhrvG4QA-unsplash.jpg";
 import Navigation from "../../../../navigation";
 import React from "react";
 
