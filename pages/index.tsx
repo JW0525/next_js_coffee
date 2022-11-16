@@ -12,7 +12,7 @@ export default function IndexPage() {
     if (status === 'authenticated') {
       router.push('/home').then();
     } else {
-      router.push('/login').then();
+      router.push('/home').then();
     }
   }
 

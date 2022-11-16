@@ -6,7 +6,7 @@ const HeadComponent = (props: {title: string, name: string, content: string}) =>
 
   return (
     <Head>
-      <title>{title}</title>
+      <title>여긴어디?</title>
       <meta name={name} content={content} />
       {/*<link rel='icon' href='./public/images/free-icon-coffee-cup-3361135.png' />*/}
     </Head>

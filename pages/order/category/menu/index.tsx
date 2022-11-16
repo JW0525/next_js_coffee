@@ -2,18 +2,19 @@ import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { API } from "../../../../config";
 import { InferGetStaticPropsType } from "next";
-import Navbar from "@/components/layout/navbar";
 import MenuContainer from "./components/menuContainer";
 
 const OrderMenuContainer = styled.div`
   .menu-container {
-    margin-top: 70px;
+    //margin-top: 70px;
+    
   }
   
   .image {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
+    background-color: #f9394e;
   }
   
   .menu-box {
@@ -43,7 +44,6 @@ const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticPro
 
   return (
     <OrderMenuContainer className='page-container'>
-      <Navbar text='preference' />
       <MenuContainer menu={menu} />
     </OrderMenuContainer>
   )

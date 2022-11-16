@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
+import theme from "../../styles/theme";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 
@@ -7,11 +8,14 @@ const NavbarContainer = styled.div`
   position: absolute;
   top: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: inherit;
-  height: 70px;
-  background-color: yellow;
+  align-items: flex-end;
+  width: 100%;
+  height: 85px;
+  text-align: left;
+  padding-left: 20px;
+  box-shadow: 0 2px 5px 0 #cacaca;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
   
   span {
     position: absolute;
@@ -19,7 +23,10 @@ const NavbarContainer = styled.div`
     cursor: pointer;
   }
   
-  button {
+  > p {
+    font-size: ${theme.fontSizes.lg};
+    
+    button {
     position: absolute;
     right: 0;
     cursor: pointer;
@@ -35,9 +42,9 @@ const Navbar = (props: { text: string }) =>{
 
   return (
     <NavbarContainer className='nav-bar'>
-      <span onClick={() => router.back()}>
-        Back
-      </span>
+      {/*<span onClick={() => router.back()}>*/}
+      {/*  Back*/}
+      {/*</span>*/}
       <p>{text}</p>
 
       {
