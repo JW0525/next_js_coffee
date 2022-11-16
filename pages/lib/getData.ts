@@ -10,6 +10,7 @@ export default function getData (url: string) {
       setTimeout(() => revalidate({ retryCount }), 5000);
     }
   });
+
   return {
     data: data,
     isLoading: (!error && !data),

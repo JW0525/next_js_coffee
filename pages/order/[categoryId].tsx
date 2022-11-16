@@ -1,10 +1,8 @@
 import {useRouter} from "next/router";
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { InferGetStaticPropsType, NextApiResponse } from "next";
-import { API } from "config";
 import Navbar from "@/components/layout/navbar";
-import getData from "../../lib/getData";
+import getData from "@/lib/getData";
 
 
 const OrderCategoryContainer = styled.div`
@@ -34,37 +32,32 @@ const OrderCategoryContainer = styled.div`
 `
 
 const OrderCategory = () => {
-  const { data: categoryList, isLoading, isError } = getData(`${API.ORDER}`);
   const router = useRouter();
-  const query = router.query;
-  const { categoryIdx } = query;
+  const { categoryId } = router.query;
+  const { data: category, isLoading, isError } = getData(`/api/order/${categoryId}`);
 
-  const category = categoryList[`${categoryIdx}`];
   if (!category) return;
-
-  const { list } = category;
-  const pathname = '/order/category/menu';
+  const { list, name } = category;
 
   return (
     <OrderCategoryContainer className='page-container'>
-      <Navbar text={category.name.toUpperCase()} />
+      <Navbar text={name.toUpperCase()} />
       <div className='menu-list-container'>
         <ul>
           {
             list.map((menu: any, idx: number) => {
               return (
-                <li>
+                <li key={idx}>
                   <Link
                     className='link'
                     href={{
-                      pathname: pathname,
+                      pathname: '/order/menu',
                       query: {
-                        categoryIdx: categoryIdx,
+                        categoryIdx: Number(categoryId) - 1,
                         menuIdx: idx
                       },
                     }}
-                    as={`/order/category/?type=${category.name}/menu?name=${menu.name}`}
-                    key={idx}
+                    as={`/order/${categoryId}/menu?name=${menu.name}`}
                   >
                     <div className='menu-list-box'>
                       <img src='' alt='' />

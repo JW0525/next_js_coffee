@@ -13,6 +13,7 @@ export default function IndexPage() {
       router.push('/home').then();
     } else {
       router.push('/home').then();
+      // router.push('/login').then();
     }
   }
 

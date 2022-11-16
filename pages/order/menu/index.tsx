@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
-import { API } from "../../../../config";
+import { API } from "../../../config";
 import { InferGetStaticPropsType } from "next";
 import MenuContainer from "./components/menuContainer";
 import Navbar from "@/components/layout/navbar";
@@ -35,8 +35,7 @@ const OrderMenuContainer = styled.div`
 
 const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
-  const query = router.query;
-  const { categoryIdx, menuIdx } = query;
+  let { categoryIdx, menuIdx } = router.query;
 
   const category = categoryList[`${categoryIdx}`];
   if (!category) return;

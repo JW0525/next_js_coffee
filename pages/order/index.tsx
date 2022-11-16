@@ -3,8 +3,10 @@ import styled from "@emotion/styled";
 import { API } from "config";
 import Navbar from "@/components/layout/navbar";
 import getData from "pages/lib/getData";
+import getIdData from "@/lib/helper";
 import Navigation from "../navigation";
 import React from "react";
+import {useRouter} from "next/router";
 
 const OrderPageContainer = styled.div`
   .category-list-container {
@@ -38,10 +40,8 @@ const OrderPageContainer = styled.div`
 
 const OrderPage = () => {
   const { data: categoryList, isLoading, isError } = getData(`${API.ORDER}`);
-  const pathname = '/order/category';
 
   if (!categoryList) return;
-
   return (
     <OrderPageContainer className='page-container'>
       <Navbar text='Order'/>
@@ -49,19 +49,11 @@ const OrderPage = () => {
         <ul>
           {
             categoryList.map((category: any, idx: number) => {
+              const categoryIdx = idx + 1;
+
               return (
-                <li>
-                  <Link
-                    className='link'
-                    href={{
-                      pathname: pathname,
-                      query: {
-                        categoryIdx: idx
-                      },
-                    }}
-                    as={`${pathname}?type=${category.name}`}
-                    key={idx}
-                  >
+                <li key={idx}>
+                  <Link className='link' href={{ pathname: `/order/${categoryIdx}` }}>
                     <div className='category-list-box'>
                       <img src='' alt='' />
                       <span>{category.name}</span>

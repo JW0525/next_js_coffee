@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { fontFamily, fontSizes, letterSpacing, palette } from './baseStyle';
+import { fontFamily, fontSizes, letterSpacing, palette } from './baseSytle'
 
 // bold(700) > medium(500) > thin(400) > regular(300)
 

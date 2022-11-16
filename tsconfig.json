@@ -23,10 +23,9 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"],
-      "@/middlewares/*": ["middlewares/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/db/*": ["db/*"]
+      "@/lib/*": ["pages/lib/*"],
+      "@/hooks/*": ["utils/hooks/*"],
+      "@/middlewares/*": ["middlewares/*"]
     }
   },
   "include": [

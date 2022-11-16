@@ -1,6 +1,3 @@
-// const fetcher = (...args: Parameters<typeof fetch>) =>
-//   fetch(...args).then(res => res.json())
-
 const fetcher = async (url) => {
   const res = await fetch(url);
 

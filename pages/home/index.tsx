@@ -1,19 +1,22 @@
 import styled from "@emotion/styled";
-import React from "react";
+import React, {ReactNode} from "react";
 import Image from 'next/image';
 import Navigation from "../navigation";
 import Link from "next/link";
 import theme from "../../styles/theme";
-import Latte from "/public/asset/img/latte.png";
 import Americano from "/public/asset/img/americano.png";
 import Ham from "/public/asset/img/Ham.png";
 import getData from "../lib/getData";
-import {API} from "../../config";
+import { API } from "../../config";
+import {palette} from "../../styles/baseSytle";
+import { useSession } from "next-auth/react";
+import {Session} from "next-auth";
 
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   overflow: auto;
 
   .header {
@@ -22,21 +25,16 @@ const HomeContainer = styled.div`
 
     > h2 {
       font-size: ${theme.fontSizes.mmd};
-      color: ${theme.colors.white};
+      color: ${palette.common.white};
       text-align: center;
       padding-top: 15px;
     }
 
     > span {
       display: block;
-      font-size: ${theme.fontSizes.lg};
-      color: ${theme.colors.white};
+      color: ${palette.common.white};
       padding: 40px 0 0 26px;
       line-height: 28px;
-
-      &:last-child {
-        padding: 20px;
-      }
     }
   }
 
@@ -62,7 +60,7 @@ const HomeContainer = styled.div`
         width: 50%;
         float: left;
 
-        &:nth-child(2n) > div {
+        &:nth-of-type(2n) > div {
           margin: 0 0 15px 6px;
         }
 
@@ -92,21 +90,26 @@ const HomeContainer = styled.div`
 
 `;
 
-const Home = (props: { englishName: string }) => {
-  const { englishName } = props
-  const { data } = getData(`${API.ORDER}`);
-  const homeMenuList = data;
-console.log('data',data)
+interface ISessionData {
+  data: Session | null | undefined,
+  status: string,
+  children?: ReactNode | JSX.Element | JSX.Element[]
+}
+
+const Home = () => {
+  const { data: session, status }: ISessionData = useSession()
+  const homeMenuList = getData(`${API.ORDER}`).data;
   const pathname = '/order/category/menu';
 
-  if (!data) return;
+  if (!homeMenuList) return;
   return (
     <HomeContainer>
       <div className="header">
         <h2>WEBLING MEMBERS</h2>
         <span>위블링과 함께<br/>오늘하루도 즐겨요!</span>
-        {/*<span>{name}님</span>*/}
-        <span>ANIVIA님</span>
+        {
+          session && <span>{`${session.user!.name}님`}</span>
+        }
       </div>
       <div className="container">
         <div className="banner">

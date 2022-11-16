@@ -43,4 +43,9 @@ export const global = css`
     color: inherit;
     text-decoration: none;
   }
+  
+  p {
+    margin: 0;
+    padding: 0;
+  }
 `;

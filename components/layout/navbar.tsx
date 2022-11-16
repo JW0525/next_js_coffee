@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
-import theme from "../../styles/theme";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
-import { backgroundIcons } from "public/asset/styles/baseSytle";
+import { backgroundIcons } from "styles/baseSytle";
+import textCss from "styles/textCss";
 
 const NavbarContainer = styled.div`
   position: absolute;
   top: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 30px;
-  text-align: left;
-  box-shadow: 0 2px 5px 0 #cacaca;
+  height: 40px;
   
   span {
     position: absolute;
@@ -25,10 +24,11 @@ const NavbarContainer = styled.div`
     cursor: pointer;
   }
   
-  > p {
-    font-size: ${theme.fontSizes.lg};
+  p {
+    font-size: ${textCss.gray18Bold};
+  }
     
-    button {
+  button {
     position: absolute;
     right: 0;
     cursor: pointer;

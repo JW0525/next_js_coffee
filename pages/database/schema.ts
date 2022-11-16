@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const categoryListSchema = new mongoose.Schema({
   categoryList: [
@@ -7,17 +7,18 @@ const categoryListSchema = new mongoose.Schema({
       name: String,
       list: [
         {
-          menuId: Number,
+          id: Number,
           name: String,
           description: String,
           price: Number,
           option: {any: []},
           imageUrl: String,
-          isSellYn: Boolean
+          isSellYn: Boolean,
+          isRecommended: Boolean
         }
       ]
     }
   ]
 })
 
-export const CategoryList = mongoose.model('category-a', categoryListSchema);
+export const CategoryList = mongoose.model('categoryListData5', categoryListSchema);

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import ImageS from "../../../../../public/asset/img/cat-bassano-uCJHhrvG4QA-unsplash.jpg";
-import Navigation from "../../../../navigation";
+import ImageS from "../../../../public/asset/img/cat-bassano-uCJHhrvG4QA-unsplash.jpg";
+import Navigation from "../../../navigation";
 import React from "react";
 
 const MenuContainer = (props: any) => {
