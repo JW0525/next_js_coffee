@@ -7,15 +7,26 @@ import { API } from "config";
 
 const OrderCategoryContainer = styled.div`
   .menu-list-container {
-    margin-top: 70px;
+    margin-top: 90px;
 
-    .menu-list-box {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      align-items: center;
-      height: 100px;
-      border-bottom: 1px solid wheat;
-      cursor: pointer;
+    > ul > li {
+      padding: 0 0 15px 20px;
+
+      .menu-list-box {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        align-items: center;
+        height: 100px;
+        border-bottom: 1px solid wheat;
+        cursor: pointer;
+
+        > img {
+          border-radius: 100px;
+          background-color: #f9394e;
+          height: 80px;
+          width: 80px;
+        }
+      }
     }
   }
 `
@@ -35,29 +46,33 @@ const OrderCategory = ({ categoryList }: InferGetStaticPropsType<typeof getStati
     <OrderCategoryContainer className='page-container'>
       <Navbar text={category.name.toUpperCase()} />
       <div className='menu-list-container'>
-        {
-          list.map((menu: any, idx: number) => {
-            return (
-              <Link
-                className='link'
-                href={{
-                  pathname: pathname,
-                  query: {
-                    categoryIdx: categoryIdx,
-                    menuIdx: idx
-                  },
-                }}
-                as={`/order/category/?type=${category.name}/menu?name=${menu.name}`}
-                key={idx}
-              >
-                <div className='menu-list-box'>
-                  <img src='' alt='' />
-                  <p>{menu.name}</p>
-                </div>
-              </Link>
-            )
-          })
-        }
+        <ul>
+          {
+            list.map((menu: any, idx: number) => {
+              return (
+                <li>
+                  <Link
+                    className='link'
+                    href={{
+                      pathname: pathname,
+                      query: {
+                        categoryIdx: categoryIdx,
+                        menuIdx: idx
+                      },
+                    }}
+                    as={`/order/category/?type=${category.name}/menu?name=${menu.name}`}
+                    key={idx}
+                  >
+                    <div className='menu-list-box'>
+                      <img src='' alt='' />
+                      <p>{menu.name}</p>
+                    </div>
+                  </Link>
+                </li>
+              )
+            })
+          }
+        </ul>
       </div>
     </OrderCategoryContainer>
   )

@@ -16,13 +16,13 @@ const LayoutContainer = styled.div`
     justify-content: center;
     align-items: center;
     height: 100%;
-    padding: 0 25px;
+    //padding: 0 25px;
   }
   
   @media screen and (max-width: 480px) {
     main {
       width: 100vw;
-      background-color: green;
+      background-color: white;
     }
   }
   

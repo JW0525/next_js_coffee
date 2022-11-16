@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import coffeeImage from "../../public/asset/images/free-icon-coffee-cup-3361135.png";
+import coffeeImage from "../../public/asset/images/free-animated-icon-coffee-cup-6172528.gif";
 import React from "react";
 
 const LoadingContainer = styled.div`

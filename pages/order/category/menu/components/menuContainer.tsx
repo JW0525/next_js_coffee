@@ -1,24 +1,23 @@
 import Image from "next/image";
 import ImageS from "../../../../../public/asset/images/cat-bassano-uCJHhrvG4QA-unsplash.jpg";
+import Navigation from "../../../../navigation";
+import React from "react";
 
 const MenuContainer = (props: any) => {
   const { menu } = props;
 
   return (
     <div className='menu-container'>
-      <Image
-        className='image'
-        // src={menu.url}
-        src={ImageS}
-        alt='image'
-      />
-
-      <div className='menu-box'>
-        <h6>메뉴</h6>
-        <p>{menu.name}</p>
+      <div className="image">
+        {/*<Image*/}
+        {/*  // src={menu.url}*/}
+        {/*  src={ImageS}*/}
+        {/*  alt='image'*/}
+        {/*/>*/}
       </div>
+      <div className='menu-box'>{menu.name}</div>
+      <div className='menu-box'>{menu.price}</div>
       <div className='menu-box'>
-        <h6>옵션</h6>
         <ul>
           {
             menu.option.map((option: string, idx: number) => {
@@ -26,10 +25,6 @@ const MenuContainer = (props: any) => {
             })
           }
         </ul>
-      </div>
-      <div className='menu-box'>
-        <h6>가격</h6>
-        <div>{menu.price}</div>
       </div>
     </div>
   )
