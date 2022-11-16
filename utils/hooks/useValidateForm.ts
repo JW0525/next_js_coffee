@@ -1,4 +1,7 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
+import CreateUser from "../createUser";
 
 export interface IRegisterForm {
   email: string,
@@ -14,13 +17,15 @@ export interface ICheckTouched {
   name?: boolean
 }
 
-export const useForm = (props: {
+export const useValidateForm = (props: {
   initialForm : IRegisterForm,
   initialError: IRegisterForm,
   initialIsTouched: ICheckTouched,
   validate: Function,
+  type: string
 }) => {
-  const { initialForm, initialError, initialIsTouched, validate } = props;
+  const { initialForm, initialError, initialIsTouched, validate, type } = props;
+  const router = useRouter();
   const [form, setForm] = useState<IRegisterForm>(initialForm);
   const [errors, setErrors] = useState<IRegisterForm>(initialError);
   const [isTouched, setTouched] = useState<ICheckTouched>(initialIsTouched);
@@ -33,7 +38,7 @@ export const useForm = (props: {
     });
   };
 
-  const blurHandler = (e: any) => {
+  const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     let { name } = e.currentTarget;
     setTouched({
       ...isTouched,
@@ -42,14 +47,31 @@ export const useForm = (props: {
   }
 
   const submitHandler = useCallback(
-    (e: any) => {
+    async (e: any) => {
       e.preventDefault();
 
       const errors = validate(form);
       setErrors(errors);
+
       if (Object.values(errors).some(v => v)) return;
 
-      alert('회원가입이 완료되었습니다.');
+      switch (type) {
+        case 'logIn': // 로그인 로직
+          const logInResponse = await signIn("email-password-credential", {
+            email: form.email,
+            password: form.pwd,
+            callbackUrl: "/home",
+            // redirect: false
+          });
+          break;
+        case 'register': // 회원가입 로직
+          const registerResponse = await CreateUser(form.name as string, form.email, form.pwd);
+
+          if (registerResponse) {
+            router.push('/login').then();
+          }
+          break;
+      }
     }, [form]
   );
 

@@ -1,8 +1,7 @@
-import {InferGetStaticPropsType} from "next";
-import styled from "@emotion/styled";
 import Link from "next/link";
-import Navbar from "@/components/common/navbar";
+import styled from "@emotion/styled";
 import { API } from "config";
+import Navbar from "@/components/layout/navbar";
 import getData from "pages/lib/getData";
 import Navigation from "../navigation";
 import React from "react";
@@ -43,6 +42,7 @@ const OrderPage = () => {
   const pathname = '/order/category';
 
   if (!data) return;
+
   return (
     <OrderPageContainer className='page-container'>
       <Navbar text='Order'/>

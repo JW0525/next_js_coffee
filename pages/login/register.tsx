@@ -1,12 +1,15 @@
-import styled from "@emotion/styled";
-import InputBox from "@/components/common/inputBox";
-import {IRegisterForm, useForm} from "../../utils/hooks/useForm";
-import {regExp} from "../../utils/regExp";
-import ButtonBox from "@/components/common/btn";
-import Navbar from "@/components/common/navbar";
 import React from "react";
+import styled from "@emotion/styled";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { regExp } from "../../utils/regExp";
+import { IRegisterForm, useValidateForm } from "../../utils/hooks/useValidateForm";
+import InputBox from "@/components/common/inputBox";
+import ButtonBox from "@/components/common/btn";
+import Navbar from "@/components/layout/navbar";
+import {Loading} from "@/components/common/loading";
 
-const LoginegisterContainer = styled.div`
+const LoginRegisterContainer = styled.div`
   display: flex;
   align-items: center;
 
@@ -16,6 +19,9 @@ const LoginegisterContainer = styled.div`
 `
 
 const Register = () => {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+
   const validate = (values: IRegisterForm) => {
     const errors = { email: "", pwd: "", pwdCheck: "", name: "" }
 
@@ -31,15 +37,19 @@ const Register = () => {
     return errors
   }
 
-  const { form, errors, isTouched, submitHandler, getFieldProps } = useForm({
+  const { form, errors, isTouched, submitHandler, getFieldProps } = useValidateForm({
   initialForm: { email: '', pwd: '', pwdCheck: '', name: ''},
     initialError: { email: '', pwd: '', pwdCheck: '', name: ''},
     initialIsTouched: { email: false, pwd: false, pwdCheck: false, name: false},
-    validate
+    validate,
+    type: 'register'
   });
 
+  if (status === "authenticated") router.push("/home").then();
+  if (status !== 'unauthenticated') return <Loading />
+
   return (
-    <LoginegisterContainer className='page-container'>
+    <LoginRegisterContainer className='page-container'>
       <Navbar text='Register' />
       <form onSubmit={ submitHandler }>
         <InputBox
@@ -73,8 +83,7 @@ const Register = () => {
 
         <ButtonBox content='Register' type="submit" />
       </form>
-    </LoginegisterContainer>
-
+    </LoginRegisterContainer>
   )
 }
 

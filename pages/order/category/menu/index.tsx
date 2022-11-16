@@ -1,9 +1,8 @@
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import styled from "@emotion/styled";
-import {InferGetStaticPropsType} from "next";
-import Navbar from "@/components/common/navbar";
+import { API } from "../../../../config";
+import { InferGetStaticPropsType } from "next";
 import MenuContainer from "./components/menuContainer";
-import {API} from "../../../../config";
 
 const OrderMenuContainer = styled.div`
   .menu-container {
@@ -24,7 +23,6 @@ const OrderMenuContainer = styled.div`
     align-items: center;
     height: 100px;
     border-bottom: 1px solid wheat;
-    cursor: pointer;
     text-align: center;
     
     ul {
