@@ -24,10 +24,10 @@ const HomeContainer = styled.div`
     background-color: #2D82E8;
 
     > h2 {
+      padding-top: 15px;
       font-size: ${theme.fontSizes.mmd};
       color: ${palette.common.white};
       text-align: center;
-      padding-top: 15px;
     }
 
     > span {
@@ -41,9 +41,9 @@ const HomeContainer = styled.div`
   .container {
 
     .banner {
+      margin: 15px 8px 0 8px;
       height: 155px;
       background-color: #F6F5EE;
-      margin: 15px 8px 0 8px;
       box-shadow: 0 4px 4px 0 #d3d2cf;
       
       > span {
@@ -52,40 +52,30 @@ const HomeContainer = styled.div`
     }
 
     .menuList {
-      padding: 16px;
-      display: inline-block;
-      margin-bottom: 50px;
-
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px 10px;
+      padding: 10px;
+      
       > li {
-        width: 50%;
-        float: left;
+        background-color: #1B2E5F;
+        box-shadow: 0 4px 4px 0 #191919;
+        border-radius: 10px;
+        text-align: center;
+        
+        .link {
+          display: block;
 
-        &:nth-of-type(2n) > div {
-          margin: 0 0 15px 6px;
-        }
-
-        > div {
-          background-color: #1B2E5F;
-          box-shadow: 0 4px 4px 0 #191919;
-          text-align: center;
-          margin: 0 6px 15px 0;
-          border-radius: 10px;
-
-          > a {
+          > span {
             display: block;
-
-            > span {
-              display: block;
-              color: ${theme.colors.white};
-              font-size: ${theme.fontSizes.xxs};
-              padding: 5px 0 15px 0;
-            }
+            color: ${palette.common.white};
+            font-size: ${theme.fontSizes.xxs};
+            padding: 5px 0 15px 0;
           }
         }
       }
     }
   }
-
 }
 
 `;
@@ -99,9 +89,9 @@ interface ISessionData {
 const Home = () => {
   const { data: session, status }: ISessionData = useSession()
   const homeMenuList = getData(`${API.ORDER}`).data;
-  const pathname = '/order/category/menu';
 
   if (!homeMenuList) return;
+
   return (
     <HomeContainer>
       <div className="header">
@@ -124,32 +114,30 @@ const Home = () => {
         </div>
         <ul className="menuList">
           {
-            homeMenuList.map((menu: any, idx: number) => {
-              return (
-                <li>
-                  <div>
-                    <Link href={{
-                      pathname: pathname,
-                      query: {
-                        categoryIdx: idx,
-                        menuIdx: [0]
-                      },
-                    }}
-                     key={idx}
-                    >
-                      <Image
-                        priority
-                        src={Americano}
-                        height={125}
-                        width={125}
-                        alt="americano"
-                      />
-                      <span>{menu.name}</span>
-                    </Link>
-                  </div>
-                </li>
-              )
-            })
+            homeMenuList.map((menu: any, idx: number) =>
+              <li>
+                <Link
+                  className='link'
+                  href={{
+                  pathname: '/order/menu',
+                  query: {
+                    categoryIdx: idx,
+                    menuIdx: [0]
+                  },
+                }}
+                 key={idx}
+                >
+                  <Image
+                    priority
+                    src={Americano}
+                    height={125}
+                    width={125}
+                    alt="americano"
+                  />
+                  <span>{menu.name}</span>
+                </Link>
+              </li>
+            )
           }
         </ul>
       </div>

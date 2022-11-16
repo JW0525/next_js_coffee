@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
-import CreateUser from "../createUser";
+import CreateUser from '../hooks/useCreateUser'
 
 export interface IRegisterForm {
   email: string,

@@ -21,7 +21,11 @@ const MenuContainer = (props: any) => {
         <ul>
           {
             menu.option.map((option: string, idx: number) => {
-              return <li key={idx}>{option}</li>
+              return (
+                <>
+                  <li key={idx}>{option}</li>
+                </>
+              )
             })
           }
         </ul>

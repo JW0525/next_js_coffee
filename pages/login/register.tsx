@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { regExp } from "../../utils/regExp";
-import { IRegisterForm, useValidateForm } from "../../utils/hooks/useValidateForm";
+import { IRegisterForm, useValidateForm } from "@/hooks/useValidateForm";
 import InputBox from "@/components/common/inputBox";
 import ButtonBox from "@/components/common/btn";
 import Navbar from "@/components/layout/navbar";

@@ -21,4 +21,4 @@ const categoryListSchema = new mongoose.Schema({
   ]
 })
 
-export const CategoryList = mongoose.model('categoryListData5', categoryListSchema);
+export const CategoryList = mongoose.model('data-category-list') || mongoose.model('data-category-list', categoryListSchema);
