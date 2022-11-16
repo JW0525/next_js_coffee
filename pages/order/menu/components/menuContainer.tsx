@@ -17,19 +17,19 @@ const MenuContainer = (props: any) => {
       </div>
       <div className='menu-box'>{menu.name}</div>
       <div className='menu-box'>{menu.price}</div>
-      <div className='menu-box'>
-        <ul>
-          {
-            menu.option.map((option: string, idx: number) => {
-              return (
-                <>
-                  <li key={idx}>{option}</li>
-                </>
-              )
-            })
-          }
-        </ul>
-      </div>
+      {
+        menu.option.length > 0 &&
+        <div className='menu-box'>
+          <ul>
+            {
+              menu.option.map((option: string, idx: number) => {
+                return <li key={idx}>{option}</li>
+              })
+            }
+          </ul>
+        </div>
+      }
+
     </div>
   )
 }

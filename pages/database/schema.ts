@@ -11,7 +11,7 @@ const categoryListSchema = new mongoose.Schema({
           name: String,
           description: String,
           price: Number,
-          option: [],
+          option: { type: Array, default: [] },
           imageUrl: String,
           isSellYn: Boolean,
           isRecommended: Boolean
