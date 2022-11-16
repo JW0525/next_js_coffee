@@ -1,20 +1,30 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import data from '../data'
 import { CategoryList } from "../../database/schema";
-import connectDB from "../../database/connection";
+import connectDB from "../../database/connectDB";
 
-export default function get_Menu(req: NextApiRequest, res: NextApiResponse) {
-  const { categoryList } = data;
-
-  // if (data) {
-  //   return res.status(200).json(categoryList)
-  // } else {
-  //   return res.status(400).json({error: "Data Not Found"});
-  // }
+export default async function get_Menu(req: NextApiRequest, res: NextApiResponse) {
+  const { method } = req;
   connectDB().catch(error => console.error(error));
 
-  const create = new CategoryList({ categoryList });
-  create.save().then(() => {
-    res.status(200).json(create);
-  })
+  switch(method) {
+    case 'GET':
+      try {
+        const data = await CategoryList.find({})
+        res.status(200).json(data);
+      } catch (err) {
+        res.status(400).json({ status: false })
+      }
+      break;
+    case 'POST':
+      const data = await CategoryList.create(req.body)
+      try {
+        res.status(201).json({ method: 'POST', status: true, data })
+      } catch (err) {
+        res.status(400).json({ status: false })
+      }
+      break;
+    default:
+      res.status(400).json({ status: false })
+      break;
+  }
 }

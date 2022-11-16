@@ -11,7 +11,7 @@ const categoryListSchema = new mongoose.Schema({
           name: String,
           description: String,
           price: Number,
-          option: {any: []},
+          option: [],
           imageUrl: String,
           isSellYn: Boolean,
           isRecommended: Boolean
@@ -21,4 +21,4 @@ const categoryListSchema = new mongoose.Schema({
   ]
 })
 
-export const CategoryList = mongoose.model('data-category-list') || mongoose.model('data-category-list', categoryListSchema);
+export const CategoryList = mongoose.models.CategoryList || mongoose.model('CategoryList', categoryListSchema);

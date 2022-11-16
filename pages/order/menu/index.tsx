@@ -41,6 +41,7 @@ const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticPro
   if (!category) return;
 
   const menu = category.list[`${menuIdx}`];
+  console.log(menu)
 
   return (
     <OrderMenuContainer className='page-container'>
@@ -53,11 +54,11 @@ export default OrderMenu;
 
 export async function getStaticProps() {
   const res = await fetch(`${API.ORDER}`);
-  const categoryList = await res.json();
+  const data = await res.json();
 
   return {
     props: {
-      categoryList
+      categoryList: data[0].categoryList
     }
   }
 }

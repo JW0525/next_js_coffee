@@ -39,9 +39,10 @@ const OrderPageContainer = styled.div`
 `
 
 const OrderPage = () => {
-  const { data: categoryList, isLoading, isError } = getData(`${API.ORDER}`);
+  const { data, isLoading, isError } = getData(`${API.ORDER}`);
+  if (!data) return;
+  const { categoryList } = data[0];
 
-  if (!categoryList) return;
   return (
     <OrderPageContainer className='page-container'>
       <Navbar text='Order'/>
