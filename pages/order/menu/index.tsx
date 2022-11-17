@@ -35,13 +35,12 @@ const OrderMenuContainer = styled.div`
 
 const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
-  let { categoryIdx, menuIdx } = router.query;
+  let { categoryId, menuId } = router.query;
+  const category = categoryList.find((list:any) => list.id === Number(categoryId));
 
-  const category = categoryList[`${categoryIdx}`];
   if (!category) return;
-
-  const menu = category.list[`${menuIdx}`];
-  console.log(menu)
+  const { list } = category;
+  const menu = list.find((menu:any) => menu.id === Number(menuId));
 
   return (
     <OrderMenuContainer className='page-container'>

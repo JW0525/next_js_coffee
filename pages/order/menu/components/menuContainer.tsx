@@ -1,6 +1,3 @@
-import Image from "next/image";
-import ImageS from "../../../../public/asset/img/cat-bassano-uCJHhrvG4QA-unsplash.jpg";
-import Navigation from "../../../navigation";
 import React from "react";
 
 const MenuContainer = (props: any) => {
@@ -18,18 +15,18 @@ const MenuContainer = (props: any) => {
       <div className='menu-box'>{menu.name}</div>
       <div className='menu-box'>{menu.price}</div>
       {
-        menu.option.length > 0 &&
-        <div className='menu-box'>
-          <ul>
-            {
-              menu.option.map((option: string, idx: number) => {
-                return <li key={idx}>{option}</li>
-              })
-            }
-          </ul>
-        </div>
+        menu.option.length > 0 && (
+          <div className='menu-box'>
+            <ul>
+              {
+                menu.option.map((option: string, idx: number) => {
+                  return <li key={idx}>{option}</li>
+                })
+              }
+            </ul>
+          </div>
+        )
       }
-
     </div>
   )
 }

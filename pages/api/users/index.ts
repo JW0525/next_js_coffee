@@ -1,11 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import connectDB from '../database/connectDB';
-import { CategoryList } from '../database/schema';
+import connectDB from '../../database/connectDB';
 
 export default async function get_Users(req: NextApiRequest, res: NextApiResponse) {
-  const { method } = req;
   connectDB().catch(error => console.error(error));
-
+  
+  const { method } = req;
   // switch(method) {
   //   case 'GET':
   //     try {

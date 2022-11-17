@@ -53,8 +53,8 @@ const OrderCategory = () => {
                     href={{
                       pathname: '/order/menu',
                       query: {
-                        categoryIdx: Number(categoryId) - 1,
-                        menuIdx: idx
+                        categoryId,
+                        menuId: idx + 1
                       },
                     }}
                     as={`/order/${categoryId}/menu?name=${menu.name}`}

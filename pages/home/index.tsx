@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, {ReactNode} from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import Image from 'next/image';
 import Navigation from "../navigation";
 import Link from "next/link";
@@ -11,6 +11,7 @@ import { API } from "../../config";
 import {palette} from "../../styles/baseSytle";
 import { useSession } from "next-auth/react";
 import {Session} from "next-auth";
+import {Loading} from "@/components/common/loading";
 
 const HomeContainer = styled.div`
   display: flex;
@@ -87,10 +88,43 @@ interface ISessionData {
 }
 
 const Home = () => {
-  const { data: session, status }: ISessionData = useSession()
-  const homeMenuList = getData(`${API.ORDER}`).data;
+  const { data: session, status }: ISessionData = useSession();
+  const { data, isLoading, isError } = getData(`${API.ORDER}`);
+  const [recommendedList, setRecommendedList] = useState<any>([]);
+  const [categoryIdxList, setCategoryIdxList] = useState<any>([]);
 
-  if (!homeMenuList) return;
+  const createList = () => {
+    const recommendedList = [];
+    const categoryIdxList = [];
+
+    if (data) {
+      const { categoryList } = data[0];
+
+      for (let i in categoryList) {
+        const { list } = categoryList[i];
+        const recommendMenu = list.filter((e: any) => e.isRecommended === true);
+        recommendedList.push(...recommendMenu);
+
+        for (let j in list) {
+          const { id } = categoryList[i];
+          categoryIdxList.push(id)
+        }
+      }
+    }
+
+    return {
+      recommendedList,
+      categoryIdxList
+    }
+  }
+
+  useEffect(() => {
+    const { recommendedList, categoryIdxList } = createList();
+    setRecommendedList(recommendedList);
+    setCategoryIdxList(categoryIdxList);
+  },[isLoading]);
+
+  if (isLoading) return <Loading />
 
   return (
     <HomeContainer>
@@ -107,37 +141,42 @@ const Home = () => {
             <span>오늘의 조식</span>
             <span>햄치즈 샌드위치</span>
           </div>
-          <Image src={Ham}
-                 height={100}
-                 width={100}
-                 alt="ham"/>
+          <Image
+            src={Ham}
+            height={100}
+            width={100}
+            alt="ham"
+          />
         </div>
         <ul className="menuList">
           {
-            homeMenuList.map((menu: any, idx: number) =>
-              <li>
-                <Link
-                  className='link'
-                  href={{
-                  pathname: '/order/menu',
-                  query: {
-                    categoryIdx: idx,
-                    menuIdx: [0]
-                  },
-                }}
-                 key={idx}
-                >
-                  <Image
-                    priority
-                    src={Americano}
-                    height={125}
-                    width={125}
-                    alt="americano"
-                  />
-                  <span>{menu.name}</span>
-                </Link>
-              </li>
-            )
+            recommendedList.map((menu: any, idx: number) => {
+              return (
+                <li>
+                  <Link
+                    className='link'
+                    href={{
+                      pathname: '/order/menu',
+                      query: {
+                        categoryId: categoryIdxList[idx],
+                        menuId: menu.id
+                      },
+                    }}
+                    as={`/order/1/menu?name=${menu.name}`}
+                    key={idx}
+                  >
+                    <Image
+                      priority
+                      src={Americano}
+                      height={125}
+                      width={125}
+                      alt="americano"
+                    />
+                    <span>{menu.name}</span>
+                  </Link>
+                </li>
+              )
+            })
           }
         </ul>
       </div>

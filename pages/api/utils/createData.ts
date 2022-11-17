@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from 'next-connect';
-import connectDB from '../database/connectDB';
-import { CategoryList } from '../database/schema';
+import connectDB from '../../database/connectDB';
+import { CategoryList } from '../../database/model';
 import data from './data'
 
 export default function get_Users(req: NextApiRequest, res: NextApiResponse) {

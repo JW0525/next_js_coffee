@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const categoryListSchema = new mongoose.Schema({
+export const categoryListSchema = new mongoose.Schema({
   categoryList: [
     {
       id: Number,
@@ -20,5 +20,3 @@ const categoryListSchema = new mongoose.Schema({
     }
   ]
 })
-
-export const CategoryList = mongoose.models.CategoryList || mongoose.model('CategoryList', categoryListSchema);

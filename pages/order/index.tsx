@@ -1,12 +1,10 @@
+import React from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { API } from "config";
 import Navbar from "@/components/layout/navbar";
-import getData from "pages/lib/getData";
-import getIdData from "@/lib/helper";
 import Navigation from "../navigation";
-import React from "react";
-import {useRouter} from "next/router";
+import getData from "pages/lib/getData";
 
 const OrderPageContainer = styled.div`
   .category-list-container {
@@ -41,6 +39,7 @@ const OrderPageContainer = styled.div`
 const OrderPage = () => {
   const { data, isLoading, isError } = getData(`${API.ORDER}`);
   if (!data) return;
+
   const { categoryList } = data[0];
 
   return (
@@ -49,21 +48,25 @@ const OrderPage = () => {
       <div className='category-list-container'>
         <ul>
           {
-            categoryList.map((category: any, idx: number) => {
-              const categoryIdx = idx + 1;
-
-              return (
-                <li key={idx}>
-                  <Link className='link' href={{ pathname: `/order/${categoryIdx}` }}>
-                    <div className='category-list-box'>
-                      <img src='' alt='' />
-                      <span>{category.name}</span>
-                    </div>
-                  </Link>
-                </li>
-                )
-              })
-            }
+            categoryList.map((category: any, idx: number) =>
+              <li key={idx}>
+                <Link
+                  className='link'
+                  href={{
+                    pathname: `/order/[categoryId]`,
+                    query: {
+                      categoryId: idx + 1,
+                    }
+                }}
+                >
+                  <div className='category-list-box'>
+                    <img src='' alt='' />
+                    <span>{category.name}</span>
+                  </div>
+                </Link>
+              </li>
+            )
+          }
         </ul>
       </div>
       <Navigation/>

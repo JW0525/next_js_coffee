@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { CategoryList } from "../../database/schema";
+import { CategoryList } from "../../database/model";
 import connectDB from "../../database/connectDB";
 
 export default async function get_Menu(req: NextApiRequest, res: NextApiResponse) {
@@ -9,7 +9,7 @@ export default async function get_Menu(req: NextApiRequest, res: NextApiResponse
   switch(method) {
     case 'GET':
       try {
-        const data = await CategoryList.find({})
+        const data = await CategoryList.find({}, {_id:0})
         res.status(200).json(data);
       } catch (err) {
         res.status(400).json({ status: false })

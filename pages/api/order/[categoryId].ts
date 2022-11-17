@@ -1,4 +1,4 @@
-import data from '../data'
+import data from '../utils/data'
 import {NextApiRequest, NextApiResponse} from "next";
 
 export default function get_IdData(req: NextApiRequest, res: NextApiResponse) {
