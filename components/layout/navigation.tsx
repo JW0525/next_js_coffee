@@ -1,21 +1,23 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
-import Home from "../home";
+import Home from "../../pages/home";
 
 const NavigationContainer = styled.div`
   position: fixed;
   bottom: 0;
-  left:0;
-  right:0;
+  width: 100%;
   height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: hotpink;
 `;
 
 const Navigation = () => {
 
   return (
-    <NavigationContainer>
+    <NavigationContainer className='navigation'>
       <Link href='home'>홈</Link>
       <Link href="coupon">쿠폰</Link>
       <Link href="order">주문하기</Link>

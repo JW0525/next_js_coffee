@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import { API } from "config";
 import Navbar from "@/components/layout/navbar";
-import Navigation from "../navigation";
+import Navigation from "@/components/layout";
 import getData from "pages/lib/getData";
 
 const OrderPageContainer = styled.div`

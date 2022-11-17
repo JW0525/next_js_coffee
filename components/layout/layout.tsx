@@ -1,6 +1,7 @@
 import {FC, ReactNode} from "react";
 import styled from "@emotion/styled";
 import Navbar from "./navbar";
+import Navigation from "@/components/layout/navigation";
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -12,15 +13,18 @@ const LayoutContainer = styled.div`
   background-color: floralwhite;
 
   main {
+    padding-bottom: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
-    //padding: 0 25px;
   }
   
   @media screen and (max-width: 480px) {
+    .navigation {
+      width: 100vw;
+    }
     main {
       width: 100vw;
       background-color: white;
@@ -28,6 +32,9 @@ const LayoutContainer = styled.div`
   }
   
   @media screen and (min-width: 480px) {
+    .navigation {
+      width: 480px;
+    }
     main {
       width: 480px;
       background-color: white;
@@ -55,7 +62,7 @@ export const Layout: FC<{children: ReactNode}> = ({ children }) => {
       <main>
         {children}
       </main>
-      {/*<footer>This is Footer</footer>*/}
+      <Navigation />
     </LayoutContainer>
   )
 }

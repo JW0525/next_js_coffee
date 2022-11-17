@@ -1,17 +1,16 @@
 import styled from "@emotion/styled";
 import React, {ReactNode, useEffect, useState} from "react";
 import Image from 'next/image';
-import Navigation from "../navigation";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
+import { API } from "../../config";
+import { Loading } from "@/components/common/loading";
+import getData from "../lib/getData";
 import theme from "../../styles/theme";
+import { palette } from "../../styles/baseSytle";
 import Americano from "/public/asset/img/americano.png";
 import Ham from "/public/asset/img/Ham.png";
-import getData from "../lib/getData";
-import { API } from "../../config";
-import {palette} from "../../styles/baseSytle";
-import { useSession } from "next-auth/react";
-import {Session} from "next-auth";
-import {Loading} from "@/components/common/loading";
 
 const HomeContainer = styled.div`
   display: flex;
@@ -114,7 +113,7 @@ const Home = () => {
 
     return {
       recommendedList,
-      categoryIdxList
+      categoryIdxList,
     }
   }
 
@@ -151,14 +150,17 @@ const Home = () => {
         <ul className="menuList">
           {
             recommendedList.map((menu: any, idx: number) => {
+              const { id } = menu;
+              const categoryId = categoryIdxList[id];
+
               return (
-                <li>
+                <li key={idx}>
                   <Link
                     className='link'
                     href={{
                       pathname: '/order/menu',
                       query: {
-                        categoryId: categoryIdxList[idx],
+                        categoryId,
                         menuId: menu.id
                       },
                     }}
@@ -180,7 +182,6 @@ const Home = () => {
           }
         </ul>
       </div>
-      <Navigation/>
     </HomeContainer>
   );
 };
