@@ -60,8 +60,7 @@ export const useValidateForm = (props: {
           const logInResponse = await signIn("email-password-credential", {
             email: form.email,
             password: form.pwd,
-            callbackUrl: "/home",
-            // redirect: false
+            callbackUrl: "/home"
           });
           break;
         case 'register': // 회원가입 로직

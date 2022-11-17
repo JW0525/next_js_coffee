@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { API } from "config";
 import Navbar from "@/components/layout/navbar";
-import Navigation from "@/components/layout";
 import getData from "pages/lib/getData";
+import {Loading} from "@/components/common/loading";
+import {useRouter} from "next/router";
+import {useSession} from "next-auth/react";
 
 const OrderPageContainer = styled.div`
   .category-list-container {
@@ -37,10 +39,28 @@ const OrderPageContainer = styled.div`
 `
 
 const OrderPage = () => {
+  const router = useRouter();
+  const { data: session, status } = useSession();
   const { data, isLoading, isError } = getData(`${API.ORDER}`);
+
   if (!data) return;
 
   const { categoryList } = data[0];
+
+  // 로그인하지 않았을 시에는 로딩화면을 보여준다. 이후 login 페이지로 이동한다.
+  useEffect(() => {
+    if (status === 'loading') return;
+
+    if (status === 'unauthenticated') {
+      const timer = setTimeout(() => {
+        router.push('/login').then();
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  },[status]);
+
+  if (status === 'unauthenticated') return <Loading/>
 
   return (
     <OrderPageContainer className='page-container'>
@@ -69,7 +89,6 @@ const OrderPage = () => {
           }
         </ul>
       </div>
-      <Navigation/>
     </OrderPageContainer>
   )
 }

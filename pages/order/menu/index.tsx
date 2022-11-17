@@ -4,6 +4,9 @@ import { API } from "../../../config";
 import { InferGetStaticPropsType } from "next";
 import MenuContainer from "./components/menuContainer";
 import Navbar from "@/components/layout/navbar";
+import { useSession } from "next-auth/react";
+import { Loading } from "@/components/common/loading";
+import {useEffect} from "react";
 
 const OrderMenuContainer = styled.div`
   .menu-container {
@@ -36,11 +39,28 @@ const OrderMenuContainer = styled.div`
 const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   let { categoryId, menuId } = router.query;
-  const category = categoryList.find((list:any) => list.id === Number(categoryId));
+  const { data: session, status } = useSession();
 
+  const category = categoryList.find((list:any) => list.id === Number(categoryId));
   if (!category) return;
+
   const { list } = category;
   const menu = list.find((menu:any) => menu.id === Number(menuId));
+
+  // 로그인하지 않았을 시에는 로딩화면을 보여준다. 이후 login 페이지로 이동한다.
+  useEffect(() => {
+    if (status === 'loading') return;
+
+    if (status === 'unauthenticated') {
+      const timer = setTimeout(() => {
+        router.push('/login').then();
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  },[status]);
+
+  if (status === 'unauthenticated') return <Loading/>
 
   return (
     <OrderMenuContainer className='page-container'>
@@ -49,6 +69,7 @@ const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticPro
     </OrderMenuContainer>
   )
 }
+
 export default OrderMenu;
 
 export async function getStaticProps() {

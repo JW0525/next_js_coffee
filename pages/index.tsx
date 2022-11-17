@@ -8,20 +8,11 @@ export default function IndexPage() {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  const CheckLogin = () => {
-    if (status === 'authenticated') {
-      router.push('/home').then();
-    } else {
-      router.push('/home').then();
-      // router.push('/login').then();
-    }
-  }
-
   useEffect(() => {
     if (status === 'loading') return;
 
     const timer = setTimeout(() => {
-      CheckLogin();
+      router.push('/home').then();
     }, 1000);
 
     return () => clearTimeout(timer);

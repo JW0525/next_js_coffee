@@ -42,12 +42,18 @@ const Navbar = (props: { text: string }) =>{
 
   return (
     <NavbarContainer className='nav-bar'>
-      <span onClick={() => router.back()} />
+      {
+        session && <span onClick={() => router.back()} />
+      }
       <p>{text}</p>
 
       {
         status === "authenticated" && (
-          <button onClick={() => signOut()}>Sign Out</button>
+          <button onClick={() => signOut({
+            callbackUrl: "/home"
+          })}>
+            Sign Out
+          </button>
         )
       }
     </NavbarContainer>

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
-import Home from "../../pages/home";
 
 const NavigationContainer = styled.div`
   position: fixed;

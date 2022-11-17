@@ -54,7 +54,7 @@ const OrderCategory = () => {
                       pathname: '/order/menu',
                       query: {
                         categoryId,
-                        menuId: idx + 1
+                        menuId: menu.id
                       },
                     }}
                     as={`/order/${categoryId}/menu?name=${menu.name}`}

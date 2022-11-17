@@ -11,6 +11,7 @@ import theme from "../../styles/theme";
 import { palette } from "../../styles/baseSytle";
 import Americano from "/public/asset/img/americano.png";
 import Ham from "/public/asset/img/Ham.png";
+import createList from "@/hooks/useCreateList";
 
 const HomeContainer = styled.div`
   display: flex;
@@ -92,33 +93,8 @@ const Home = () => {
   const [recommendedList, setRecommendedList] = useState<any>([]);
   const [categoryIdxList, setCategoryIdxList] = useState<any>([]);
 
-  const createList = () => {
-    const recommendedList = [];
-    const categoryIdxList = [];
-
-    if (data) {
-      const { categoryList } = data[0];
-
-      for (let i in categoryList) {
-        const { list } = categoryList[i];
-        const recommendMenu = list.filter((e: any) => e.isRecommended === true);
-        recommendedList.push(...recommendMenu);
-
-        for (let j in list) {
-          const { id } = categoryList[i];
-          categoryIdxList.push(id)
-        }
-      }
-    }
-
-    return {
-      recommendedList,
-      categoryIdxList,
-    }
-  }
-
   useEffect(() => {
-    const { recommendedList, categoryIdxList } = createList();
+    const { recommendedList, categoryIdxList } = createList(data);
     setRecommendedList(recommendedList);
     setCategoryIdxList(categoryIdxList);
   },[isLoading]);
