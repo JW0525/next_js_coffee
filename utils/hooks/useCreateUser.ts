@@ -1,11 +1,14 @@
 const CreateUser = async (
   name: string,
   email: string,
-  password: string
+  password: string,
+  birthDate: string,
+  coupon: number,
+  amounts: number
 ): Promise<any> => {
   const response = await fetch("/api/auth/register", {
     method: "POST",
-    body: JSON.stringify({ name, email, password }),
+    body: JSON.stringify({ name, email, password, birthDate, coupon, amounts}),
     headers: {
       "Content-Type": "application/json",
     },

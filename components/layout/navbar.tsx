@@ -6,11 +6,11 @@ import { backgroundIcons } from "styles/baseSytle";
 import textCss from "styles/textCss";
 
 const NavbarContainer = styled.div`
-  position: absolute;
-  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  top: 0;
   width: 100%;
   height: 40px;
   

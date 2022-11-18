@@ -3,24 +3,40 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 
 const NavigationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 66px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0 100px;
   background-color: hotpink;
+  
+  
+  .link-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 `;
 
 const Navigation = () => {
 
   return (
     <NavigationContainer className='navigation'>
-      <Link href='home'>홈</Link>
-      <Link href="coupon">쿠폰</Link>
-      <Link href="order">주문하기</Link>
-      <Link href="mypage">마이페이지</Link>
+      <div className='link-box'>
+        <Link href='/home'>
+          <p>Home</p>
+        </Link>
+        <Link href="/order">
+          <p>Order</p>
+        </Link>
+        <Link href="/mypage">
+          <p>MyPage</p>
+        </Link>
+      </div>
     </NavigationContainer>
 )
 }

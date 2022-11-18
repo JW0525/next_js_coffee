@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 export const categoryListSchema = new mongoose.Schema({
   categoryList: [
@@ -19,4 +19,13 @@ export const categoryListSchema = new mongoose.Schema({
       ]
     }
   ]
+})
+
+export const UserSchema = new mongoose.Schema({
+  email: String,
+  name: String,
+  password: String,
+  birthDate: String,
+  coupon: Number,
+  amounts: Number
 })

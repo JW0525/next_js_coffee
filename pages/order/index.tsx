@@ -1,12 +1,12 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import styled from "@emotion/styled";
 import { API } from "config";
 import Navbar from "@/components/layout/navbar";
 import getData from "pages/lib/getData";
-import {Loading} from "@/components/common/loading";
-import {useRouter} from "next/router";
-import {useSession} from "next-auth/react";
+import { Loading } from "@/components/common/loading";
 
 const OrderPageContainer = styled.div`
   .category-list-container {

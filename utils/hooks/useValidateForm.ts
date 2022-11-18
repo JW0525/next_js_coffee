@@ -7,14 +7,16 @@ export interface IRegisterForm {
   email: string,
   pwd: string,
   pwdCheck?: string,
-  name?: string
+  name?: string,
+  birthDate?: string
 }
 
 export interface ICheckTouched {
   email: boolean,
   pwd: boolean,
   pwdCheck?: boolean,
-  name?: boolean
+  name?: boolean,
+  birthDate?: boolean
 }
 
 export const useValidateForm = (props: {
@@ -64,7 +66,7 @@ export const useValidateForm = (props: {
           });
           break;
         case 'register': // 회원가입 로직
-          const registerResponse = await CreateUser(form.name as string, form.email, form.pwd);
+          const registerResponse = await CreateUser(form.name as string, form.email, form.pwd, form.birthDate as string, 0, 0);
 
           if (registerResponse) {
             router.push('/login').then();

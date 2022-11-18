@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
-import {verifyPassword} from "../../lib/auth";
+import { verifyPassword } from "../../lib/auth";
 
 const prisma = new PrismaClient();
 // 로그인 인증 방식 설정

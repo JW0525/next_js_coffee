@@ -23,7 +23,7 @@ const Register = () => {
   const { data: session, status } = useSession();
 
   const validate = (values: IRegisterForm) => {
-    const errors = { email: "", pwd: "", pwdCheck: "", name: "" }
+    const errors = { email: "", pwd: "", pwdCheck: "", name: "", birthDate: "" }
 
     if (!values.email) errors.email = "이메일을 입력하세요"
     if (!regExp.email.test(values.email)) errors.email = "이메일은 aws@snaps.com 형식으로 입력해주세요"
@@ -33,14 +33,15 @@ const Register = () => {
     if (values.pwd !== values.pwdCheck) errors.pwdCheck = "비밀번호가 일치하지 않습니다"
     if (!values.name) errors.name = "사명을 입력하세요"
     if (!regExp.eng.test(values.name as string)) errors.name = "영어 이름을 입력해주세요"
+    if (!values.birthDate) errors.birthDate = "생일을 입력하세요"
 
     return errors
   }
 
   const { form, errors, isTouched, submitHandler, getFieldProps } = useValidateForm({
-  initialForm: { email: '', pwd: '', pwdCheck: '', name: ''},
-    initialError: { email: '', pwd: '', pwdCheck: '', name: ''},
-    initialIsTouched: { email: false, pwd: false, pwdCheck: false, name: false},
+  initialForm: { email: '', pwd: '', pwdCheck: '', name: '', birthDate: "" },
+    initialError: { email: '', pwd: '', pwdCheck: '', name: '', birthDate: "" },
+    initialIsTouched: { email: false, pwd: false, pwdCheck: false, name: false, birthDate: false },
     validate,
     type: 'register'
   });
@@ -80,6 +81,13 @@ const Register = () => {
           getFieldProps={getFieldProps}
         />
         {isTouched.name && errors.name && <span>{errors.name}</span>}
+        <InputBox
+          title='생일'
+          type='date'
+          name='birthDate'
+          getFieldProps={getFieldProps}
+        />
+        {isTouched.birthDate && errors.birthDate && <span>{errors.birthDate}</span>}
 
         <ButtonBox content='Register' type="submit" />
       </form>

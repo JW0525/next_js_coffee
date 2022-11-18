@@ -8,7 +8,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return;
 
   const data = req.body;
-  const { name, email, password } = data;
+  const { name, email, password, birthDate, coupon, amounts } = data;
 
   const existingUser = await prisma.user.findUnique({
     where: { email: email },
@@ -24,9 +24,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const result = await prisma.user.create({
     data: {
-      name: name,
-      email: email,
+      name,
+      email,
       password: hashedPassword,
+      birthDate,
+      coupon,
+      amounts
     },
   });
 

@@ -1,5 +1,6 @@
 export const BASE_URL = "http://localhost:3000/api";
 
 export const API = {
-  ORDER: `${BASE_URL}/order`
+  ORDER: `${BASE_URL}/order`,
+  MYPAGE: `${BASE_URL}/user`
 }

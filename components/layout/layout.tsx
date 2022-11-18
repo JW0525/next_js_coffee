@@ -6,7 +6,6 @@ import Navigation from "@/components/layout/navigation";
 const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
@@ -16,9 +15,8 @@ const LayoutContainer = styled.div`
     padding-bottom: 80px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 100vh;
   }
   
   @media screen and (max-width: 480px) {
