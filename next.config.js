@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env: {
-    NEXT_PUBLIC_MONGODB_URI:'mongodb+srv://constell:1234@cluster0.56jgory.mongodb.net/?retryWrites=true&w=majority',
+    NEXT_PUBLIC_MONGODB_URI:'mongodb+srv://constell:1234@cluster0.56jgory.mongodb.net/project_cafe?retryWrites=true&w=majority',
     DB_NAME: 'cafe-mongodb',
     // CLOUDINARY_URL=cloudinary: //xxxxxxxxxxx:yyyyyyyyyyyyyyyyyyy@cpro95,
     SESSION_SECRET: 'keyboard cat'

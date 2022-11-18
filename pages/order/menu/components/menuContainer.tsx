@@ -15,7 +15,7 @@ const MenuContainer = (props: any) => {
       <div className='menu-box'>{menu.name}</div>
       <div className='menu-box'>{menu.price}</div>
       {
-        menu.option.length > 0 && (
+        menu.option.length > 1 && (
           <div className='menu-box'>
             <ul>
               {

@@ -43,10 +43,6 @@ const OrderPage = () => {
   const { data: session, status } = useSession();
   const { data, isLoading, isError } = getData(`${API.ORDER}`);
 
-  if (!data) return;
-
-  const { categoryList } = data[0];
-
   // 로그인하지 않았을 시에는 로딩화면을 보여준다. 이후 login 페이지로 이동한다.
   useEffect(() => {
     if (status === 'loading') return;
@@ -59,6 +55,9 @@ const OrderPage = () => {
       return () => clearTimeout(timer);
     }
   },[status]);
+
+  if (!data) return;
+  const { categoryList } = data[0];
 
   if (status === 'unauthenticated') return <Loading/>
 

@@ -41,12 +41,6 @@ const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticPro
   let { categoryId, menuId } = router.query;
   const { data: session, status } = useSession();
 
-  const category = categoryList.find((list:any) => list.id === Number(categoryId));
-  if (!category) return;
-
-  const { list } = category;
-  const menu = list.find((menu:any) => menu.id === Number(menuId));
-
   // 로그인하지 않았을 시에는 로딩화면을 보여준다. 이후 login 페이지로 이동한다.
   useEffect(() => {
     if (status === 'loading') return;
@@ -59,6 +53,12 @@ const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticPro
       return () => clearTimeout(timer);
     }
   },[status]);
+
+  const category = categoryList.find((list:any) => list.id === Number(categoryId));
+  if (!category) return;
+
+  const { list } = category;
+  const menu = list.find((menu:any) => menu.id === Number(menuId));
 
   if (status === 'unauthenticated') return <Loading/>
 

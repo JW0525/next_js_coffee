@@ -3,9 +3,12 @@ import { CategoryList } from "../../database/model";
 import connectDB from "../../database/connectDB";
 
 export default async function get_Menu(req: NextApiRequest, res: NextApiResponse) {
-  const { method } = req;
   connectDB().catch(error => console.error(error));
 
+  const data = await CategoryList.find({}, {_id:0})
+  res.status(200).json(data);
+
+  const { method } = req;
   switch(method) {
     case 'GET':
       try {
