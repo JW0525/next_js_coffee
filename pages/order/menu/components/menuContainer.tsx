@@ -5,6 +5,7 @@ const MenuContainer = (props: any) => {
   const { menu } = props;
   const { data: session, status } = useSession();
   const { email } = session!.user!;
+  console.log(menu)
 
   const submitFormHandler = async () => {
     // event.preventDefault();
@@ -12,6 +13,7 @@ const MenuContainer = (props: any) => {
     const reqBody = {
       menuId: menu.id,
       menuName: menu.name,
+      option: 'ice',
       quantity: 1,
       totalPrice: 1000,
       status: 'preparing',

@@ -5,7 +5,13 @@ export default async function post_Menu(req: NextApiRequest, res: NextApiRespons
   const prisma = new PrismaClient();  // Loading prisma client
   const { method } = req;
   const data = req.body;
-  const { menuId, menuName, quantity, totalPrice, status, userEmail } = data;
+  const { menuId, menuName, option, quantity, totalPrice, status, userEmail } = data;
+
+  const userOrderData = await prisma.orderHistory.findMany({
+    where: {
+      userEmail: userEmail
+    }
+  });
 
   switch(method) {
     case 'POST':
@@ -13,12 +19,22 @@ export default async function post_Menu(req: NextApiRequest, res: NextApiRespons
         data: {
           menuId,
           menuName,
+          option,
           quantity,
           totalPrice,
           status,
-          userEmail
+          userEmail: userEmail
         }
       });
+
+      const update = await prisma.user.update({
+        where: {
+          email: userEmail
+        },
+        data : {
+          amounts: userOrderData.length * 1000
+        }
+      })
 
       try {
         res.status(201).json({ method: 'POST', status: true })

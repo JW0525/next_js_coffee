@@ -28,6 +28,7 @@ model OrderHistory {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
   menuId          Int
   menuName        String
+  option          String?
   quantity        Int
   totalPrice      Int
   status          String

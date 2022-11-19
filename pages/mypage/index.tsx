@@ -13,10 +13,11 @@ const MyPageContainer = styled.div`
   }
 `
 
-const OrderPage = () => {
+const UserPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const { data, isLoading, isError } = getData(`${API.MYPAGE}`);
+  const { data: userData, isLoading, isError } = getData(`${API.USER}`);
+  const { data: orderData } = getData(`${API.ORDER_HISTORY}`);
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -32,22 +33,45 @@ const OrderPage = () => {
 
   if (status === 'unauthenticated') return <Loading/>
 
-  if (!data || !session) return;
-  const { user } = session;
-  const userInfo = data?.find((user: any) => user.email === user.email)
+  if (!userData || !session || ! orderData) return;
+
+  const thisUserEmail = session.user!.email;
+  const userInfo = userData?.find((user: any) => user.email === thisUserEmail);
+  const userOrder = orderData?.filter((order: any) => order.userEmail === thisUserEmail).reverse();
 
   return (
     <MyPageContainer className='page-container'>
       <Navbar text='my Page'/>
       <div className='user-info-container'>
 
-        <p>{userInfo.email}</p>
-        <p>{userInfo.name}</p>
-        <p>{userInfo.birthDate}</p>
-        <p>{userInfo.coupon}</p>
+        <p>이메일: {userInfo.email}</p>
+        <p>사명: {userInfo.name}</p>
+        <p>생일: {userInfo.birthDate}</p>
+        <p>쿠폰: {userInfo.coupon}</p>
 
       </div>
+
+      <div>
+        <h1>주문 내역</h1>
+        {
+          userOrder.map((order: any, idx: number) => {
+            return (
+              <div key={idx}>
+                <div>{order.createdAt}</div>
+                <div>{order.menuName}, {order.option}</div>
+                <div>{order.quantity}</div>
+                <div>{order.totalPrice}</div>
+                <div>{order.status}</div>
+              </div>
+            )
+          })
+        }
+      </div>
+
+
+
+
     </MyPageContainer>
   )
 }
-export default OrderPage;
+export default UserPage;
