@@ -6,19 +6,19 @@ const MenuContainer = (props: any) => {
   const { data: session, status } = useSession();
   const { email } = session!.user!;
 
-  const submitFormHandler = (event: any) => {
-    event.preventDefault()
+  const submitFormHandler = async () => {
+    // event.preventDefault();
 
     const reqBody = {
-      // user: email,
       menuId: menu.id,
       menuName: menu.name,
       quantity: 1,
       totalPrice: 1000,
       status: 'preparing',
+      userEmail: email
     }
 
-    fetch('/api/menu', {
+    const response = await fetch('/api/order/menu', {
       method: 'POST',
       body: JSON.stringify(reqBody),
       headers: {
@@ -26,7 +26,7 @@ const MenuContainer = (props: any) => {
       },
     })
       .then(response => response.json())
-      .then(data => console.log(data)) // {email : "test@test.com", text: 'Some feedback text'};
+      .then(data => console.log(data))
   }
 
   return (
@@ -53,10 +53,7 @@ const MenuContainer = (props: any) => {
           </div>
         )
       }
-      <div onClick={()=> {
-        console.log(menu.name, menu.price)
-      }
-      }>
+      <div onClick={submitFormHandler}>
         구매
       </div>
     </div>
