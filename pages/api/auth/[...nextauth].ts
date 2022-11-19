@@ -25,7 +25,7 @@ export default NextAuth({
             name: true, email: true, password: true
           },
         });
-        if (!user) throw new Error('No user found!');
+        if (!user) throw new Error('wrong-user');
 
         const isValid = await verifyPassword(credentials!.password, user.password);
         if (!isValid) throw new Error('Could not log you in!');
@@ -36,6 +36,7 @@ export default NextAuth({
   ],
   secret: process.env.SECRET,
   pages: {
-    signIn: '/login'
+    signIn: '/login',
+    error: '/auth/error'
   }
 })

@@ -66,7 +66,14 @@ export const useValidateForm = (props: {
           });
           break;
         case 'register': // 회원가입 로직
-          const registerResponse = await CreateUser(form.name as string, form.email, form.pwd, form.birthDate as string, 0, 0);
+          const registerResponse = await CreateUser(
+            form.name as string,
+            form.email,
+            form.pwd,
+            form.birthDate as string,
+            0,
+            0
+          );
 
           if (registerResponse) {
             router.push('/login').then();

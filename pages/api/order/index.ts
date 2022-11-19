@@ -15,14 +15,6 @@ export default async function get_Menu(req: NextApiRequest, res: NextApiResponse
         res.status(400).json({ status: false })
       }
       break;
-    case 'POST':
-      const data = await CategoryList.create(req.body)
-      try {
-        res.status(201).json({ method: 'POST', status: true, data })
-      } catch (err) {
-        res.status(400).json({ status: false })
-      }
-      break;
     default:
       res.status(400).json({ status: false })
       break;

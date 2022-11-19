@@ -1,7 +1,33 @@
 import React from "react";
+import {useSession} from "next-auth/react";
 
 const MenuContainer = (props: any) => {
   const { menu } = props;
+  const { data: session, status } = useSession();
+  const { email } = session!.user!;
+
+  const submitFormHandler = (event: any) => {
+    event.preventDefault()
+
+    const reqBody = {
+      // user: email,
+      menuId: menu.id,
+      menuName: menu.name,
+      quantity: 1,
+      totalPrice: 1000,
+      status: 'preparing',
+    }
+
+    fetch('/api/menu', {
+      method: 'POST',
+      body: JSON.stringify(reqBody),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => console.log(data)) // {email : "test@test.com", text: 'Some feedback text'};
+  }
 
   return (
     <div className='menu-container'>
@@ -27,6 +53,12 @@ const MenuContainer = (props: any) => {
           </div>
         )
       }
+      <div onClick={()=> {
+        console.log(menu.name, menu.price)
+      }
+      }>
+        구매
+      </div>
     </div>
   )
 }

@@ -41,8 +41,6 @@ const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticPro
   let { categoryId, menuId } = router.query;
   const { data: session, status } = useSession();
 
-  console.log(session);
-
   // 로그인하지 않았을 시에는 로딩화면을 보여준다. 이후 login 페이지로 이동한다.
   useEffect(() => {
     if (status === 'loading') return;

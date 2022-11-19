@@ -1,6 +1,5 @@
 import {FC, ReactNode} from "react";
 import styled from "@emotion/styled";
-import Navbar from "./navbar";
 import Navigation from "@/components/layout/navigation";
 
 const LayoutContainer = styled.div`
@@ -34,6 +33,8 @@ const LayoutContainer = styled.div`
       width: 480px;
     }
     main {
+      display: flex;
+      justify-content: center;
       width: 480px;
       background-color: white;
     }
