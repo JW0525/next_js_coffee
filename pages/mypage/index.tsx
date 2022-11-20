@@ -42,13 +42,14 @@ const UserPage = () => {
   return (
     <MyPageContainer className='page-container'>
       <Navbar text='my Page'/>
-      <div className='user-info-container'>
 
+
+      <div className='user-info-container'>
         <p>이메일: {userInfo.email}</p>
         <p>사명: {userInfo.name}</p>
         <p>생일: {userInfo.birthDate}</p>
         <p>쿠폰: {userInfo.coupon}</p>
-
+        <p>구매금액: {userInfo.amounts} (쿠폰으로 구매한 금액은 제외됩니다.)</p>
       </div>
 
       <div>

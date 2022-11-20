@@ -87,9 +87,10 @@ interface ISessionData {
   children?: ReactNode | JSX.Element | JSX.Element[]
 }
 
-const Home = () => {
+const HomePage = () => {
   const { data: session, status }: ISessionData = useSession();
   const { data, isLoading, isError } = getData(`${API.ORDER}`);
+  const { data: menuData } = getData(`${API.ORDER_MENU}`);
   const [recommendedList, setRecommendedList] = useState<any>([]);
   const [categoryIdxList, setCategoryIdxList] = useState<any>([]);
 
@@ -98,6 +99,10 @@ const Home = () => {
     setRecommendedList(recommendedList);
     setCategoryIdxList(categoryIdxList);
   },[isLoading]);
+
+  if (!session || !menuData) return;
+  const { email } = session!.user!;
+  const matchedList = menuData.filter((menu: any) => menu.userEmail === email);
 
   if (isLoading) return <Loading />
 
@@ -123,6 +128,9 @@ const Home = () => {
             alt="ham"
           />
         </div>
+
+        <div>별 : {matchedList.length}/30</div>
+
         <ul className="menuList">
           {
             recommendedList.map((menu: any, idx: number) => {
@@ -162,5 +170,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
 

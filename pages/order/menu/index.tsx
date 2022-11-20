@@ -2,13 +2,13 @@ import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { API } from "../../../config";
 import { InferGetStaticPropsType } from "next";
-import MenuContainer from "./components/menuContainer";
 import Navbar from "@/components/layout/navbar";
 import { useSession } from "next-auth/react";
 import { Loading } from "@/components/common/loading";
 import {useEffect} from "react";
+import MenuComponent from "./components/menuComponent";
 
-const OrderMenuContainer = styled.div`
+const OrderMenuPageContainer = styled.div`
   .menu-container {
     //margin-top: 70px;
     
@@ -36,7 +36,7 @@ const OrderMenuContainer = styled.div`
   }
 `
 
-const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const OrderMenuPage = ({ categoryList }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   let { categoryId, menuId } = router.query;
   const { data: session, status } = useSession();
@@ -63,14 +63,14 @@ const OrderMenu = ({ categoryList }: InferGetStaticPropsType<typeof getStaticPro
   if (status === 'unauthenticated') return <Loading/>
 
   return (
-    <OrderMenuContainer className='page-container'>
+    <OrderMenuPageContainer className='page-container'>
       <Navbar text='안녕' />
-      <MenuContainer menu={menu} />
-    </OrderMenuContainer>
+      <MenuComponent menu={menu} />
+    </OrderMenuPageContainer>
   )
 }
 
-export default OrderMenu;
+export default OrderMenuPage;
 
 export async function getStaticProps() {
   const res = await fetch(`${API.ORDER}`);

@@ -18,7 +18,7 @@ const LoginRegisterContainer = styled.div`
   }
 `
 
-const Register = () => {
+const LoginRegisterPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
@@ -95,4 +95,4 @@ const Register = () => {
   )
 }
 
-export default Register;
+export default LoginRegisterPage;
