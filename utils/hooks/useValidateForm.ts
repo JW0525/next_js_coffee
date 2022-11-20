@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import CreateUser from '../hooks/useCreateUser'
+import ExchangeCoupon from "@/hooks/useExchangeCoupon";
 
 export interface IRegisterForm {
   email: string,
@@ -71,6 +72,7 @@ export const useValidateForm = (props: {
             form.email,
             form.pwd,
             form.birthDate as string,
+            0,
             0,
             0
           );

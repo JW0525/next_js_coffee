@@ -8,7 +8,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return;
 
   const data = req.body;
-  const { name, email, password, birthDate, coupon, amounts } = data;
+  const { name, email, password, birthDate, coupon, amounts, couponExchanged } = data;
 
   const existingUser = await prisma.user.findUnique({
     where: { email: email },
@@ -29,7 +29,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       password: hashedPassword,
       birthDate,
       coupon,
-      amounts
+      amounts,
+      couponExchanged
     },
   });
 

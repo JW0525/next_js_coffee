@@ -35,9 +35,9 @@ const MyPage = () => {
 
   if (!userData || !session || ! orderData) return;
 
-  const thisUserEmail = session.user!.email;
-  const userInfo = userData?.find((user: any) => user.email === thisUserEmail);
-  const userOrder = orderData?.filter((order: any) => order.userEmail === thisUserEmail).reverse();
+  const { email } = session.user!;
+  const userInfo = userData?.find((user: any) => user.email === email);
+  const userOrder = orderData?.filter((order: any) => order.userEmail === email).reverse();
 
   return (
     <MyPageContainer className='page-container'>

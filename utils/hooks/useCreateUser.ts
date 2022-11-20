@@ -4,11 +4,12 @@ const CreateUser = async (
   password: string,
   birthDate: string,
   coupon: number,
-  amounts: number
+  amounts: number,
+  couponExchanged: number
 ): Promise<any> => {
   const response = await fetch("/api/auth/register", {
     method: "POST",
-    body: JSON.stringify({ name, email, password, birthDate, coupon, amounts}),
+    body: JSON.stringify({ name, email, password, birthDate, coupon, amounts, couponExchanged }),
     headers: {
       "Content-Type": "application/json",
     },

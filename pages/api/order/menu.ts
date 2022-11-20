@@ -21,12 +21,6 @@ export default async function post_Menu(req: NextApiRequest, res: NextApiRespons
       }
       break;
     case 'POST':
-      const userOrderData = await prisma.orderHistory.findMany({
-        where: {
-          userEmail: userEmail,
-        }
-      });
-
       const result = await prisma.orderHistory.create({
         data: {
           menuId,
@@ -38,6 +32,13 @@ export default async function post_Menu(req: NextApiRequest, res: NextApiRespons
           userEmail: userEmail
         }
       });
+
+      const userOrderData = await prisma.orderHistory.findMany({
+        where: {
+          userEmail: userEmail,
+        }
+      });
+
       const nonCouponData = userOrderData.filter((e) => e.totalPrice > 0);
 
       const update = await prisma.user.update({

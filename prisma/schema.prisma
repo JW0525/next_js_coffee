@@ -12,16 +12,17 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  email        String   @unique
-  name         String?
-  password     String
-  birthDate    String?
-  coupon       Int
-  amounts      Int
-  orderHistory OrderHistory[]
-  createdAt    DateTime @default(now()) @map(name: "created_at")
-  updatedAt    DateTime @updatedAt @map(name: "updated_at")
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  email            String   @unique
+  name             String?
+  password         String
+  birthDate        String?
+  coupon           Int
+  amounts          Int
+  orderHistory     OrderHistory[]
+  couponExchanged  Int
+  createdAt        DateTime @default(now()) @map(name: "created_at")
+  updatedAt        DateTime @updatedAt @map(name: "updated_at")
 }
 
 model OrderHistory {

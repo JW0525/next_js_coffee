@@ -12,6 +12,7 @@ import { palette } from "../../styles/baseSytle";
 import Americano from "/public/asset/img/americano.png";
 import Ham from "/public/asset/img/Ham.png";
 import createList from "@/hooks/useCreateList";
+import ExchangeCoupon from "@/hooks/useExchangeCoupon";
 
 const HomePageContainer = styled.div`
   display: flex;
@@ -90,7 +91,7 @@ interface ISessionData {
 const HomePage = () => {
   const { data: session, status }: ISessionData = useSession();
   const { data, isLoading, isError } = getData(`${API.ORDER}`);
-  const { data: menuData } = getData(`${API.ORDER_MENU}`);
+  const { data: userData } = getData(`${API.USER}`);
   const [recommendedList, setRecommendedList] = useState<any>([]);
   const [categoryIdxList, setCategoryIdxList] = useState<any>([]);
 
@@ -100,12 +101,23 @@ const HomePage = () => {
     setCategoryIdxList(categoryIdxList);
   },[isLoading]);
 
-  if (!session || !menuData) return;
+  if (!session || !userData) return;
   const { email } = session!.user!;
-  const matchedList = menuData.filter((menu: any) => menu.userEmail === email);
+  const userInfo = userData?.find((user: any) => user.email === email);
+  const { amounts, couponExchanged } = userInfo;
+  const counts = amounts / 1000;
+  const star = counts - (couponExchanged * 30);
+
+  console.log(star);
+
+  const clickHandler = () => {
+    ExchangeCoupon(email as string).then();
+    return;
+  }
+
+
 
   if (isLoading) return <Loading />
-
   return (
     <HomePageContainer>
       <div className="header">
@@ -129,7 +141,13 @@ const HomePage = () => {
           />
         </div>
 
-        <div>별 : {matchedList.length}/30</div>
+        <div>별 : {counts - (couponExchanged * 30)} / 30</div>
+        {
+          (star > 30) &&
+          <div onClick={clickHandler}>
+            쿠폰으로 전환
+          </div>
+        }
 
         <ul className="menuList">
           {
