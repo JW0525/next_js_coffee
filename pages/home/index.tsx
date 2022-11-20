@@ -13,6 +13,7 @@ import Americano from "/public/asset/img/americano.png";
 import Ham from "/public/asset/img/Ham.png";
 import createList from "@/hooks/useCreateList";
 import ExchangeCoupon from "@/hooks/useExchangeCoupon";
+import {useRouter} from "next/router";
 
 const HomePageContainer = styled.div`
   display: flex;
@@ -89,6 +90,7 @@ interface ISessionData {
 }
 
 const HomePage = () => {
+  const router = useRouter();
   const { data: session, status }: ISessionData = useSession();
   const { data, isLoading, isError } = getData(`${API.ORDER}`);
   const { data: userData } = getData(`${API.USER}`);
@@ -100,22 +102,22 @@ const HomePage = () => {
     setRecommendedList(recommendedList);
     setCategoryIdxList(categoryIdxList);
   },[isLoading]);
+  console.log(userData);
 
-  if (!session || !userData) return;
-  const { email } = session!.user!;
+  if (!userData) return;
+
+  const email = session?.user!.email;
   const userInfo = userData?.find((user: any) => user.email === email);
-  const { amounts, couponExchanged } = userInfo;
-  const counts = amounts / 1000;
-  const star = counts - (couponExchanged * 30);
+  const counts = userInfo?.amounts / 1000;
+  const star = counts - (userInfo?.couponExchanged * 30);
 
   console.log(star);
 
-  const clickHandler = () => {
+  const clickHandler = async () => {
     ExchangeCoupon(email as string).then();
-    return;
+    await window.location.replace('/home');
+    alert('쿠폰이 발급되었습니다.');
   }
-
-
 
   if (isLoading) return <Loading />
   return (
@@ -141,12 +143,17 @@ const HomePage = () => {
           />
         </div>
 
-        <div>별 : {counts - (couponExchanged * 30)} / 30</div>
         {
-          (star > 30) &&
-          <div onClick={clickHandler}>
-            쿠폰으로 전환
-          </div>
+          !isNaN(star) && (
+            <div>별 : {star} / 30</div>
+          )
+        }
+        {
+          (star > 30) && (
+            <div onClick={clickHandler}>
+              쿠폰으로 전환
+            </div>
+          )
         }
 
         <ul className="menuList">

@@ -12,7 +12,11 @@ export default function IndexPage() {
     if (status === 'loading') return;
 
     const timer = setTimeout(() => {
-      router.push('/home').then();
+      if (status === 'unauthenticated') {
+        router.push('/login').then();
+      } else {
+        router.push('/home').then();
+      }
     }, 1000);
 
     return () => clearTimeout(timer);

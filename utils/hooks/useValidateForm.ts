@@ -78,6 +78,7 @@ export const useValidateForm = (props: {
           );
 
           if (registerResponse) {
+            alert('회원가입이 완료되었습니다.')
             router.push('/login').then();
           }
           break;

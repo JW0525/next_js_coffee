@@ -3,6 +3,7 @@ import {useSession} from "next-auth/react";
 import styled from "@emotion/styled";
 import getData from "@/lib/getData";
 import {API} from "../../../../config";
+import {useRouter} from "next/router";
 
 const MenuContainer = styled.div<{isCoupon: boolean}>`
   
@@ -13,6 +14,7 @@ const MenuContainer = styled.div<{isCoupon: boolean}>`
 
 const MenuComponent = (props: any) => {
   const { menu } = props;
+  const router = useRouter();
   const { data: session, status } = useSession();
   const { data: userData, isLoading, isError } = getData(`${API.USER}`);
   const { email } = session!.user!;
@@ -27,6 +29,8 @@ const MenuComponent = (props: any) => {
       alert('사용 가능한 쿠폰이 없습니다.');
       return;
     }
+
+    await alert('구매가 완료되었습니다.');
 
     const reqBody = {
       menuId: menu.id,
@@ -48,6 +52,8 @@ const MenuComponent = (props: any) => {
     })
       .then(response => response.json())
       .then(data => console.log(data))
+
+    router.push('/home').then()
   }
 
   return (
