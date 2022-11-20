@@ -13,7 +13,7 @@ const MyPageContainer = styled.div`
   }
 `
 
-const UserPage = () => {
+const MyPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const { data: userData, isLoading, isError } = getData(`${API.USER}`);
@@ -43,7 +43,6 @@ const UserPage = () => {
     <MyPageContainer className='page-container'>
       <Navbar text='my Page'/>
 
-
       <div className='user-info-container'>
         <p>이메일: {userInfo.email}</p>
         <p>사명: {userInfo.name}</p>
@@ -68,11 +67,7 @@ const UserPage = () => {
           })
         }
       </div>
-
-
-
-
     </MyPageContainer>
   )
 }
-export default UserPage;
+export default MyPage;

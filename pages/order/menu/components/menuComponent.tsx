@@ -18,15 +18,13 @@ const MenuComponent = (props: any) => {
   const { email } = session!.user!;
   const [isCoupon, setIsCoupon] = useState(false);
 
-  if (!userData) return <></>;
-  const userInfo = userData!.find((user: any) => user.email === email);
-
   const submitFormHandler = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
 
+    const userInfo = userData!.find((user: any) => user.email === email);
     // 유저 정보에 쿠폰이 1 이하로 남아 있는 경우, 쿠폰으로 구매할 수 없다.
     if (userInfo.coupon < 1 && isCoupon) {
-      alert('사용 가능한 쿠폰이 없습니다.')
+      alert('사용 가능한 쿠폰이 없습니다.');
       return;
     }
 
@@ -37,7 +35,8 @@ const MenuComponent = (props: any) => {
       quantity: 1,
       totalPrice: isCoupon ? 0 : menu.price,
       status: 'preparing',
-      userEmail: email
+      userEmail: email,
+      isCoupon
     }
 
     const response = await fetch('/api/order/menu', {
@@ -64,7 +63,6 @@ const MenuComponent = (props: any) => {
       </div>
       <div className='menu-box'>{menu.name}</div>
       <div className='menu-box'>{menu.price}</div>
-      <div className='select-coupon' onClick={() => setIsCoupon(!isCoupon)}>쿠폰으로 구매하기</div>
       {
         menu.option.length > 1 && (
           <div className='menu-box'>
@@ -78,6 +76,7 @@ const MenuComponent = (props: any) => {
           </div>
         )
       }
+      <div className='select-coupon' onClick={() => setIsCoupon(!isCoupon)}>쿠폰으로 구매하기</div>
       <div onClick={submitFormHandler}>
         구매
       </div>

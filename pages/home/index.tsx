@@ -13,7 +13,7 @@ import Americano from "/public/asset/img/americano.png";
 import Ham from "/public/asset/img/Ham.png";
 import createList from "@/hooks/useCreateList";
 
-const HomeContainer = styled.div`
+const HomePageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -107,7 +107,7 @@ const HomePage = () => {
   if (isLoading) return <Loading />
 
   return (
-    <HomeContainer>
+    <HomePageContainer>
       <div className="header">
         <h2>WEBLING MEMBERS</h2>
         <span>위블링과 함께<br/>오늘하루도 즐겨요!</span>
@@ -166,7 +166,7 @@ const HomePage = () => {
           }
         </ul>
       </div>
-    </HomeContainer>
+    </HomePageContainer>
   );
 };
 

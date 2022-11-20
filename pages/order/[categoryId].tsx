@@ -4,8 +4,7 @@ import styled from "@emotion/styled";
 import Navbar from "@/components/layout/navbar";
 import getData from "@/lib/getData";
 
-
-const OrderCategoryContainer = styled.div`
+const OrderCategoryPageContainer = styled.div`
   .menu-list-container {
     margin-top: 90px;
 
@@ -31,7 +30,7 @@ const OrderCategoryContainer = styled.div`
   }
 `
 
-const OrderCategory = () => {
+const OrderCategoryPage = () => {
   const router = useRouter();
   const { categoryId } = router.query;
   const { data: category, isLoading, isError } = getData(`/api/order/${categoryId}`);
@@ -40,7 +39,7 @@ const OrderCategory = () => {
   const { list, name } = category;
 
   return (
-    <OrderCategoryContainer className='page-container'>
+    <OrderCategoryPageContainer className='page-container'>
       <Navbar text={name.toUpperCase()} />
       <div className='menu-list-container'>
         <ul>
@@ -70,8 +69,8 @@ const OrderCategory = () => {
           }
         </ul>
       </div>
-    </OrderCategoryContainer>
+    </OrderCategoryPageContainer>
   )
 }
 
-export default OrderCategory;
+export default OrderCategoryPage;

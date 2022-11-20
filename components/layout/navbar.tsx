@@ -46,7 +46,6 @@ const Navbar = (props: { text: string }) =>{
         session && <span onClick={() => router.back()} />
       }
       <p>{text}</p>
-
       {
         status === "authenticated" && (
           <button onClick={() => signOut({

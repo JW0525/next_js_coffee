@@ -9,7 +9,7 @@ import ButtonBox from "@/components/common/btn";
 import Navbar from "@/components/layout/navbar";
 import {Loading} from "@/components/common/loading";
 
-const LoginRegisterContainer = styled.div`
+const LoginRegisterPageContainer = styled.div`
   display: flex;
   align-items: center;
 
@@ -50,7 +50,7 @@ const LoginRegisterPage = () => {
   if (status !== 'unauthenticated') return <Loading />
 
   return (
-    <LoginRegisterContainer className='page-container'>
+    <LoginRegisterPageContainer className='page-container'>
       <Navbar text='Register' />
       <form onSubmit={ submitHandler }>
         <InputBox
@@ -91,7 +91,7 @@ const LoginRegisterPage = () => {
 
         <ButtonBox content='Register' type="submit" />
       </form>
-    </LoginRegisterContainer>
+    </LoginRegisterPageContainer>
   )
 }
 

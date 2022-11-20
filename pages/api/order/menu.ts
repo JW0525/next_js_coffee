@@ -1,12 +1,11 @@
-import {NextApiRequest, NextApiResponse} from "next";
-import {PrismaClient} from "@prisma/client";
-import {CategoryList} from "../../database/model";
+import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
 
 export default async function post_Menu(req: NextApiRequest, res: NextApiResponse) {
   const prisma = new PrismaClient();  // Loading prisma client
   const { method } = req;
   const data = req.body;
-  const { menuId, menuName, option, quantity, totalPrice, status, userEmail } = data;
+  const { menuId, menuName, option, quantity, totalPrice, status, userEmail, isCoupon } = data;
 
   switch(method) {
     case 'GET':
@@ -47,7 +46,7 @@ export default async function post_Menu(req: NextApiRequest, res: NextApiRespons
         },
         data : {
           coupon: {
-            decrement: 1
+            decrement: isCoupon ? 1 : 0
           },
           amounts: nonCouponData.length * 1000
         }
