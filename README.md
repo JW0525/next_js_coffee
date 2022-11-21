@@ -7,7 +7,7 @@
 - 사내에 있는 카페는 현재 주문지에 메뉴를 작성하고, 월말에 주문지 내역을 합산하는 방식으로 운영되고 있습니다. 매번 주문지를 출력하고 합산하는 바리스타의 수고를 덜어주고 환경도 보호할 겸 ^^, 스타벅스의 사이렌오더 와 같은 어플을 제작해보면 어떨까 하는 생각에 이르게 되었습니다.
 이를 통해 사내 구성원들의 편의성도 증진할 수 있다는 생각에 프로젝트를 진행하였습니다.
     
-    ![image (3).png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/084c6e58-02c6-4608-a301-853201a4a643/image_(3).png)
+    ![image (3).png]([https://s3-us-west-2.amazonaws.com/secure.notion-static.com/084c6e58-02c6-4608-a301-853201a4a643/image_(3).png](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/084c6e58-02c6-4608-a301-853201a4a643/image_%283%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221121%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221121T143323Z&X-Amz-Expires=86400&X-Amz-Signature=0a00bd9c5eec13cec69751c971f76b455a4a75d2f94241473d2d761755f9833b&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22image%2520%283%29.png%22&x-id=GetObject))
     
 
 # **프로젝트 기간 및 인원**
