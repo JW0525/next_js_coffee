@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyPassword } from "@/lib/auth";
 
 const prisma = new PrismaClient();
-// 로그인 인증 방식 설정
+
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -25,7 +25,7 @@ export default NextAuth({
             name: true, email: true, password: true
           },
         });
-        if (!user) throw new Error('wrong-user');
+        if (!user) throw new Error('Wrong User');
 
         const isValid = await verifyPassword(credentials!.password, user.password);
         if (!isValid) throw new Error('Could not log you in!');

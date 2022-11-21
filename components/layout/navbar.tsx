@@ -40,6 +40,8 @@ const Navbar = (props: { text: string }) =>{
   const router = useRouter();
   const { data: session, status } = useSession();
 
+  console.log(session)
+
   return (
     <NavbarContainer className='nav-bar'>
       {

@@ -80,7 +80,6 @@ const HomePageContainer = styled.div`
     }
   }
 }
-
 `;
 
 interface ISessionData {

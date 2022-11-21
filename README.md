@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 사내카페 주문 어플리케이션 제작
 
-## Getting Started
+---
 
-First, run the development server:
+# 프로젝트 개요
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- 사내에 있는 카페는 현재 주문지에 메뉴를 작성하고, 월말에 주문지 내역을 합산하는 방식으로 운영되고 있습니다. 매번 주문지를 출력하고 합산하는 바리스타의 수고를 덜어주고 환경도 보호할 겸 ^^, 스타벅스의 사이렌오더 와 같은 어플을 제작해보면 어떨까 하는 생각에 이르게 되었습니다.
+  이를 통해 사내 구성원들의 편의성도 증진할 수 있다는 생각에 프로젝트를 진행하였습니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![image (3).png](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/084c6e58-02c6-4608-a301-853201a4a643/image_%283%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221121%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221121T143323Z&X-Amz-Expires=86400&X-Amz-Signature=0a00bd9c5eec13cec69751c971f76b455a4a75d2f94241473d2d761755f9833b&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22image%2520%283%29.png%22&x-id=GetObject)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+# **프로젝트 기간 및 인원**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+---
 
-## Learn More
+- 개발기간📆 : 2022/11 ~
 
-To learn more about Next.js, take a look at the following resources:
+# **적용 기술 및 구현 기능**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## **적용 기술 및 도구**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Next.js, TypeScript
+- monogoDB, mongoose, prisma, NextAuth, bcrypt, POSTMAN, aws
+- Emotion, Redux-toolkit
+- Slack, Notion, Github
 
-## Deploy on Vercel
+## **구현 기능**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**BACK-END**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- monogoDB 를 이용한 NoSQL 데이터베이스 구축
+- prisma, mongoose 를 이용한 데이터베이스 연결 및 관리
+- NextAuth, bcrypt 를 이용하여 회원가입, 로그인 시스템 구축
+- 쿠폰, 구매 내역 등 유저 정보에서 관리되는 API 구축
+
+**FRONT-END**
+
+- Emotion 을 이용한 모바일 대응 반응형 페이지 개발
+- Next.js 의 Dynamic Routing 기능을 이용한 메뉴 표시
+- 쿠폰 및 구매 내역, 사용자 선호도를 기반으로 하는 추천 메뉴 표시
+
+**INFRA**
+
+- 추후, AWS EC2 를 이용한 배포 예정

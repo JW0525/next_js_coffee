@@ -4,7 +4,7 @@ import connectDB from '../../database/connectDB';
 import { CategoryList } from '../../database/model';
 import data from './data'
 
-export default function get_Users(req: NextApiRequest, res: NextApiResponse) {
+export default function get_Categories(req: NextApiRequest, res: NextApiResponse) {
   connectDB().catch(error => console.error(error));
 
   const { categoryList } = data;

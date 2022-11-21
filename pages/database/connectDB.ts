@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import {MongoClient} from "mongodb";
 
 export const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI;
 const connection = {};
