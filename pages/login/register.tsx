@@ -6,15 +6,47 @@ import { regExp } from "../../utils/regExp";
 import { IRegisterForm, useValidateForm } from "@/hooks/useValidateForm";
 import InputBox from "@/components/common/inputBox";
 import ButtonBox from "@/components/common/btn";
-import Navbar from "@/components/layout/navbar";
 import {Loading} from "@/components/common/loading";
 
 const LoginRegisterPageContainer = styled.div`
-  display: flex;
-  align-items: center;
+  display: block;
+  padding:  0 30px;
+
+  .register_title {
+    margin-top: 94px;
+    
+    > h2 {
+      width: 100%;
+      height: 62px;
+      font-size: 26px;
+      font-weight: bold;
+      text-align: left;
+      color: #000000;
+    }
+    
+    > span {
+      display: block;
+      font-size: 26px;
+      line-height: 30px;
+      
+      &:last-child {
+        font-size: 12px;
+        padding-top: 10px;
+      }
+    }
+
+  }
 
   form {
     width: 100%;
+    display: block;
+    margin-top: 50px;
+    position: relative;
+    
+    .error {
+      color: #f02222 !important;
+      font-size: 12px;
+    }
   }
 `
 
@@ -51,45 +83,50 @@ const LoginRegisterPage = () => {
 
   return (
     <LoginRegisterPageContainer className='page-container'>
-      <Navbar text='Register' />
+      <div className="register_title">
+        <h2>회원가입</h2>
+        <span>고객님 <br/>환영합니다!</span>
+        <span>회원 서비스 이용을 위해 회원가입을 해주세요.</span>
+      </div>
       <form onSubmit={ submitHandler }>
         <InputBox
           title='이메일'
           type='email'
           name='email'
+          value='email'
           getFieldProps={getFieldProps}
         />
-        {isTouched.email && errors.email && <span>{errors.email}</span>}
+        {isTouched.email && errors.email && <span className="error">{errors.email}</span>}
         <InputBox
           title='비밀번호'
           type='password'
           name='pwd'
           getFieldProps={getFieldProps}
         />
-        {isTouched.pwd && errors.pwd && <span>{errors.pwd}</span>}
+        {isTouched.pwd && errors.pwd && <span className="error">{errors.pwd}</span>}
         <InputBox
           title='비밀번호 확인'
           type='password'
           name='pwdCheck'
           getFieldProps={getFieldProps}
         />
-        {isTouched.pwdCheck && errors.pwdCheck && <span>{errors.pwdCheck}</span>}
+        {isTouched.pwdCheck && errors.pwdCheck && <span className="error">{errors.pwdCheck}</span>}
         <InputBox
           title='사명'
           type='text'
           name='name'
           getFieldProps={getFieldProps}
         />
-        {isTouched.name && errors.name && <span>{errors.name}</span>}
+        {isTouched.name && errors.name && <span className="error">{errors.name}</span>}
         <InputBox
           title='생일'
           type='date'
           name='birthDate'
           getFieldProps={getFieldProps}
         />
-        {isTouched.birthDate && errors.birthDate && <span>{errors.birthDate}</span>}
+        {isTouched.birthDate && errors.birthDate && <span className="error">{errors.birthDate}</span>}
 
-        <ButtonBox content='Register' type="submit" />
+        <ButtonBox content='회원가입' type="submit"/>
       </form>
     </LoginRegisterPageContainer>
   )

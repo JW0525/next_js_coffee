@@ -2,13 +2,13 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const InputBoxContainer = styled.div`
-  p {
-    font-size: 20px;
-    color: gray;
-  } 
-  
   input {
     width: 100%;
+    height: 39px;
+    border-bottom: 1px solid #a1a1a1;
+    margin-bottom: 5px;
+    color:#5F5E5E;
+    font-size: 13px;
   }
 `
 
@@ -18,10 +18,10 @@ const InputBox = (props: any) => {
 
   return (
     <InputBoxContainer>
-      <p>{title}</p>
       <input
         type={type}
         name={name}
+        placeholder={title}
         value={value}
         onChange={ changeHandler }
         onBlur={ blurHandler }

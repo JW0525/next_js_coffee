@@ -2,15 +2,17 @@ import styled from "@emotion/styled";
 import React from "react";
 
 const Button = styled.button`
-  display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
+  width: 90%;
   height: 50px;
   border-radius: 26px;
-  background-color: gray;
+  background-color: #2D82E8;
   color: white;
   cursor: pointer;
+  position: fixed;
+  bottom: 25px;
+  left: 5%;
+  font-size: 15px;
 `
 
 const ButtonBox = (props: {

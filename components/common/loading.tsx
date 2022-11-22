@@ -4,6 +4,17 @@ import coffeeImage from "../../public/asset/img/free-animated-icon-coffee-cup-61
 import React from "react";
 
 const LoadingContainer = styled.div`
+  position: fixed;
+  z-index: 1000;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  
   .contents {
     > h1 {
       border-top: 2px solid black;
@@ -24,7 +35,7 @@ export const Loading = () => {
           height={75}
           priority
         />
-        <h1>CoffeeTEK</h1>
+        <h1>Army Bucks</h1>
       </div>
     </LoadingContainer>
   )

@@ -61,7 +61,7 @@ export const Layout: FC<{children: ReactNode}> = ({ children }) => {
       <main>
         {children}
       </main>
-      <Navigation />
+
     </LayoutContainer>
   )
 }
