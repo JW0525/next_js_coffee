@@ -16,7 +16,9 @@ import ExchangeCoupon from "@/hooks/useExchangeCoupon";
 import {useRouter} from "next/router";
 import textCss from "styles/textCss";
 
-const HomePageContainer = styled.div`
+const HomePageContainer = styled.div<{
+  exchangeRate: number;
+}>`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -52,11 +54,19 @@ const HomePageContainer = styled.div`
           font-size: 20px;
         }
         
-        span {
+        .rate-bar {
+          position: relative;
           background-color: green;
-          height: 20px;
+          height: 2px;
           width: 100%;
-          border: 1px solid black;
+          
+          > span {
+            position: absolute;
+            
+            background-color: white;
+            height: 2px;
+            width: ${props => props.exchangeRate * 100 > 100 ? 100 : props.exchangeRate * 100}%;
+          }
         }
       }
       
@@ -152,10 +162,12 @@ const HomePage = () => {
   const email = session?.user!.email;
   const userInfo = userData?.find((user: any) => user.email === email);
   const counts = userInfo?.amounts / 1000;
-  const star = counts - (userInfo?.couponExchanged * 30);
-  const exchangeBtn = star > 30;
 
-  console.log(star);
+  const exchangeCondition = 30;
+
+  const star = counts - (userInfo?.couponExchanged * exchangeCondition);
+  const exchangeBtn = star > exchangeCondition;
+  const exchangeRate = star / exchangeCondition;
 
   const clickHandler = async () => {
     ExchangeCoupon(email as string).then();
@@ -172,7 +184,7 @@ const HomePage = () => {
 
   if (isLoading) return <Loading />
   return (
-    <HomePageContainer>
+    <HomePageContainer exchangeRate={exchangeRate}>
 
       <div className="header">
         <h2>WEBLING MEMBERS</h2>
