@@ -14,6 +14,7 @@ import Ham from "/public/asset/img/Ham.png";
 import createList from "@/hooks/useCreateList";
 import ExchangeCoupon from "@/hooks/useExchangeCoupon";
 import {useRouter} from "next/router";
+import textCss from "styles/textCss";
 
 const HomePageContainer = styled.div`
   display: flex;
@@ -23,11 +24,12 @@ const HomePageContainer = styled.div`
   overflow: auto;
 
   .header {
-    height: 220px;
+    position: relative;
+    //min-height: 200px;
+    padding: 25px;
     background-color: #2D82E8;
 
     > h2 {
-      padding-top: 15px;
       font-size: ${theme.fontSizes.mmd};
       color: ${palette.common.white};
       text-align: center;
@@ -35,34 +37,85 @@ const HomePageContainer = styled.div`
 
     > span {
       display: block;
+      padding: 20px 0;
       color: ${palette.common.white};
-      padding: 40px 0 0 26px;
-      line-height: 28px;
+      line-height: 25px;
+    }
+    
+    .coupon-box {
+      display: grid;
+      grid-template-columns: 1fr 100px;
+      
+      .reward-rate {
+        
+        p {
+          font-size: 20px;
+        }
+        
+        span {
+          background-color: green;
+          height: 20px;
+          width: 100%;
+          border: 1px solid black;
+        }
+      }
+      
+      > span {
+        display: flex;
+      }
     }
   }
 
-  .container {
+  .contents-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    padding: 20px;
 
     .banner {
-      margin: 15px 8px 0 8px;
-      height: 155px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      height: 150px;
       background-color: #F6F5EE;
       box-shadow: 0 4px 4px 0 #d3d2cf;
       
       > span {
-        display: block;
+          h6 {
+            padding-bottom: 20px;
+            ${textCss.gray16Medium};
+          }
+        
+          h3 {
+            font-size: 25px;
+          }
+      }
+    }
+    
+    .recommend-list-title {
+      display: flex;
+      font-size: 19px;
+
+      span {
+        display: flex;
+        font-size: 19px;
+
+        p {
+          color: green;
+          font-size: 19px;
+        }
       }
     }
 
-    .menuList {
+    .recommend-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px 10px;
-      padding: 10px;
       
       > li {
         background-color: #1B2E5F;
-        box-shadow: 0 4px 4px 0 #191919;
+        //box-shadow: 0 4px 4px 0 #191919;
         border-radius: 10px;
         text-align: center;
         
@@ -72,7 +125,7 @@ const HomePageContainer = styled.div`
           > span {
             display: block;
             color: ${palette.common.white};
-            font-size: ${theme.fontSizes.xxs};
+            font-size: 14px;
             padding: 5px 0 15px 0;
           }
         }
@@ -96,66 +149,80 @@ const HomePage = () => {
   const [recommendedList, setRecommendedList] = useState<any>([]);
   const [categoryIdxList, setCategoryIdxList] = useState<any>([]);
 
-  useEffect(() => {
-    const { recommendedList, categoryIdxList } = createList(data);
-    setRecommendedList(recommendedList);
-    setCategoryIdxList(categoryIdxList);
-  },[isLoading]);
-  console.log(userData);
-
-  if (!userData) return;
-
   const email = session?.user!.email;
   const userInfo = userData?.find((user: any) => user.email === email);
   const counts = userInfo?.amounts / 1000;
   const star = counts - (userInfo?.couponExchanged * 30);
+  const exchangeBtn = star > 30;
 
   console.log(star);
 
   const clickHandler = async () => {
     ExchangeCoupon(email as string).then();
+
     await window.location.replace('/home');
     alert('쿠폰이 발급되었습니다.');
   }
 
+  useEffect(() => {
+    const { recommendedList, categoryIdxList } = createList(data);
+    setRecommendedList(recommendedList);
+    setCategoryIdxList(categoryIdxList);
+  }, [isLoading]);
+
   if (isLoading) return <Loading />
   return (
     <HomePageContainer>
+
       <div className="header">
         <h2>WEBLING MEMBERS</h2>
-        <span>위블링과 함께<br/>오늘하루도 즐겨요!</span>
-        {
-          session && <span>{`${session.user!.name}님`}</span>
-        }
-      </div>
-      <div className="container">
-        <div className="banner">
-          <div>
-            <span>오늘의 조식</span>
-            <span>햄치즈 샌드위치</span>
+        <span>
+          { session && <p>{`${session.user!.name}님`}</p> }
+          위블링과 함께 오늘 하루도 즐겨요!
+        </span>
+        <div className='coupon-box'>
+          {/*{ !isNaN(star) && (*/}
+          <div className='reward-rate'>
+            <p>3 until next Reward</p>
+            <div className='rate-bar'>
+              <span />
+            </div>
           </div>
+          <span>
+            <p>{star}</p>/ 30
+          </span>
+          {/*)}*/}
+          {/*<div onClick={clickHandler}>쿠폰으로 전환</div>*/}
+        </div>
+      </div>
+
+
+      <div className="contents-container">
+
+        <div className="banner">
+          <span>
+            <h6>오늘의 조식</h6>
+            <h3>햄치즈 샌드위치</h3>
+          </span>
           <Image
             src={Ham}
-            height={100}
-            width={100}
+            height={150}
+            width={150}
             alt="ham"
           />
         </div>
 
-        {
-          !isNaN(star) && (
-            <div>별 : {star} / 30</div>
-          )
-        }
-        {
-          (star > 30) && (
-            <div onClick={clickHandler}>
-              쿠폰으로 전환
-            </div>
-          )
-        }
+        <div className='recommend-list-title'>
+          {
+            session &&
+            <span>
+              <p>{session.user!.name}</p>님을 위한&nbsp;
+            </span>
+          }
+          추천 메뉴
+        </div>
 
-        <ul className="menuList">
+        <ul className="recommend-list">
           {
             recommendedList.map((menu: any, idx: number) => {
               const { id } = menu;

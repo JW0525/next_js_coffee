@@ -6,9 +6,11 @@ const HeadComponent = (props: {title: string, name: string, content: string}) =>
 
   return (
     <Head>
-      <title>여긴어디?</title>
+      <title>{title}</title>
       <meta name={name} content={content} />
-      {/*<link rel='icon' href='./public/img/free-icon-coffee-cup-3361135.png' />*/}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com"  />
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
     </Head>
   )
 }

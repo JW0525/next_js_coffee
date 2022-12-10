@@ -32,7 +32,6 @@ const MyPage = () => {
   },[status]);
 
   if (status === 'unauthenticated') return <Loading/>
-
   if (!userData || !session || ! orderData) return;
 
   const { email } = session.user!;

@@ -3,16 +3,14 @@ import React from "react";
 
 const Button = styled.button`
   justify-content: center;
-  width: 90%;
+  width: 100%;
   height: 50px;
-  border-radius: 26px;
   background-color: #2D82E8;
+  border-radius: 26px;
+  font-size: 15px;
   color: white;
   cursor: pointer;
-  position: fixed;
-  bottom: 25px;
-  left: 5%;
-  font-size: 15px;
+
 `
 
 const ButtonBox = (props: {
