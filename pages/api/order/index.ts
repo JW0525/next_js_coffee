@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import connectDB from "../../database/connectDB";
-import { CategoryList } from "../../database/model";
+import connectDB from "../../../database/connectDB";
+import { CategoryList } from "../../../database/model";
 
 export default async function get_Menu(req: NextApiRequest, res: NextApiResponse) {
   connectDB().catch(error => console.error(error));

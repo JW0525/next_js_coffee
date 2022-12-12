@@ -40,8 +40,6 @@ const Navbar = (props: { text: string }) =>{
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  console.log(session)
-
   return (
     <NavbarContainer className='nav-bar'>
       {
@@ -50,9 +48,9 @@ const Navbar = (props: { text: string }) =>{
       <p>{text}</p>
       {
         status === "authenticated" && (
-          <button onClick={() => signOut({
-            callbackUrl: "/home"
-          })}>
+          <button
+            onClick={() => signOut({callbackUrl: "/home"})}
+          >
             Sign Out
           </button>
         )

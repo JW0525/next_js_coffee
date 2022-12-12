@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
-import { CategoryList } from "../../database/model";
+import { CategoryList } from "../../../database/model";
 
 export default async function get_User(req: NextApiRequest, res: NextApiResponse) {
   const prisma = new PrismaClient();  // Loading prisma client

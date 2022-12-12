@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import Navbar from "@/components/layout/navbar";
 import {useSession} from "next-auth/react";
-import getData from "@/lib/getData";
+import getData from "../../lib/getData";
 import {API} from "../../config";
 import React, {useEffect} from "react";
 import {Loading} from "@/components/common/loading";

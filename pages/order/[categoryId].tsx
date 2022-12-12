@@ -2,7 +2,7 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import Navbar from "@/components/layout/navbar";
-import getData from "@/lib/getData";
+import getData from "../../lib/getData";
 
 const OrderCategoryPageContainer = styled.div`
   .menu-list-container {

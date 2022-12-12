@@ -1,9 +1,11 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Americano from "/public/asset/img/americano.png";
-import React from "react";
+// import Americano from "/public/asset/img/americano.png";
 import styled from "@emotion/styled";
-import {palette} from "../../../styles/baseSytle";
+import { palette } from "../../../styles/baseSytle";
+import textCss from "../../../styles/textCss";
+import { IMenuData } from "../../order";
 
 const RecommendListLayout = styled.ul`
   display: grid;
@@ -11,17 +13,19 @@ const RecommendListLayout = styled.ul`
   gap: 15px 10px;
   
   > li {
-    background-color: #B6C8D7;
+    background: linear-gradient(#B0C8D7, #EFD0D0);
+    //background-color: #B6C8D7;
     border-radius: 10px;
     text-align: center;
   
     .link {
       display: block;
   
-      > span {
+      > p {
         display: block;
+        ${textCss.gray14Bold};
+        letter-spacing: 1.5px;
         color: ${palette.common.white};
-        font-size: 14px;
         padding: 5px 0 15px 0;
       }
     }
@@ -29,15 +33,15 @@ const RecommendListLayout = styled.ul`
 `
 
 const HomeRecommendList = (props: {
-  recommendedList: any,
-  categoryIdxList: any
+  recommendedList: IMenuData[],
+  categoryIdxList: number[]
 }) => {
   const { recommendedList, categoryIdxList } = props;
 
   return (
     <RecommendListLayout>
       {
-        recommendedList.map((menu: any, idx: number) => {
+        recommendedList?.map((menu: any, idx: number) => {
           const { id } = menu;
           const categoryId = categoryIdxList[id];
 
@@ -55,13 +59,13 @@ const HomeRecommendList = (props: {
                 as={`/order/1/menu?name=${menu.name}`}
                 key={idx}
               >
-                <Image
-                  src={Americano}
-                  height={125}
-                  width={125}
-                  alt="americano"
-                />
-                <span>{menu.name}</span>
+                {/*<Image*/}
+                {/*  src={Americano}*/}
+                {/*  height={125}*/}
+                {/*  width={125}*/}
+                {/*  alt="americano"*/}
+                {/*/>*/}
+                <p>{menu.name}</p>
               </Link>
             </li>
           )

@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import styled from "@emotion/styled";
 import { API } from "config";
 import Navbar from "@/components/layout/navbar";
-import getData from "pages/lib/getData";
+import getData from "lib/getData";
 import { Loading } from "@/components/common/loading";
 
 const OrderPageContainer = styled.div`
@@ -38,6 +38,18 @@ const OrderPageContainer = styled.div`
   }
 `
 
+export interface IMenuData {
+  description: string,
+  id: number,
+  imageUrl: string,
+  isRecommended: boolean,
+  isSellYn: boolean,
+  name: string;
+  option: string[];
+  price: number;
+  _id: string;
+}
+
 const OrderPage = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -56,11 +68,10 @@ const OrderPage = () => {
     }
   },[status]);
 
-  if (!data) return;
-  const { categoryList } = data[0];
-
   if (status === 'unauthenticated') return <Loading/>
+  if (!data) return;
 
+  const { categoryList } = data[0];
   return (
     <OrderPageContainer className='page-container'>
       <Navbar text='Order'/>

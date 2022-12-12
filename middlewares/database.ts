@@ -1,4 +1,4 @@
-import connectDB from "../pages/database/connectDB";
+import connectDB from "../database/connectDB";
 
 export async function getDatabase(req: any, res: any, next: any) {
   try {

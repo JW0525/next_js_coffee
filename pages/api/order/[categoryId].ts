@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import {CategoryList} from "../../database/model";
+import {CategoryList} from "../../../database/model";
 
 export default async function get_IdData(req: NextApiRequest, res: NextApiResponse) {
   const { categoryId } = req.query;

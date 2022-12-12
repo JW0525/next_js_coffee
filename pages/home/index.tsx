@@ -4,10 +4,9 @@ import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { API } from "../../config";
 import { Loading } from "@/components/common/loading";
-import getData from "../lib/getData";
+import getData from "../../lib/getData";
 import createList from "@/hooks/useCreateList";
 import ExchangeCoupon from "@/hooks/useExchangeCoupon";
-import {useRouter} from "next/router";
 import textCss from "styles/textCss";
 import HomeBanner from "./Components/HomeBanner";
 import HomeRecommendList from "./Components/HomeRecommendList";
@@ -47,14 +46,18 @@ const HomePageContainer = styled.div`
 }
 `;
 
-interface ISessionData {
+export interface IUserData {
+  name: string;
+  email: string;
+}
+
+export interface ISessionData {
   data: Session | null | undefined,
   status: string,
   children?: ReactNode | JSX.Element | JSX.Element[]
 }
 
 const HomePage = () => {
-  const router = useRouter();
   const { data: session, status }: ISessionData = useSession();
   const { data, isLoading, isError } = getData(`${API.ORDER}`);
   const { data: userData } = getData(`${API.USER}`);
@@ -67,7 +70,7 @@ const HomePage = () => {
 
   const exchangeCondition = 30;
   const star = counts - (userInfo?.couponExchanged * exchangeCondition);
-  const exchangeBtn = star > exchangeCondition;
+  const showExchangeBtn = star > exchangeCondition;
   const exchangeRate = star / exchangeCondition;
 
   const clickHandler = async () => {
@@ -87,12 +90,12 @@ const HomePage = () => {
   return (
     <HomePageContainer>
       <HomeHeader
-        clickHandler={clickHandler}
-        exchangeBtn={exchangeBtn}
         exchangeRate={exchangeRate}
+        showExchangeBtn={showExchangeBtn}
         exchangeCondition={exchangeCondition}
-        session={session}
         star={star}
+        session={session as Session}
+        clickHandler={clickHandler}
       />
 
       <div className="contents-container">

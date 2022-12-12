@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import theme from "../../../styles/theme";
 import {palette} from "../../../styles/baseSytle";
+import {Session} from "next-auth";
 
 const HeaderLayout = styled.div<{ exchangeRate: number }>`
   position: relative;
@@ -84,14 +85,14 @@ const HeaderLayout = styled.div<{ exchangeRate: number }>`
 `
 
 const HomeHeader = (props: {
-  session: any;
-  star: any;
-  exchangeRate: any;
-  exchangeBtn: any;
-  exchangeCondition: any;
+  exchangeRate: number;
+  showExchangeBtn: boolean;
+  star: number;
+  exchangeCondition: number;
+  session: Session;
   clickHandler: any;
 }) => {
-  const { session, star, exchangeRate, exchangeBtn, exchangeCondition, clickHandler } = props;
+  const { session, star, exchangeRate, showExchangeBtn, exchangeCondition, clickHandler } = props;
 
   return (
     <HeaderLayout exchangeRate={exchangeRate}>
@@ -104,7 +105,7 @@ const HomeHeader = (props: {
         <div className='coupon-box'>
           <div className='reward-rate'>
             {
-              !exchangeBtn
+              !showExchangeBtn
                 ? <p>{exchangeCondition - star} until next Reward</p>
                 : <p onClick={clickHandler}>쿠폰으로 전환하기</p>
             }
