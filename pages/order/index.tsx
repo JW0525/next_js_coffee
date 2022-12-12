@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import styled from "@emotion/styled";
 import { API } from "config";
 import Navbar from "@/components/layout/navbar";
-import getData from "lib/getData";
+import getData from "pages/api/lib/getData";
 import { Loading } from "@/components/common/loading";
 
 const OrderPageContainer = styled.div`
@@ -38,6 +38,13 @@ const OrderPageContainer = styled.div`
   }
 `
 
+export interface ICategoryData {
+  id: number;
+  list: IMenuData[];
+  name: string;
+  _id?: string;
+}
+
 export interface IMenuData {
   description: string,
   id: number,
@@ -52,26 +59,32 @@ export interface IMenuData {
 
 const OrderPage = () => {
   const router = useRouter();
-  const { data: session, status } = useSession();
-  const { data, isLoading, isError } = getData(`${API.ORDER}`);
+  const { status } = useSession();
+  const { data, isLoading } = getData(`${API.ORDER}`);
 
-  // 로그인하지 않았을 시에는 로딩화면을 보여준다. 이후 login 페이지로 이동한다.
+  // 로그인하지 않았을 시에는 로딩화면을 띄우고, 이후 login 페이지로 이동한다.
   useEffect(() => {
-    if (status === 'loading') return;
+    switch (status) {
+      case('loading'): return;
 
-    if (status === 'unauthenticated') {
-      const timer = setTimeout(() => {
-        router.push('/login').then();
-      }, 500);
+      case('unauthenticated'):
+        const timer = setTimeout(() => {
+          router.push('/login').then();
+        }, 500);
+        return () => clearTimeout(timer);
 
-      return () => clearTimeout(timer);
+      default: return;
     }
   },[status]);
 
-  if (status === 'unauthenticated') return <Loading/>
-  if (!data) return;
+  if (status === 'unauthenticated' || isLoading) {
+    return (
+      <Loading/>
+    )
+  }
 
   const { categoryList } = data[0];
+
   return (
     <OrderPageContainer className='page-container'>
       <Navbar text='Order'/>
@@ -87,7 +100,7 @@ const OrderPage = () => {
                     query: {
                       categoryId: idx + 1,
                     }
-                }}
+                  }}
                 >
                   <div className='category-list-box'>
                     <img src='' alt='' />

@@ -65,7 +65,7 @@ const MenuBox = (props: {
         )
       }
       <div className='select-coupon' onClick={() => setIsCoupon(!isCoupon)}>쿠폰으로 구매하기</div>
-      <div onClick={submitFormHandler}>
+      <div onClick={ submitFormHandler }>
         구매
       </div>
     </MenuBoxLayout>

@@ -4,13 +4,13 @@ import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { API } from "../../config";
 import { Loading } from "@/components/common/loading";
-import getData from "../../lib/getData";
+import getData from "../api/lib/getData";
 import createList from "@/hooks/useCreateList";
 import ExchangeCoupon from "@/hooks/useExchangeCoupon";
-import textCss from "styles/textCss";
+import HomeHeader from "./Components/HomeHeader";
 import HomeBanner from "./Components/HomeBanner";
 import HomeRecommendList from "./Components/HomeRecommendList";
-import HomeHeader from "./Components/HomeHeader";
+import HomeRecommendListTitle from "./Components/HomeRecommendListTitle";
 
 const HomePageContainer = styled.div`
   display: flex;
@@ -24,27 +24,8 @@ const HomePageContainer = styled.div`
     flex-direction: column;
     row-gap: 30px;
     padding: 20px;
-    
-    .recommend-list-title {
-      display: flex;
-      align-items: flex-end;
-      ${textCss.gray18Bold};
-      margin-bottom: -10px;
-
-      span {
-        display: flex;
-        align-items: flex-end;
-        ${textCss.gray18Bold};
-
-        p {
-          ${textCss.gray20Bold};
-          color: #AFC8D7;
-        }
-      }
-    }
   }
-}
-`;
+`
 
 export interface IUserData {
   name: string;
@@ -67,7 +48,6 @@ const HomePage = () => {
   const email = session?.user!.email;
   const userInfo = userData?.find((user: any) => user.email === email);
   const counts = userInfo?.amounts / 1000;
-
   const exchangeCondition = 30;
   const star = counts - (userInfo?.couponExchanged * exchangeCondition);
   const showExchangeBtn = star > exchangeCondition;
@@ -87,6 +67,7 @@ const HomePage = () => {
   }, [isLoading]);
 
   if (isLoading) return <Loading />
+
   return (
     <HomePageContainer>
       <HomeHeader
@@ -101,15 +82,7 @@ const HomePage = () => {
       <div className="contents-container">
         <HomeBanner />
 
-        <div className='recommend-list-title'>
-          {
-            session &&
-            <span>
-              <p>{session.user!.name}&nbsp;</p>님을 위한&nbsp;
-            </span>
-          }
-          추천 메뉴
-        </div>
+        <HomeRecommendListTitle session={session as Session} />
 
         <HomeRecommendList
           recommendedList={recommendedList}
