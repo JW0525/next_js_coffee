@@ -1,5 +1,9 @@
 const fetcher = async (url) => {
-  const res = await fetch(url);
+  const res = await fetch(url, {
+      headers: {
+        Accept: 'application/json',
+      }
+    });
 
   if (!res.ok) {
     const error = new Error("An Error");
