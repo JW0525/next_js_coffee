@@ -33,9 +33,13 @@ const OrderCategoryPageContainer = styled.div`
 const OrderCategoryPage = () => {
   const router = useRouter();
   const { categoryId } = router.query;
-  const { data: category, isLoading, isError } = getData(`/api/order/${categoryId}`);
+  const { data: categoryList, isLoading, isError } = getData(`/api/order/${categoryId}`);
 
-  if (!category) return;
+  if (!categoryList) return;
+
+  const category = categoryList!.find((value: any) => {
+    return value.id.toString() === categoryId
+  });
   const { list, name } = category;
 
   return (
