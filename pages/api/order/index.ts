@@ -4,7 +4,6 @@ import { CategoryList } from "../database/model";
 
 export default async function get_Menu(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-
   connectDB().catch(error => console.error(error));
 
   const { method } = req;
