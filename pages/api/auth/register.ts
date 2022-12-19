@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from "@prisma/client";
-import { hashPassword } from 'pages/api/lib/auth';
+import { hashPassword } from '../lib/auth';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const prisma = new PrismaClient();  // Loading prisma client

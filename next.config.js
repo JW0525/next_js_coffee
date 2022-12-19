@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         // matching all API routes
-        source: "/api/(.*)",
+        source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" },
@@ -14,7 +14,7 @@ const nextConfig = {
       }
     ]
   },
-  reactStrictMode: true,
+  // reactStrictMode: true,
   swcMinify: true,
   env: {
     NEXT_PUBLIC_MONGODB_URI:'mongodb+srv://constell:1234@cluster0.56jgory.mongodb.net/project_cafe?retryWrites=true&w=majority',
@@ -23,4 +23,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig;
+module.exports = nextConfig

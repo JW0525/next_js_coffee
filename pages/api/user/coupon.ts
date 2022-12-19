@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 
 export default async function post_Menu(req: NextApiRequest, res: NextApiResponse) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   const prisma = new PrismaClient();  // Loading prisma client
   const { method } = req;
   const data = req.body;

@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { CategoryList } from "../database/model";
 
 export default async function get_User(req: NextApiRequest, res: NextApiResponse) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   const prisma = new PrismaClient();  // Loading prisma client
 
   const { method } = req;
