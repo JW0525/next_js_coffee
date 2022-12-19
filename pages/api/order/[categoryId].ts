@@ -3,15 +3,24 @@ import {CategoryList} from "../database/model";
 
 export default async function get_IdData(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-
   const { categoryId } = req.query;
   const data = await CategoryList.find({}, {_id:0}).limit(1)
 
-  if (categoryId && data) {
-    const { categoryList } = data[0];
-    const category = categoryList.find((value: any) => (value.id).toString() === categoryId);
-    return res.status(200).json(category);
-  } else {
-    return res.status(400).json({error: "Data Not Found"})
+  const { method } = req;
+  switch(method) {
+    case 'GET':
+      try {
+        if (categoryId && data) {
+          const { categoryList } = data[0];
+          const category = categoryList.find((value: any) => (value.id).toString() === categoryId);
+          res.status(200).json(category);
+        }
+      } catch (err) {
+        res.status(400).json({ status: false })
+      }
+      break;
+    default:
+      res.status(400).json({ status: false })
+      break;
   }
 }
