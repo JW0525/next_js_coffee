@@ -1,5 +1,4 @@
-// export const BASE_URL = "http://localhost:3000/api";
-export const BASE_URL = "https://next-js-coffee.vercel.app";
+export const BASE_URL = "https://next-js-coffee.vercel.app/api";
 
 export const API = {
   ORDER: `${BASE_URL}/order`,
