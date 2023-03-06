@@ -20,3 +20,8 @@ export const userInfoAtom = atom<UserInfo>({
     coupon: 0,
   },
 });
+
+export const headerTitleAtom = atom({
+  key: "headerTitleAtom",
+  default: "",
+});
