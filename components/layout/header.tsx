@@ -49,6 +49,6 @@ const HeaderContainer = styled.div`
     color: black;
     font-size: 2rem;
     font-weight: bolder;
-    margin: 0 10px;
+    margin: 0 20px;
   }
 `;
