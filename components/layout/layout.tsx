@@ -1,6 +1,11 @@
-import {FC, ReactNode} from "react";
+import { FC, ReactNode } from "react";
 import styled from "@emotion/styled";
 import Navigation from "@/components/layout/navigation";
+import { useAuth } from "hooks/common/useAuth";
+
+interface ILayoutContainerProps {
+  isWide: boolean;
+}
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -17,7 +22,7 @@ const LayoutContainer = styled.div`
     align-items: center;
     height: 100vh;
   }
-  
+
   @media screen and (max-width: 480px) {
     .navigation {
       width: 100vw;
@@ -27,7 +32,7 @@ const LayoutContainer = styled.div`
       background-color: white;
     }
   }
-  
+
   @media screen and (min-width: 480px) {
     .navigation {
       width: 480px;
@@ -35,17 +40,18 @@ const LayoutContainer = styled.div`
     main {
       display: flex;
       justify-content: center;
-      width: 480px;
+      width: ${(props: ILayoutContainerProps) =>
+        props.isWide ? "80%" : "480px"};
       background-color: white;
     }
   }
-  
+
   footer {
     position: absolute;
     bottom: 0;
   }
-  
- // 컴포넌트 CSS 
+
+  // 컴포넌트 CSS
   .page-container {
     position: relative;
     width: 100%;
@@ -53,15 +59,15 @@ const LayoutContainer = styled.div`
     max-height: 1536px;
     overflow: auto;
   }
-`
+`;
 
-export const Layout: FC<{children: ReactNode}> = ({ children }) => {
+export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
+  const { isLogin, userInfo } = useAuth();
+
   return (
-    <LayoutContainer>
-      <main>
-        {children}
-      </main>
-      <Navigation />
+    <LayoutContainer isWide={isLogin && userInfo.isManager}>
+      <main>{children}</main>
+      {isLogin && !userInfo.isManager && <Navigation />}
     </LayoutContainer>
-  )
-}
+  );
+};
