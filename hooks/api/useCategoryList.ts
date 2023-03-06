@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import { firestoreDB } from "../../utils/firebaseApp";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
-
-interface Category {
-  name: string;
-  order: number;
-  id: string;
-}
+import { Category } from "store/types";
 
 const useCategoryList = () => {
   const [isLoading, setIsLoading] = useState(false);

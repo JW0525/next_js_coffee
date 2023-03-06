@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { UserInfo } from "./types";
+import { Menu, UserInfo } from "./types";
 
 export const loginStateAtom = atom({
   key: "loginState",
@@ -24,4 +24,20 @@ export const userInfoAtom = atom<UserInfo>({
 export const headerTitleAtom = atom({
   key: "headerTitleAtom",
   default: "",
+});
+
+export const selectedMenuAtom = atom<Menu>({
+  key: "selecedtMenuAtom",
+  default: {
+    categoryId: "",
+    coldAvailable: false,
+    hotAvailable: false,
+    isAvailable: false,
+    couponPayback: 0,
+    couponPrice: 0,
+    name: "",
+    order: 0,
+    price: 0,
+    id: "",
+  },
 });
