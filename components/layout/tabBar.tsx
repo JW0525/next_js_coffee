@@ -8,8 +8,8 @@ const TabBarItemList = [
     path: "/employee/category",
   },
   {
-    title: "주문",
-    path: "/employee/order",
+    title: "주문내역",
+    path: "/employee/orderHistory",
   },
   {
     title: "마이페이지",
