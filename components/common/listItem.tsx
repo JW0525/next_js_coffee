@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { FC, ReactNode } from "react";
+import { FC, MouseEvent, ReactNode } from "react";
 
-const ListItemContainer = styled.div`
+const ListItemContainer = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -12,14 +12,24 @@ const ListItemContainer = styled.div`
   padding: 0 10px;
   border-radius: 10px;
   cursor: pointer;
+  background-color: white;
 
   &:hover {
     background-color: #f4f4f4;
   }
 `;
 
-const ListItem: FC<{ children: ReactNode }> = ({ children }) => {
-  return <ListItemContainer>{children}</ListItemContainer>;
+interface IListItemProps {
+  children: ReactNode;
+  onclick: (event: MouseEvent<HTMLButtonElement>) => void;
+}
+
+const ListItem = (props: IListItemProps) => {
+  return (
+    <ListItemContainer onClick={props.onclick}>
+      {props.children}
+    </ListItemContainer>
+  );
 };
 
 export default ListItem;
