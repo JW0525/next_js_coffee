@@ -4,17 +4,17 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { useAuth } from "hooks/common/useAuth";
 
-interface IUseSignUpApiProps {
+interface IUseSignUpProps {
   email: string;
   password: string;
 }
 
-const useSignUpApi = () => {
+const useSignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { handleAuthChange } = useAuth();
 
-  const signupUser = async (data: IUseSignUpApiProps) => {
+  const signupUser = async (data: IUseSignUpProps) => {
     if (isLoading) return;
     setIsLoading(true);
     try {
@@ -50,4 +50,4 @@ const useSignUpApi = () => {
   };
 };
 
-export default useSignUpApi;
+export default useSignUp;
