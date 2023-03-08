@@ -23,3 +23,21 @@ export interface Category {
   order: number;
   id: string;
 }
+
+export type OrderStatus = "준비중" | "주문취소" | "완료";
+
+export interface Order {
+  status: OrderStatus;
+  userName: string;
+  userId: string;
+  menuName: string;
+  menuId: string;
+  hotColdOption: "hot" | "cold";
+  price: number;
+  quantity: number;
+  finalPrice: number;
+  couponQuantity: number;
+  request: string;
+  id?: string;
+  orderMemo: string;
+}
