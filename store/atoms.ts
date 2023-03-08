@@ -41,3 +41,8 @@ export const selectedMenuAtom = atom<Menu>({
     id: "",
   },
 });
+
+export const selectedOrderHistoryDateAtom = atom({
+  key: "selectedOrderHistoryDateAtom",
+  default: "",
+});
