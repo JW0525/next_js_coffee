@@ -25,7 +25,7 @@ export default function EmployeeCateogryPage() {
     <List>
       {categoryList.map((el, idx) => {
         return (
-          <ListItem key={idx} onclick={onClickCategory(idx)}>
+          <ListItem key={idx} onclick={onClickCategory(idx)} isclickable={true}>
             {el.name}
           </ListItem>
         );

@@ -28,7 +28,7 @@ export default function EmployeeMenuPage() {
     <List>
       {menuList.map((el, idx) => {
         return (
-          <ListItem key={idx} onclick={onClickMenu(idx)}>
+          <ListItem key={idx} onclick={onClickMenu(idx)} isclickable={true}>
             {el.name}
           </ListItem>
         );
