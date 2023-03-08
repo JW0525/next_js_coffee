@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const MenuOrderBox = styled.div`
+const ContentItemBox = styled.div`
   width: 100%;
   height: fit-content;
   margin-bottom: 20px;
@@ -8,3 +8,5 @@ export const MenuOrderBox = styled.div`
   padding: 10px;
   background-color: #f8f8f8;
 `;
+
+export default ContentItemBox;

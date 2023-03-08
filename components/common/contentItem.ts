@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const MenuOrderItem = styled.div`
+const ContentItem = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -11,4 +11,4 @@ const MenuOrderItem = styled.div`
   height: fit-content;
 `;
 
-export default MenuOrderItem;
+export default ContentItem;

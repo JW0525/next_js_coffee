@@ -1,18 +1,22 @@
-import { MenuOrderBox } from "@/components/menu/menuOrderBox";
 import { MenuOrderContainer } from "@/components/menu/menuOrderContainer";
-import MenuOrderItem from "@/components/menu/menuOrderItem";
-import MenuOrderItemTitle from "@/components/menu/menuOrderItemTitle";
 import { useAuth } from "hooks/common/useAuth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { headerTitleAtom, selectedMenuAtom } from "store/atoms";
 import type { RadioChangeEvent } from "antd";
-import { Radio, InputNumber, Input } from "antd";
-import ButtonBox, { Button } from "../../../../components/common/btn";
+import { Button } from "../../../../components/common/btn";
 import { MenuOrderContent } from "@/components/menu/menuOrderContent";
 import useMakeOrder from "hooks/api/useMakeOrder";
 import useOrderCalculate from "hooks/common/useOrderCalculate";
+import ContentItemBox from "@/components/common/contentItemBox";
+import MenuOrderName from "@/components/menu/menuOrderName";
+import MenuOrderOptoin from "@/components/menu/menuOrderOption";
+import MenuOrderQuantity from "@/components/menu/menuOrderQuantity";
+import MenuOrderRequest from "@/components/menu/menuOrderRequest";
+import MenuOrderPrice from "@/components/menu/menuOrderPrice";
+import MenuOrderCoupon from "@/components/menu/menuOrderCoupon";
+import MenuOrderFinalPrice from "@/components/menu/menuOrderFinalPrice";
 
 export default function EmployeeMenuOrderPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
@@ -76,59 +80,33 @@ export default function EmployeeMenuOrderPage() {
   return (
     <MenuOrderContainer>
       <MenuOrderContent>
-        <MenuOrderBox>
-          <MenuOrderItem>
-            <MenuOrderItemTitle>메뉴</MenuOrderItemTitle>
-            <strong>{selectedMenu.name}</strong>
-          </MenuOrderItem>
-          <MenuOrderItem>
-            <MenuOrderItemTitle>옵션</MenuOrderItemTitle>
-            <Radio.Group onChange={onOptionChange} value={hotColdOption}>
-              {selectedMenu.hotAvailable && <Radio value={1}>hot</Radio>}
-              {selectedMenu.coldAvailable && <Radio value={2}>cold</Radio>}
-            </Radio.Group>
-          </MenuOrderItem>
-          <MenuOrderItem>
-            <MenuOrderItemTitle>수량</MenuOrderItemTitle>
-            <InputNumber
-              min={1}
-              defaultValue={quantity}
-              onChange={onQuantityChange}
-            />
-          </MenuOrderItem>
-          <MenuOrderItem>
-            <MenuOrderItemTitle>요청사항</MenuOrderItemTitle>
-            <Input
-              style={{ width: "70%" }}
-              showCount
-              maxLength={30}
-              onChange={onRequestChange}
-            />
-          </MenuOrderItem>
-        </MenuOrderBox>
-        <MenuOrderBox>
-          <MenuOrderItem>
-            <MenuOrderItemTitle>가격</MenuOrderItemTitle>
-            <p>{price}원</p>
-          </MenuOrderItem>
-          <MenuOrderItem>
-            <MenuOrderItemTitle>쿠폰사용</MenuOrderItemTitle>
-            <InputNumber
-              min={0}
-              max={Math.min(
-                Math.floor(userInfo.coupon / 10) * 10,
-                selectedMenu.couponPrice * quantity
-              )}
-              value={useCoupon}
-              step={selectedMenu.couponPrice}
-              onChange={onCouponChange}
-            />
-          </MenuOrderItem>
-          <MenuOrderItem>
-            <MenuOrderItemTitle>최종금액</MenuOrderItemTitle>
-            <strong>{finalPrice}원</strong>
-          </MenuOrderItem>
-        </MenuOrderBox>
+        <ContentItemBox>
+          <MenuOrderName body={`${selectedMenu.name}`} />
+          <MenuOrderOptoin
+            onOptionChange={onOptionChange}
+            hotColdOption={hotColdOption}
+            hotAvailable={selectedMenu.hotAvailable}
+            coldAvailable={selectedMenu.coldAvailable}
+          />
+          <MenuOrderQuantity
+            quantity={quantity}
+            onQuantityChange={onQuantityChange}
+          />
+          <MenuOrderRequest onRequestChange={onRequestChange} />
+        </ContentItemBox>
+        <ContentItemBox>
+          <MenuOrderPrice price={price} />
+          <MenuOrderCoupon
+            max={Math.min(
+              Math.floor(userInfo.coupon / 10) * 10,
+              selectedMenu.couponPrice * quantity
+            )}
+            useCoupon={useCoupon}
+            step={selectedMenu.couponPrice}
+            onCouponChange={onCouponChange}
+          />
+          <MenuOrderFinalPrice finalPrice={finalPrice} />
+        </ContentItemBox>
       </MenuOrderContent>
       <Button onClick={onClickOrder} type="button">
         확인
