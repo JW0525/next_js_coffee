@@ -12,6 +12,7 @@ import { Radio, InputNumber, Input } from "antd";
 import ButtonBox, { Button } from "../../../../components/common/btn";
 import { MenuOrderContent } from "@/components/menu/menuOrderContent";
 import useMakeOrder from "hooks/api/useMakeOrder";
+import useOrderCalculate from "hooks/common/useOrderCalculate";
 
 export default function EmployeeMenuOrderPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
@@ -21,47 +22,27 @@ export default function EmployeeMenuOrderPage() {
   const [hotColdOption, setOption] = useState(1);
   const { makeOrder, errorMessage } = useMakeOrder();
   const [orderRequest, setOrderRequest] = useState("");
-
-  // fix custom hook
-  const [quantity, setQuantity] = useState(1);
-  const [useCoupon, setUseCoupon] = useState(0);
-  const [price, setPrice] = useState(selectedMenu.price);
-  const [finalPrice, setFinalPrice] = useState(selectedMenu.price);
+  const {
+    quantity,
+    useCoupon,
+    price,
+    finalPrice,
+    onQuantityChange,
+    onCouponChange,
+  } = useOrderCalculate();
 
   const onOptionChange = (e: RadioChangeEvent) => {
     setOption(e.target.value);
   };
 
-  const onQuantityChange = (value: number | null) => {
-    if (!value || value <= 0) {
-      value = 1;
-    }
-    setQuantity(value);
-    setPrice(value * selectedMenu.price);
-    setUseCoupon(0);
-    setFinalPrice(value * selectedMenu.price);
-  };
-
-  const onCouponChange = (value: number | null) => {
-    if (!value) {
-      value = 0;
-    }
-    setUseCoupon(value);
-    setFinalPrice(
-      price - (value / selectedMenu.couponPrice) * selectedMenu.price
-    );
-  };
-
   const onRequestChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    console.log("Change:", e.target.value);
     setOrderRequest(e.target.value);
   };
 
   const onClickOrder = async () => {
     if (confirm(`주문하시겠습니까?`)) {
-      console.log("주문 완료");
       await makeOrder({
         userName: userInfo.name,
         userId: userInfo.uid,
@@ -76,8 +57,6 @@ export default function EmployeeMenuOrderPage() {
         status: "준비중",
         orderMemo: "",
       });
-    } else {
-      console.log("주문 취소");
     }
   };
 
