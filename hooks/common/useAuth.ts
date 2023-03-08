@@ -60,5 +60,6 @@ export const useAuth = () => {
     userInfo,
     setUserInfo,
     handleAuthChange,
+    logout,
   };
 };

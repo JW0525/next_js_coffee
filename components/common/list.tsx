@@ -10,6 +10,7 @@ const ListContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 5px 20px 0;
+  overflow: scroll;
 `;
 const List: FC<{ children: ReactNode }> = ({ children }) => {
   return <ListContainer>{children}</ListContainer>;

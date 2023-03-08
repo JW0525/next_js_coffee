@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { FC, MouseEvent, ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 
 const ListItemContainer = styled.button`
   display: flex;
@@ -11,22 +11,35 @@ const ListItemContainer = styled.button`
   margin: 5px 0;
   padding: 0 10px;
   border-radius: 10px;
-  cursor: pointer;
   background-color: white;
 
-  &:hover {
-    background-color: #f4f4f4;
-  }
+  ${(props: IListItemContainerProps) =>
+    props.isclickable
+      ? {
+          cursor: "pointer",
+          "&:hover": {
+            backgroundColor: "#f4f4f4",
+          },
+        }
+      : {}};
 `;
+
+interface IListItemContainerProps {
+  isclickable: boolean;
+}
 
 interface IListItemProps {
   children: ReactNode;
-  onclick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onclick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  isclickable?: boolean;
 }
 
 const ListItem = (props: IListItemProps) => {
   return (
-    <ListItemContainer onClick={props.onclick}>
+    <ListItemContainer
+      onClick={props.onclick}
+      isclickable={props.isclickable ?? false}
+    >
       {props.children}
     </ListItemContainer>
   );
