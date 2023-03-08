@@ -4,6 +4,7 @@ import { global } from "../styles/global";
 import { Global } from "@emotion/react";
 import { Layout } from "@/components/layout/layout";
 import { RecoilRoot } from "recoil";
+import "antd/dist/reset.css";
 
 export default function App({
   Component,
