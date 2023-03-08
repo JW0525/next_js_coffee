@@ -26,13 +26,17 @@ export default function EmployeeMenuPage() {
 
   return (
     <List>
-      {menuList.map((el, idx) => {
-        return (
-          <ListItem key={idx} onclick={onClickMenu(idx)} isclickable={true}>
-            {el.name}
-          </ListItem>
-        );
-      })}
+      {menuList.length != 0 ? (
+        menuList.map((el, idx) => {
+          return (
+            <ListItem key={idx} onclick={onClickMenu(idx)} isclickable={true}>
+              {el.name}
+            </ListItem>
+          );
+        })
+      ) : (
+        <div style={{ margin: "20px 0" }}>메뉴가 없습니다</div>
+      )}
     </List>
   );
 }
