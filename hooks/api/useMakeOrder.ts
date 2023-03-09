@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { firestoreDB } from "../../utils/firebaseApp";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { Order } from "store/types";
@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 const useMakeOrder = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const todayString = useMemo(() => {
+  const getTodayString = useCallback(() => {
     dayjs.extend(utc);
     dayjs.extend(timezone);
     return dayjs().tz("Asia/Seoul").format("YYYY-MM-DD");
@@ -24,7 +24,7 @@ const useMakeOrder = () => {
       await addDoc(collection(firestoreDB, "orders"), {
         ...param,
         createdAt: serverTimestamp(),
-        createdDate: todayString,
+        createdDate: getTodayString(),
       });
       setIsLoading(false);
       await router.push("/employee/orderHistory");

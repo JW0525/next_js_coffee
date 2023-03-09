@@ -4,7 +4,7 @@ import { DatePicker, Space } from "antd";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useRecoilState } from "recoil";
 import { selectedOrderHistoryDateAtom } from "store/atoms";
 
@@ -15,7 +15,7 @@ export default function OrderHitoryDate() {
     setSelectedDate(dateString);
   };
 
-  const today = useMemo(() => {
+  const getToday = useCallback(() => {
     dayjs.extend(utc);
     dayjs.extend(timezone);
     return dayjs().tz("Asia/Seoul");
@@ -24,7 +24,11 @@ export default function OrderHitoryDate() {
   return (
     <OrderHistoryDateContainer>
       <Title>날짜</Title>
-      <DatePicker defaultValue={today} size="large" onChange={onDateChange} />
+      <DatePicker
+        defaultValue={getToday()}
+        size="large"
+        onChange={onDateChange}
+      />
     </OrderHistoryDateContainer>
   );
 }
