@@ -1,6 +1,9 @@
+import styled from "@emotion/styled";
 import { Layout, Menu } from "antd";
+import { useAuth } from "hooks/common/useAuth";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { MenuInfo } from "rc-menu/lib/interface";
+import { useCallback, useMemo } from "react";
 
 const { Sider } = Layout;
 
@@ -18,7 +21,7 @@ const item: SideBarMenuItem[] = [
   },
   {
     key: "1",
-    label: "메뉴표",
+    label: "메뉴관리",
     path: "/manager/menu",
   },
   {
@@ -40,13 +43,21 @@ const item: SideBarMenuItem[] = [
 
 export default function Sidebar() {
   const router = useRouter();
+  const { logout } = useAuth();
 
   const currentSideMenu = useMemo(() => {
     const idx = item.findIndex((el) => {
       return el.path === router.pathname;
     });
-    return `${idx === -1 ? 0 : idx}`;
+    return `${idx < 0 ? 0 : idx}`;
   }, [router.pathname]);
+
+  const onClickLogout = useCallback(() => {
+    if (confirm("로그아웃 하시겠습니까?")) {
+      localStorage.removeItem("lastpage");
+      logout();
+    }
+  }, []);
 
   return (
     <Sider
@@ -75,6 +86,22 @@ export default function Sidebar() {
           router.push(item[idx].path);
         }}
       />
+      <LogoutBtn onClick={onClickLogout}>로그아웃</LogoutBtn>
     </Sider>
   );
 }
+
+const LogoutBtn = styled.div`
+  height: 40px;
+  border-radius: 8px;
+  margin: 1px 4px;
+  padding: 0 25px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &:hover {
+    background-color: #eaeaea;
+  }
+`;
