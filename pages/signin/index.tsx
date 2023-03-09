@@ -27,8 +27,13 @@ const SignInPage = () => {
 
   useEffect(() => {
     if (!isLogin) return;
-    if (userInfo.isManager) router.push("/manager/order");
-    if (!userInfo.isManager) router.push("/employee/category");
+    if (userInfo.isManager) {
+      const lastpage = localStorage.getItem("lastpage") ?? "/manager/order";
+      router.push(lastpage);
+    } else if (!userInfo.isManager) {
+      const lastpage = localStorage.getItem("lastpage") ?? "/employee/category";
+      router.push(lastpage);
+    }
   }, [isLogin, userInfo.isManager]);
 
   useEffect(() => {

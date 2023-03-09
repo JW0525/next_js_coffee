@@ -2,6 +2,7 @@ import { Button } from "@/components/common/btn";
 import List from "@/components/common/list";
 import ListItem from "@/components/common/listItem";
 import { useAuth } from "hooks/common/useAuth";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { headerTitleAtom } from "store/atoms";
@@ -9,9 +10,11 @@ import { headerTitleAtom } from "store/atoms";
 export default function EmployeeMypagePage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
   const { userInfo, logout } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     setHeaderTitle("마이페이지");
+    localStorage.setItem("lastpage", router.pathname);
   }, []);
 
   return (
