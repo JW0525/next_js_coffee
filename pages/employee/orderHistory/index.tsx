@@ -2,7 +2,6 @@ import List from "@/components/common/list";
 import OrderHistorListItem from "@/components/order/orderHistoryListItem";
 import useOrderHistoryList from "hooks/api/useOrderHistoryList";
 import { useAuth } from "hooks/common/useAuth";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { headerTitleAtom, selectedOrderHistoryDateAtom } from "store/atoms";
@@ -14,8 +13,7 @@ import OrderHitoryDate from "@/components/order/orderHistoryDate";
 
 export default function EmployeeOrderHistoryPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
-  const { isLogin, userInfo } = useAuth();
-  const router = useRouter();
+  const { userInfo } = useAuth();
 
   const { orderHistory, getOrderHistory } = useOrderHistoryList();
   const [selectedDate, setSelectedDate] = useRecoilState(
@@ -24,9 +22,6 @@ export default function EmployeeOrderHistoryPage() {
 
   useEffect(() => {
     setHeaderTitle("주문내역");
-    if (!(isLogin && !userInfo.isManager)) {
-      void router.push("/signin");
-    }
     dayjs.extend(utc);
     dayjs.extend(timezone);
     const today = dayjs().tz("Asia/Seoul").format("YYYY-MM-DD");

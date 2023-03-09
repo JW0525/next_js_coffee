@@ -1,17 +1,19 @@
-import { FC, ReactNode, useMemo } from "react";
+import { FC, ReactNode, useEffect, useMemo } from "react";
 import styled from "@emotion/styled";
 import TabBar from "@/components/layout/tabBar";
 import { useAuth } from "hooks/common/useAuth";
 import Header from "./header";
 import Sidebar from "./sidebar";
+import { Loading } from "../common/loading";
+import { useRouter } from "next/router";
 
 interface ILayoutContainerProps {
   isManagerMode: boolean;
 }
 
 export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
-  const { isLogin, userInfo } = useAuth();
-
+  const { isLogin, userInfo, isLoading } = useAuth();
+  const router = useRouter();
   const isManagerMode = useMemo(() => {
     return isLogin && userInfo.isManager;
   }, [isLogin, userInfo.isManager]);
@@ -19,6 +21,14 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const isEmployeeMode = useMemo(() => {
     return isLogin && !userInfo.isManager;
   }, [isLogin, userInfo.isManager]);
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.push("/signin");
+    }
+  }, [isLogin]);
+
+  if (isLoading) return <Loading />;
 
   return (
     <LayoutContainer isManagerMode={isManagerMode}>

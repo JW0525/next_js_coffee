@@ -1,6 +1,5 @@
 import { MenuOrderContainer } from "@/components/menu/menuOrderContainer";
 import { useAuth } from "hooks/common/useAuth";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { headerTitleAtom, selectedMenuAtom } from "store/atoms";
@@ -21,8 +20,7 @@ import MenuOrderFinalPrice from "@/components/menu/menuOrderFinalPrice";
 export default function EmployeeMenuOrderPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
   const [selectedMenu] = useRecoilState(selectedMenuAtom);
-  const { isLogin, userInfo } = useAuth();
-  const router = useRouter();
+  const { userInfo } = useAuth();
   const [hotColdOption, setOption] = useState(1);
   const { makeOrder, errorMessage } = useMakeOrder();
   const [orderRequest, setOrderRequest] = useState("");
@@ -66,9 +64,6 @@ export default function EmployeeMenuOrderPage() {
 
   useEffect(() => {
     setHeaderTitle("주문하기");
-    if (!(isLogin && !userInfo.isManager)) {
-      void router.push("/signin");
-    }
   }, []);
 
   useEffect(() => {

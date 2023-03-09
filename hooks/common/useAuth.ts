@@ -3,14 +3,16 @@ import { loginStateAtom, userInfoAtom } from "../../store/atoms";
 import { UserInfo } from "../../store/types";
 import { firebaseAuth, firestoreDB } from "../../utils/firebaseApp";
 import { signOut } from "firebase/auth";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 export const useAuth = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const logout = () => {
+  const logout = useCallback(async () => {
+    setIsLoading(true);
     setUserInfo({
       uid: "",
       name: "",
@@ -18,21 +20,23 @@ export const useAuth = () => {
       coupon: 0,
     });
     setIsLogin(false);
-    void signOut(firebaseAuth);
-  };
+    await signOut(firebaseAuth);
+    setIsLoading(false);
+  }, [firebaseAuth]);
 
-  const handleAuthChange = (data: UserInfo) => {
+  const handleAuthChange = useCallback((data: UserInfo) => {
     if (data.name && data.uid) {
       setUserInfo(data);
       setIsLogin(true);
     } else {
       logout();
     }
-  };
+  }, []);
 
   useEffect(() => {
     firebaseAuth.onAuthStateChanged(async (user) => {
       if (user) {
+        setIsLoading(true);
         const q = query(
           collection(firestoreDB, "userInfos"),
           where("uid", "==", user.uid)
@@ -48,11 +52,12 @@ export const useAuth = () => {
           };
           handleAuthChange(userInfo);
         }
+        setIsLoading(false);
       } else {
         logout();
       }
     });
-  }, []);
+  }, [firebaseAuth]);
 
   return {
     isLogin,
@@ -61,5 +66,6 @@ export const useAuth = () => {
     setUserInfo,
     handleAuthChange,
     logout,
+    isLoading,
   };
 };
