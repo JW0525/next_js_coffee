@@ -7,6 +7,7 @@ import utc from "dayjs/plugin/utc";
 import { useCallback, useMemo, useState } from "react";
 import { useRecoilState } from "recoil";
 import { selectedOrderHistoryDateAtom } from "store/atoms";
+import { getToday } from "utils/lib/getToday";
 
 export default function OrderHitoryDate() {
   const [_, setSelectedDate] = useRecoilState(selectedOrderHistoryDateAtom);
@@ -14,12 +15,6 @@ export default function OrderHitoryDate() {
   const onDateChange: DatePickerProps["onChange"] = (_, dateString) => {
     setSelectedDate(dateString);
   };
-
-  const getToday = useCallback(() => {
-    dayjs.extend(utc);
-    dayjs.extend(timezone);
-    return dayjs().tz("Asia/Seoul");
-  }, []);
 
   return (
     <OrderHistoryDateContainer>

@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import OrderHitoryDate from "@/components/order/orderHistoryDate";
+import { getTodayString } from "utils/lib/getToday";
 
 export default function EmployeeOrderHistoryPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
@@ -22,10 +23,7 @@ export default function EmployeeOrderHistoryPage() {
 
   useEffect(() => {
     setHeaderTitle("주문내역");
-    dayjs.extend(utc);
-    dayjs.extend(timezone);
-    const today = dayjs().tz("Asia/Seoul").format("YYYY-MM-DD");
-    setSelectedDate(today);
+    setSelectedDate(getTodayString());
   }, []);
 
   useEffect(() => {

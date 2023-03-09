@@ -6,15 +6,11 @@ import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import { useRouter } from "next/router";
+import { getTodayString } from "utils/lib/getToday";
 
 const useMakeOrder = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const getTodayString = useCallback(() => {
-    dayjs.extend(utc);
-    dayjs.extend(timezone);
-    return dayjs().tz("Asia/Seoul").format("YYYY-MM-DD");
-  }, []);
   const router = useRouter();
 
   const makeOrder = async (param: Order) => {
