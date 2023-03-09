@@ -24,7 +24,7 @@ const SignUpPage = () => {
 
   useEffect(() => {
     if (!isLogin) return;
-    if (userInfo.isManager) router.push("/manager/home");
+    if (userInfo.isManager) router.push("/manager/order");
     if (!userInfo.isManager) router.push("/employee/category");
   }, [isLogin]);
 

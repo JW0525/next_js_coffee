@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import TabBar from "@/components/layout/tabBar";
 import { useAuth } from "hooks/common/useAuth";
 import Header from "./header";
+import Sidebar from "./sidebar";
 
 interface ILayoutContainerProps {
   isManagerMode: boolean;
@@ -20,8 +21,8 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   }, [isLogin, userInfo.isManager]);
 
   return (
-    <LayoutContainer>
-      {/* {isManagerMode && <SideBar/>} */}
+    <LayoutContainer isManagerMode={isManagerMode}>
+      {isManagerMode && <Sidebar />}
       <MainContainer isManagerMode={isManagerMode}>
         {isLogin && <Header />}
         {children}
@@ -33,8 +34,10 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
 
 const LayoutContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props: ILayoutContainerProps) =>
+    props.isManagerMode ? "row" : "column"};
   align-items: center;
+  justify-content: center;
   width: 100vw;
   height: 100vh;
   background-color: floralwhite;
