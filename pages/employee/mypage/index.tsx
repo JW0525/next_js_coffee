@@ -21,7 +21,13 @@ export default function EmployeeMypagePage() {
     <List>
       <ListItem>{`이름 : ${userInfo.name}`}</ListItem>
       <ListItem>{`쿠폰갯수 : ${userInfo.coupon}개`}</ListItem>
-      <ListItem isclickable={true} onclick={logout}>
+      <ListItem
+        isclickable={true}
+        onclick={() => {
+          localStorage.removeItem("lastpage");
+          logout();
+        }}
+      >
         로그아웃
       </ListItem>
     </List>
