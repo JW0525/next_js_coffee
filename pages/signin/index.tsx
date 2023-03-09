@@ -27,12 +27,19 @@ const SignInPage = () => {
 
   useEffect(() => {
     if (!isLogin) return;
+    const lastpage = localStorage.getItem("lastpage") ?? "";
     if (userInfo.isManager) {
-      const lastpage = localStorage.getItem("lastpage") ?? "/manager/order";
-      router.push(lastpage);
+      if (lastpage.includes("/manager")) {
+        router.push(lastpage);
+      } else {
+        router.push("/manager/order");
+      }
     } else if (!userInfo.isManager) {
-      const lastpage = localStorage.getItem("lastpage") ?? "/employee/category";
-      router.push(lastpage);
+      if (lastpage.includes("/employee")) {
+        router.push(lastpage);
+      } else {
+        router.push("/employee/category");
+      }
     }
   }, [isLogin, userInfo.isManager]);
 
