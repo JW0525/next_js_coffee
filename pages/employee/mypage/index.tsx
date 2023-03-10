@@ -14,7 +14,6 @@ export default function EmployeeMypagePage() {
 
   useEffect(() => {
     setHeaderTitle("마이페이지");
-    localStorage.setItem("lastpage", router.pathname);
   }, []);
 
   return (
@@ -24,7 +23,6 @@ export default function EmployeeMypagePage() {
       <ListItem
         isclickable={true}
         onclick={() => {
-          localStorage.removeItem("lastpage");
           logout();
         }}
       >

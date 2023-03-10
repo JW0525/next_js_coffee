@@ -9,7 +9,6 @@ export default function ManagerAdjustmentMonthlyPage() {
 
   useEffect(() => {
     setHeaderTitle("월간 정산");
-    localStorage.setItem("lastpage", router.pathname);
   }, []);
   return (
     <>

@@ -54,7 +54,6 @@ export default function Sidebar() {
 
   const onClickLogout = useCallback(() => {
     if (confirm("로그아웃 하시겠습니까?")) {
-      localStorage.removeItem("lastpage");
       logout();
     }
   }, []);

@@ -9,7 +9,6 @@ export default function ManagerSettingPage() {
 
   useEffect(() => {
     setHeaderTitle("설정");
-    localStorage.setItem("lastpage", router.pathname);
   }, []);
 
   return (

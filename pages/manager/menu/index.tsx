@@ -9,7 +9,6 @@ export default function ManagerMenuPage() {
 
   useEffect(() => {
     setHeaderTitle("메뉴관리");
-    localStorage.setItem("lastpage", router.pathname);
   }, []);
 
   return (

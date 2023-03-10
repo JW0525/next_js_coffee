@@ -22,7 +22,6 @@ export default function EmployeeOrderHistoryPage() {
   useEffect(() => {
     setHeaderTitle("주문내역");
     setSelectedDate(getTodayString());
-    localStorage.setItem("lastpage", router.pathname);
   }, []);
 
   useEffect(() => {

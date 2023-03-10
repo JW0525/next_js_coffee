@@ -9,7 +9,6 @@ export default function ManagerOrderPage() {
 
   useEffect(() => {
     setHeaderTitle("주문현황");
-    localStorage.setItem("lastpage", router.pathname);
   }, []);
 
   return (

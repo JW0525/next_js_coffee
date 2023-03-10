@@ -13,7 +13,6 @@ export default function EmployeeCateogryPage() {
 
   useEffect(() => {
     setHeaderTitle("메뉴");
-    localStorage.setItem("lastpage", router.pathname);
   }, []);
 
   const onClickCategory =

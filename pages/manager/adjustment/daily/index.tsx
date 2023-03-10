@@ -9,7 +9,6 @@ export default function ManagerAdjustmentDailyPage() {
 
   useEffect(() => {
     setHeaderTitle("일간 정산");
-    localStorage.setItem("lastpage", router.pathname);
   }, []);
 
   return (
