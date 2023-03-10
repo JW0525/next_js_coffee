@@ -22,13 +22,7 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
     return isLogin && !userInfo.isManager;
   }, [isLogin, userInfo.isManager]);
 
-  useEffect(() => {
-    if (!isLogin) {
-      router.push("/signin");
-    }
-  }, [isLogin]);
-
-  if (isLoading) return <Loading />;
+  // if (!isManagerMode && !isEmployeeMode) return <Loading />;
 
   return (
     <LayoutContainer isManagerMode={isManagerMode}>
