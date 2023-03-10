@@ -5,11 +5,13 @@ import { firebaseAuth, firestoreDB } from "../../utils/firebaseApp";
 import { signOut } from "firebase/auth";
 import { useCallback, useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 export const useAuth = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const logout = useCallback(async () => {
     setIsLoading(true);
@@ -22,6 +24,7 @@ export const useAuth = () => {
     setIsLogin(false);
     await signOut(firebaseAuth);
     setIsLoading(false);
+    await router.push("/signin")
   }, [firebaseAuth]);
 
   const handleAuthChange = useCallback((data: UserInfo) => {
