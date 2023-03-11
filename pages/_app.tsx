@@ -5,6 +5,10 @@ import { Global } from "@emotion/react";
 import { Layout } from "@/components/layout/layout";
 import { RecoilRoot } from "recoil";
 import "antd/dist/reset.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+const queryClient = new QueryClient();
 
 export default function App({
   Component,
@@ -13,12 +17,15 @@ export default function App({
   return (
     <>
       <RecoilRoot>
-        <SessionProvider session={pageProps.session}>
-          <Layout>
-            <Global styles={global} />
-            <Component {...pageProps} />
-          </Layout>
-        </SessionProvider>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={true} />
+          <SessionProvider session={pageProps.session}>
+            <Layout>
+              <Global styles={global} />
+              <Component {...pageProps} />
+            </Layout>
+          </SessionProvider>
+        </QueryClientProvider>
       </RecoilRoot>
     </>
   );
