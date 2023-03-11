@@ -1,9 +1,10 @@
 import { atom } from "recoil";
 import { Menu, UserInfo } from "./types";
 
-export const loginStateAtom = atom({
+type ILoginStatus = "unknown" | "true" | "false";
+export const loginStateAtom = atom<ILoginStatus>({
   key: "loginState",
-  default: false,
+  default: "unknown",
 });
 
 export const accessTokeneAtom = atom({

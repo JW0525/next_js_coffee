@@ -15,20 +15,20 @@ export const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const { isLogin, userInfo, isLoading } = useAuth();
   const router = useRouter();
   const isManagerMode = useMemo(() => {
-    return isLogin && userInfo.isManager;
+    return isLogin === "true" && userInfo.isManager;
   }, [isLogin, userInfo.isManager]);
 
   const isEmployeeMode = useMemo(() => {
-    return isLogin && !userInfo.isManager;
+    return isLogin === "true" && !userInfo.isManager;
   }, [isLogin, userInfo.isManager]);
 
-  // if (!isManagerMode && !isEmployeeMode) return <Loading />;
+  if (isLogin === "unknown") return <Loading />;
 
   return (
     <LayoutContainer isManagerMode={isManagerMode}>
       {isManagerMode && <Sidebar />}
       <MainContainer isManagerMode={isManagerMode}>
-        {isLogin && <Header />}
+        {isLogin === "true" && <Header />}
         {children}
       </MainContainer>
       {isEmployeeMode && <TabBar />}

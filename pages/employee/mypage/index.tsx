@@ -22,8 +22,9 @@ export default function EmployeeMypagePage() {
       <ListItem>{`쿠폰갯수 : ${userInfo.coupon}개`}</ListItem>
       <ListItem
         isclickable={true}
-        onclick={() => {
-          logout();
+        onclick={async () => {
+          await logout();
+          router.push("/signin");
         }}
       >
         로그아웃

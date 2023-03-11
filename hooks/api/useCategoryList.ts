@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { firestoreDB } from "../../utils/firebaseApp";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { Category } from "store/types";
@@ -7,7 +7,7 @@ const useCategoryList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [categoryList, setCategoryList] = useState<Category[]>([]);
 
-  const getCategoryList = async () => {
+  const getCategoryList = useCallback(async () => {
     if (isLoading) return;
     setIsLoading(true);
     try {
@@ -31,14 +31,11 @@ const useCategoryList = () => {
       setIsLoading(false);
       setCategoryList([]);
     }
-  };
-
-  useEffect(() => {
-    getCategoryList();
-  }, []);
+  }, [firestoreDB]);
 
   return {
     categoryList,
+    getCategoryList,
   };
 };
 

@@ -52,9 +52,10 @@ export default function Sidebar() {
     return `${idx < 0 ? 0 : idx}`;
   }, [router.pathname]);
 
-  const onClickLogout = useCallback(() => {
+  const onClickLogout = useCallback(async () => {
     if (confirm("로그아웃 하시겠습니까?")) {
-      logout();
+      await logout();
+      await router.push("/signin");
     }
   }, []);
 

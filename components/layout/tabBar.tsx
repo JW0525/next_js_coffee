@@ -64,4 +64,5 @@ const TabBarItem = styled.div`
   align-items: center;
   color: black;
   font-size: 1rem;
+  cursor: pointer;
 `;

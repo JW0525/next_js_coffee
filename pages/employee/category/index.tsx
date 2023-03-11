@@ -8,11 +8,13 @@ import { headerTitleAtom } from "store/atoms";
 
 export default function EmployeeCateogryPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
-  const { categoryList } = useCategoryList();
+  const { categoryList, getCategoryList } = useCategoryList();
   const router = useRouter();
 
+  console.log("EmployeeCateogryPage");
   useEffect(() => {
     setHeaderTitle("메뉴");
+    getCategoryList();
   }, []);
 
   const onClickCategory =
@@ -23,13 +25,18 @@ export default function EmployeeCateogryPage() {
 
   return (
     <List>
-      {categoryList.map((el, idx) => {
-        return (
-          <ListItem key={idx} onclick={onClickCategory(idx)} isclickable={true}>
-            {el.name}
-          </ListItem>
-        );
-      })}
+      {categoryList &&
+        categoryList.map((el, idx) => {
+          return (
+            <ListItem
+              key={idx}
+              onclick={onClickCategory(idx)}
+              isclickable={true}
+            >
+              {el.name}
+            </ListItem>
+          );
+        })}
     </List>
   );
 }

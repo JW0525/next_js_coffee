@@ -21,16 +21,15 @@ export const useAuth = () => {
       isManager: false,
       coupon: 0,
     });
-    setIsLogin(false);
+    setIsLogin("false");
     await signOut(firebaseAuth);
     setIsLoading(false);
-    await router.push("/signin")
   }, [firebaseAuth]);
 
   const handleAuthChange = useCallback((data: UserInfo) => {
     if (data.name && data.uid) {
       setUserInfo(data);
-      setIsLogin(true);
+      setIsLogin("true");
     } else {
       logout();
     }

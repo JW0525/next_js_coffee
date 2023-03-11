@@ -16,6 +16,7 @@ import MenuOrderRequest from "@/components/menu/menuOrderRequest";
 import MenuOrderPrice from "@/components/menu/menuOrderPrice";
 import MenuOrderCoupon from "@/components/menu/menuOrderCoupon";
 import MenuOrderFinalPrice from "@/components/menu/menuOrderFinalPrice";
+import { useRouter } from "next/router";
 
 export default function EmployeeMenuOrderPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
@@ -32,6 +33,7 @@ export default function EmployeeMenuOrderPage() {
     onQuantityChange,
     onCouponChange,
   } = useOrderCalculate();
+  const router = useRouter();
 
   const onOptionChange = (e: RadioChangeEvent) => {
     setOption(e.target.value);
@@ -64,7 +66,8 @@ export default function EmployeeMenuOrderPage() {
 
   useEffect(() => {
     setHeaderTitle("주문하기");
-  }, []);
+    if (!selectedMenu.id) router.push("/employee/category");
+  }, [selectedMenu.id]);
 
   useEffect(() => {
     if (errorMessage) {

@@ -26,8 +26,8 @@ const SignInPage = () => {
   };
 
   useEffect(() => {
-    if (!isLogin) return;
-    if (userInfo.isManager) {
+    if (isLogin !== "true") return;
+    else if (userInfo.isManager) {
       router.push("/manager/order");
     } else if (!userInfo.isManager) {
       router.push("/employee/category");
