@@ -1,6 +1,7 @@
 import List from "@/components/common/list";
 import ListItem from "@/components/common/listItem";
-import useCategoryList from "hooks/api/useCategoryList";
+import { Loading } from "@/components/common/loading";
+import useCategoryListQuery from "hooks/queries/useCategoryListQuery";
 import { useRouter } from "next/router";
 import { MouseEvent, useEffect } from "react";
 import { useRecoilState } from "recoil";
@@ -8,24 +9,26 @@ import { headerTitleAtom } from "store/atoms";
 
 export default function EmployeeCateogryPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
-  const { categoryList, getCategoryList } = useCategoryList();
+  const { data: categoryListData, isLoading } = useCategoryListQuery();
   const router = useRouter();
 
   useEffect(() => {
     setHeaderTitle("메뉴");
-    getCategoryList();
   }, []);
 
   const onClickCategory =
     (categoryIdx: number) => (_: MouseEvent<HTMLButtonElement>) => {
-      const category = categoryList[categoryIdx];
+      if (!categoryListData) return;
+      const category = categoryListData[categoryIdx];
       router.push(`/employee/menu/${category.id}`);
     };
 
+  if (isLoading) return <Loading />;
+
   return (
     <List>
-      {categoryList &&
-        categoryList.map((el, idx) => {
+      {categoryListData &&
+        categoryListData.map((el, idx) => {
           return (
             <ListItem
               key={idx}
