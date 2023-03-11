@@ -80,7 +80,11 @@ interface ISignUpForm {
 const schema = yup.object({
   email: yup
     .string()
-    .email("이메일 형식이 아닙니다")
+    // .email("이메일 형식이 아닙니다")
+    .matches(
+      new RegExp("[a-z0-9]+@snaps+.[a-z]{2,3}"),
+      "스냅스 이메일을 입력해주세요"
+    )
     .required("이메일은 필수 입력입니다."),
   password: yup
     .string()
