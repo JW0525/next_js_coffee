@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const TabBarItemList = [
   {
     title: "메뉴",
-    path: "/employee/category",
+    path: "/employee/menu/category",
   },
   {
     title: "주문내역",

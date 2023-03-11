@@ -8,12 +8,17 @@ import { headerTitleAtom } from "store/atoms";
 const Header = () => {
   const router = useRouter();
   const [headerTitle] = useRecoilState(headerTitleAtom);
-  const showBackBtn = useMemo(() => {
-    return router.pathname.includes("employee/menu");
+  const hideBackBtn = useMemo(() => {
+    return (
+      router.pathname.includes("/manager") ||
+      router.pathname.includes("/employee/menu/category") ||
+      router.pathname.includes("/employee/mypage") ||
+      router.pathname.includes("/employee/orderHistory")
+    );
   }, [router.pathname]);
 
   return (
-    <HeaderContainer showBackBtn={showBackBtn}>
+    <HeaderContainer showBackBtn={!hideBackBtn}>
       <span onClick={() => router.back()} />
       <p>{headerTitle}</p>
     </HeaderContainer>

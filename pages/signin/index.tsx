@@ -30,7 +30,7 @@ const SignInPage = () => {
     else if (userInfo.isManager) {
       router.push("/manager/order");
     } else if (!userInfo.isManager) {
-      router.push("/employee/category");
+      router.push("/employee/menu/category");
     }
   }, [isLogin, userInfo.isManager]);
 

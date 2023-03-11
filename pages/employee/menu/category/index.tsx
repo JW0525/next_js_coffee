@@ -11,7 +11,6 @@ export default function EmployeeCateogryPage() {
   const { categoryList, getCategoryList } = useCategoryList();
   const router = useRouter();
 
-  console.log("EmployeeCateogryPage");
   useEffect(() => {
     setHeaderTitle("메뉴");
     getCategoryList();

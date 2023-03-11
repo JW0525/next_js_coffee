@@ -66,7 +66,7 @@ export default function EmployeeMenuOrderPage() {
 
   useEffect(() => {
     setHeaderTitle("주문하기");
-    if (!selectedMenu.id) router.push("/employee/category");
+    if (!selectedMenu.id) router.push("/employee/menu/category");
   }, [selectedMenu.id]);
 
   useEffect(() => {

@@ -21,8 +21,8 @@ export const useAuth = () => {
       isManager: false,
       coupon: 0,
     });
-    setIsLogin("false");
     await signOut(firebaseAuth);
+    setIsLogin("false");
     setIsLoading(false);
   }, [firebaseAuth]);
 
