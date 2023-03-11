@@ -34,25 +34,27 @@ const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: flex-end;
   width: 100%;
-  height: 100px;
   border-bottom: 1px solid lightgray;
   background-color: white;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
 
   span {
-    width: 30px;
+    width: 35px;
     height: 30px;
     ${backgroundIcons};
     background-position: -29px -67px;
     cursor: pointer;
+    margin: 10px 10px 20px;
     visibility: ${(props: IHeaderContainerProps) =>
       props.showBackBtn ? "visible" : "hidden"};
   }
 
   p {
     color: black;
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: bolder;
     margin: 0 20px;
   }

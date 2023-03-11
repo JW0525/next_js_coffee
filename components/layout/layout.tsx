@@ -57,7 +57,7 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   width: ${(props: ILayoutContainerProps) =>
     props.isManagerMode ? "80%" : "480px"};
   background-color: white;
