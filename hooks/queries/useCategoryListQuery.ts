@@ -1,5 +1,5 @@
 import { firestoreDB } from "../../utils/firebaseApp";
-import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import { collection, query, getDocs, orderBy } from "firebase/firestore";
 import { useQuery } from "react-query";
 import React from "react";
 
@@ -17,14 +17,15 @@ const useCategoryListQuery = () => {
   return {
     ...getCategoryListQuery,
     data: React.useMemo(() => {
-      const list = getCategoryListQuery.data?.docs.map((el) => {
-        const category = el.data();
-        return {
-          id: el.id,
-          name: category.name,
-          order: category.order,
-        };
-      });
+      const list =
+        getCategoryListQuery.data?.docs.map((el) => {
+          const category = el.data();
+          return {
+            id: el.id,
+            name: category.name,
+            order: category.order,
+          };
+        }) ?? [];
       return list;
     }, [getCategoryListQuery.data]),
   };

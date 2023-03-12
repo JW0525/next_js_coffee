@@ -18,7 +18,6 @@ export default function EmployeeCateogryPage() {
 
   const onClickCategory =
     (categoryIdx: number) => (_: MouseEvent<HTMLButtonElement>) => {
-      if (!categoryListData) return;
       const category = categoryListData[categoryIdx];
       router.push(`/employee/menu/${category.id}`);
     };
@@ -27,18 +26,13 @@ export default function EmployeeCateogryPage() {
 
   return (
     <List>
-      {categoryListData &&
-        categoryListData.map((el, idx) => {
-          return (
-            <ListItem
-              key={idx}
-              onclick={onClickCategory(idx)}
-              isclickable={true}
-            >
-              {el.name}
-            </ListItem>
-          );
-        })}
+      {categoryListData.map((el, idx) => {
+        return (
+          <ListItem key={idx} onclick={onClickCategory(idx)} isclickable={true}>
+            {el.name}
+          </ListItem>
+        );
+      })}
     </List>
   );
 }
