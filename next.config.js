@@ -16,11 +16,6 @@ const nextConfig = {
   },
   // reactStrictMode: true,
   swcMinify: true,
-  env: {
-    NEXT_PUBLIC_MONGODB_URI:'mongodb+srv://constell:1234@cluster0.56jgory.mongodb.net/project_cafe?retryWrites=true&w=majority',
-    DB_NAME: 'cafe-mongodb',
-    SESSION_SECRET: 'keyboard cat'
-  }
 }
 
 module.exports = nextConfig
