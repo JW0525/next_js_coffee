@@ -26,8 +26,8 @@ export const useAuth = () => {
     setIsLoading(false);
   }, [firebaseAuth]);
 
-  const handleAuthChange = useCallback((data: UserInfo) => {
-    if (data.name && data.uid) {
+  const handleAuthChange = useCallback((data?: UserInfo) => {
+    if (data?.name && data?.uid) {
       setUserInfo(data);
       setIsLogin("true");
     } else {

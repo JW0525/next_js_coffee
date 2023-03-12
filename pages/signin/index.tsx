@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AuthPageContainer from "../../components/layout/authPage";
-import useSignIn from "hooks/api/useSignIn";
 import { useEffect } from "react";
 import { useAuth } from "hooks/common/useAuth";
+import useSignInQuery from "hooks/queries/useSigninMutation";
 
 const SignInPage = () => {
   const router = useRouter();
@@ -14,12 +14,17 @@ const SignInPage = () => {
     resolver: yupResolver(schema),
     mode: "onSubmit",
   });
-  const { mutation: signinMutaoin, error: signinError } = useSignIn();
   const { isLogin, userInfo } = useAuth();
 
   const onClickSubmit = (data: ISignInForm) => {
     signinMutaoin(data);
   };
+
+  const {
+    mutate: signinMutaoin,
+    error: signinError,
+    isError,
+  } = useSignInQuery();
 
   const onClickSignUp = () => {
     router.push("/signup");
@@ -35,10 +40,10 @@ const SignInPage = () => {
   }, [isLogin, userInfo.isManager]);
 
   useEffect(() => {
-    if (signinError) {
+    if (isError) {
       alert(signinError);
     }
-  }, [signinError]);
+  }, [isError]);
 
   return (
     <AuthPageContainer className="page-container">
