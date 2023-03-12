@@ -1,6 +1,5 @@
 import List from "@/components/common/list";
 import OrderHistorListItem from "@/components/order/orderHistoryListItem";
-import useOrderHistoryList from "hooks/api/useOrderHistoryList";
 import { useAuth } from "hooks/common/useAuth";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
@@ -8,15 +7,17 @@ import { headerTitleAtom, selectedOrderHistoryDateAtom } from "store/atoms";
 import OrderHitoryPageContainer from "@/components/order/orderHistoryContainer";
 import OrderHitoryDate from "@/components/order/orderHistoryDate";
 import { getTodayString } from "utils/lib/getToday";
-import { useRouter } from "next/router";
+import useOrderHistoryListQuery from "hooks/queries/useOrderHistoryListQuery";
 
 export default function EmployeeOrderHistoryPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
   const { userInfo } = useAuth();
-  const router = useRouter();
-  const { orderHistory, getOrderHistory } = useOrderHistoryList();
   const [selectedDate, setSelectedDate] = useRecoilState(
     selectedOrderHistoryDateAtom
+  );
+  const { data: orderHistory, refetch } = useOrderHistoryListQuery(
+    userInfo.uid,
+    selectedDate
   );
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function EmployeeOrderHistoryPage() {
 
   useEffect(() => {
     if (selectedDate) {
-      getOrderHistory(userInfo.uid, selectedDate);
+      refetch();
     }
   }, [selectedDate]);
 
