@@ -4,18 +4,22 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AuthPageContainer from "../../components/layout/authPage";
-import useSignUp from "hooks/api/useSignUp";
 import { useEffect } from "react";
 import { useAuth } from "hooks/common/useAuth";
+import useSignUpMutation from "hooks/queries/useSignUpMutation";
 
 const SignUpPage = () => {
   const router = useRouter();
-  const { mutation: signupMutaoin, error: signupError } = useSignUp();
   const { isLogin, userInfo } = useAuth();
   const { register, handleSubmit, formState } = useForm<ISignUpForm>({
     resolver: yupResolver(schema),
     mode: "onSubmit",
   });
+  const {
+    mutate: signupMutaoin,
+    error: signupError,
+    isError,
+  } = useSignUpMutation();
 
   const onClickSubmit = async (data: ISignUpForm) => {
     const { confirmPassword, ...rest } = data;
@@ -29,10 +33,10 @@ const SignUpPage = () => {
   }, [isLogin, userInfo.isManager]);
 
   useEffect(() => {
-    if (signupError) {
+    if (isError) {
       alert(signupError);
     }
-  }, [signupError]);
+  }, [isError]);
 
   return (
     <AuthPageContainer className="page-container">
