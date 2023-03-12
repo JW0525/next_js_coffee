@@ -7,6 +7,7 @@ const OrderHitoryPageContainer = styled.div`
   align-items: center;
 
   width: 100%;
+  overflow: scroll;
 `;
 
 export default OrderHitoryPageContainer;
