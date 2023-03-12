@@ -5,13 +5,13 @@ import type { MenuProps } from "antd";
 import { Button, Table, Dropdown, Space } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useCallback } from "react";
+import { useRecoilState } from "recoil";
+import { orderHistoryListAtom } from "store/atoms";
 
-interface IOrderHistorDetailListProps {
-  orders: Order[];
-}
-function OrderHistorDetailList(props: IOrderHistorDetailListProps) {
+function OrderHistorDetailList() {
   // dev * 주문메모 입력 기능 개발 필요
 
+  const [orders] = useRecoilState(orderHistoryListAtom);
   const getButtonColor = useCallback((status: OrderStatus) => {
     switch (status) {
       case "준비중":
@@ -121,7 +121,7 @@ function OrderHistorDetailList(props: IOrderHistorDetailListProps) {
         }}
         pagination={false}
         columns={columns}
-        dataSource={props.orders}
+        dataSource={orders}
       />
     </OrderHistorDetailListContainer>
   );

@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { Menu, UserInfo } from "./types";
+import { Menu, Order, UserInfo } from "./types";
 
 type ILoginStatus = "unknown" | "true" | "false";
 export const loginStateAtom = atom<ILoginStatus>({
@@ -46,4 +46,9 @@ export const selectedMenuAtom = atom<Menu>({
 export const selectedOrderHistoryDateAtom = atom({
   key: "selectedOrderHistoryDateAtom",
   default: "",
+});
+
+export const orderHistoryListAtom = atom<Order[]>({
+  key: "orderHistoryListAtom",
+  default: [],
 });

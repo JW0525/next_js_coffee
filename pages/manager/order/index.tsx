@@ -5,9 +5,14 @@ import { useAuth } from "hooks/common/useAuth";
 import useOrderHistoryListQuery from "hooks/queries/useOrderHistoryListQuery";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { headerTitleAtom, selectedOrderHistoryDateAtom } from "store/atoms";
+import {
+  headerTitleAtom,
+  orderHistoryListAtom,
+  selectedOrderHistoryDateAtom,
+} from "store/atoms";
 import { setTimeout } from "timers";
 import { getTodayString } from "utils/lib/getToday";
+import { useSubscribeOrderChange } from "hooks/common/useSubscribeOrderChange";
 
 export default function ManagerOrderPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
@@ -15,11 +20,18 @@ export default function ManagerOrderPage() {
   const [selectedDate, setSelectedDate] = useRecoilState(
     selectedOrderHistoryDateAtom
   );
+  const [orders, setOrders] = useRecoilState(orderHistoryListAtom);
 
   const { data: orderHistory, refetch } = useOrderHistoryListQuery(
     userInfo,
     selectedDate
   );
+
+  const { subscribeOrderChange } = useSubscribeOrderChange();
+
+  useEffect(() => {
+    setOrders(orderHistory);
+  }, [orderHistory]);
 
   useEffect(() => {
     setHeaderTitle("주문현황");
@@ -30,15 +42,18 @@ export default function ManagerOrderPage() {
   }, []);
 
   useEffect(() => {
+    if (!selectedDate) return;
     if (selectedDate) {
       refetch();
     }
+    const unsubscribe = subscribeOrderChange(selectedDate);
+    return () => unsubscribe();
   }, [selectedDate]);
 
   return (
     <ManagerOrderPageContainer>
       <OrderHitoryDate />
-      <OrderHistoryDetailList orders={orderHistory} />
+      <OrderHistoryDetailList />
     </ManagerOrderPageContainer>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { Loading } from "@/components/common/loading";
 
 export default function IndexPage() {
   const router = useRouter();
@@ -11,9 +12,5 @@ export default function IndexPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  return (
-    <div>
-      <p>로그인 페이지로 이동합니다.</p>
-    </div>
-  );
+  return <Loading />;
 }
