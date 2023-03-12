@@ -6,7 +6,6 @@ import { headerTitleAtom, selectedMenuAtom } from "store/atoms";
 import type { RadioChangeEvent } from "antd";
 import { Button } from "../../../../components/common/btn";
 import { MenuOrderContent } from "@/components/menu/menuOrderContent";
-import useMakeOrder from "hooks/api/useMakeOrder";
 import useOrderCalculate from "hooks/common/useOrderCalculate";
 import ContentItemBox from "@/components/common/contentItemBox";
 import MenuOrderName from "@/components/menu/menuOrderName";
@@ -17,13 +16,13 @@ import MenuOrderPrice from "@/components/menu/menuOrderPrice";
 import MenuOrderCoupon from "@/components/menu/menuOrderCoupon";
 import MenuOrderFinalPrice from "@/components/menu/menuOrderFinalPrice";
 import { useRouter } from "next/router";
+import useMakeOrderMutation from "hooks/queries/useMakeOrderMutation";
 
 export default function EmployeeMenuOrderPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
   const [selectedMenu] = useRecoilState(selectedMenuAtom);
   const { userInfo } = useAuth();
   const [hotColdOption, setOption] = useState(1);
-  const { makeOrder, errorMessage } = useMakeOrder();
   const [orderRequest, setOrderRequest] = useState("");
   const {
     quantity,
@@ -34,6 +33,11 @@ export default function EmployeeMenuOrderPage() {
     onCouponChange,
   } = useOrderCalculate();
   const router = useRouter();
+  const {
+    mutate: makeOrderMutate,
+    error: errorMessage,
+    isError,
+  } = useMakeOrderMutation();
 
   const onOptionChange = (e: RadioChangeEvent) => {
     setOption(e.target.value);
@@ -45,9 +49,9 @@ export default function EmployeeMenuOrderPage() {
     setOrderRequest(e.target.value);
   };
 
-  const onClickOrder = async () => {
+  const onClickOrder = () => {
     if (confirm(`주문하시겠습니까?`)) {
-      await makeOrder({
+      makeOrderMutate({
         userName: userInfo.name,
         userId: userInfo.uid,
         menuName: selectedMenu.name,
@@ -70,10 +74,10 @@ export default function EmployeeMenuOrderPage() {
   }, [selectedMenu.id]);
 
   useEffect(() => {
-    if (errorMessage) {
+    if (isError) {
       alert(errorMessage);
     }
-  }, [errorMessage]);
+  }, [isError]);
 
   return (
     <MenuOrderContainer>
