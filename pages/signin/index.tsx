@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import AuthPageContainer from "../../components/layout/authPage";
 import { useEffect } from "react";
 import { useAuth } from "hooks/common/useAuth";
-import useSignInQuery from "hooks/queries/useSigninMutation";
+import useSignInMutation from "hooks/queries/useSignInMutation";
 
 const SignInPage = () => {
   const router = useRouter();
@@ -24,7 +24,7 @@ const SignInPage = () => {
     mutate: signinMutaoin,
     error: signinError,
     isError,
-  } = useSignInQuery();
+  } = useSignInMutation();
 
   const onClickSignUp = () => {
     router.push("/signup");

@@ -12,21 +12,17 @@ interface IUseSignInProps {
 const useSignInMutation = () => {
   const { handleAuthChange } = useAuth();
 
-  const signInAndGetUserInfo = async ({ email, password }: IUseSignInProps) => {
-    const userCredential = await signInWithEmailAndPassword(
-      firebaseAuth,
-      email,
-      password
-    );
-    const q = query(
-      collection(firestoreDB, "userInfos"),
-      where("uid", "==", userCredential.user.uid)
-    );
-    return getDocs(q);
+  const signInMutatoin = async ({ email, password }: IUseSignInProps) => {
+    return signInWithEmailAndPassword(firebaseAuth, email, password);
   };
 
-  return useMutation(signInAndGetUserInfo, {
-    onSuccess: (data) => {
+  return useMutation(signInMutatoin, {
+    onSuccess: async (userCredential) => {
+      const q = query(
+        collection(firestoreDB, "userInfos"),
+        where("uid", "==", userCredential.user.uid)
+      );
+      const data = await getDocs(q);
       const doc = data.docs[0].data();
       const userInfo = {
         uid: doc.uid,
