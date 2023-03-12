@@ -23,9 +23,10 @@ export default function ManagerOrderPage() {
 
   useEffect(() => {
     setHeaderTitle("주문현황");
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setSelectedDate(getTodayString());
     }, 500);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {

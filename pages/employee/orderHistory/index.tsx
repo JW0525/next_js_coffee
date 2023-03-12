@@ -23,9 +23,10 @@ export default function EmployeeOrderHistoryPage() {
 
   useEffect(() => {
     setHeaderTitle("주문내역");
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setSelectedDate(getTodayString());
     }, 500);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
