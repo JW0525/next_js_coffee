@@ -36,7 +36,7 @@ export const useAuth = () => {
   }, []);
 
   useEffect(() => {
-    firebaseAuth.onAuthStateChanged(async (user) => {
+    const unsubscribe = firebaseAuth.onAuthStateChanged(async (user) => {
       if (user) {
         setIsLoading(true);
         const q = query(
@@ -59,6 +59,7 @@ export const useAuth = () => {
         logout();
       }
     });
+    return () => unsubscribe();
   }, [firebaseAuth]);
 
   return {
