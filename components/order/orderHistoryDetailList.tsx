@@ -4,14 +4,16 @@ import { DownOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Button, Table, Dropdown, Space } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { orderHistoryListAtom } from "store/atoms";
+import useOrderStatusMutaion from "hooks/queries/useOrderStatusMutation";
 
 function OrderHistorDetailList() {
   // dev * 주문메모 입력 기능 개발 필요
 
-  const [orders] = useRecoilState(orderHistoryListAtom);
+  const { mutate, error, isError } = useOrderStatusMutaion();
+  const [orders, setOrders] = useRecoilState(orderHistoryListAtom);
   const getButtonColor = useCallback((status: OrderStatus) => {
     switch (status) {
       case "준비중":
@@ -23,29 +25,48 @@ function OrderHistorDetailList() {
     }
   }, []);
 
+  useEffect(() => {
+    if (isError) {
+      alert(error);
+    }
+  }, [isError]);
+
   const handlesOrderStatusClick = useCallback(
     (order: Order): MenuProps["onClick"] =>
       (e) => {
-        console.log("click", order);
-        console.log("click", e);
+        mutate(
+          {
+            order: order,
+            newStatus: e.key,
+          },
+          {
+            onSuccess: () => {
+              let copy = [...orders];
+              const idx = copy.findIndex((el) => {
+                return el.id === order.id;
+              });
+              if (idx >= 0 && idx < orders.length) {
+                let newStatus: OrderStatus;
+                switch (e.key) {
+                  case "주문취소":
+                    newStatus = "주문취소";
+                    break;
+                  case "완료":
+                    newStatus = "완료";
+                    break;
+                  default:
+                    newStatus = "준비중";
+                    break;
+                }
+                copy[idx] = { ...order, status: newStatus };
+                setOrders(copy);
+              }
+            },
+          }
+        );
       },
-    []
+    [orders]
   );
-
-  const menus = [
-    {
-      label: "준비중",
-      key: "0",
-    },
-    {
-      label: "주문취소",
-      key: "1",
-    },
-    {
-      label: "완료",
-      key: "2",
-    },
-  ];
 
   const columns: ColumnsType<Order> = [
     {
@@ -58,7 +79,20 @@ function OrderHistorDetailList() {
           <Dropdown
             trigger={["click"]}
             menu={{
-              items: menus,
+              items: [
+                {
+                  label: "준비중",
+                  key: "준비중",
+                },
+                {
+                  label: "주문취소",
+                  key: "주문취소",
+                },
+                {
+                  label: "완료",
+                  key: "완료",
+                },
+              ],
               onClick: handlesOrderStatusClick(order),
             }}
           >

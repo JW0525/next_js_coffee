@@ -4,6 +4,8 @@ import {
   query,
   where,
   orderBy,
+  Query,
+  DocumentData,
 } from "firebase/firestore";
 import { firestoreDB } from "utils/firebaseApp";
 import { Order } from "store/types";
@@ -16,7 +18,7 @@ export const useSubscribeOrderChange = () => {
 
   const subscribeOrderChange = useCallback(
     (selectedDate: string) => {
-      const q = query(
+      const q: Query<DocumentData> = query(
         collection(firestoreDB, "orders"),
         where("createdDate", "==", selectedDate),
         orderBy("createdAt", "desc")
