@@ -8,6 +8,7 @@ import OrderHitoryPageContainer from "@/components/order/orderHistoryContainer";
 import OrderHitoryDate from "@/components/order/orderHistoryDate";
 import { getTodayString } from "utils/lib/getToday";
 import useOrderHistoryListQuery from "hooks/queries/useOrderHistoryListQuery";
+import { setTimeout } from "timers";
 
 export default function EmployeeOrderHistoryPage() {
   const [_, setHeaderTitle] = useRecoilState(headerTitleAtom);
@@ -16,13 +17,15 @@ export default function EmployeeOrderHistoryPage() {
     selectedOrderHistoryDateAtom
   );
   const { data: orderHistory, refetch } = useOrderHistoryListQuery(
-    userInfo.uid,
+    userInfo,
     selectedDate
   );
 
   useEffect(() => {
     setHeaderTitle("주문내역");
-    setSelectedDate(getTodayString());
+    setTimeout(() => {
+      setSelectedDate(getTodayString());
+    }, 500);
   }, []);
 
   useEffect(() => {

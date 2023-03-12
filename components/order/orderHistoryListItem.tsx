@@ -15,7 +15,7 @@ function OrderHistorListItem(order: IOrderHistorListItemProps) {
         <OrderStatus status={status}>{status}</OrderStatus>
         <span
           style={{ flex: "3 1 0", marginLeft: "10px" }}
-        >{`${menuName} (${hotColdOption}${request && " , " + request})`}</span>
+        >{`${menuName}, ${hotColdOption}${request && ", " + request}`}</span>
         <span>{`수량 : ${quantity}`}</span>
       </OrderHistoryItem>
       {orderMemo && (

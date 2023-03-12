@@ -52,13 +52,15 @@ const LayoutContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
-  padding-bottom: 80px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+
   height: 100%;
   width: ${(props: ILayoutContainerProps) =>
     props.isManagerMode ? "80%" : "480px"};
+  padding-bottom: ${(props: ILayoutContainerProps) =>
+    props.isManagerMode ? "0" : "80px"};
   background-color: white;
 `;

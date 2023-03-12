@@ -2,20 +2,29 @@ import { firestoreDB } from "../../utils/firebaseApp";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { useQuery } from "react-query";
 import React from "react";
-import { Order } from "store/types";
+import { Order, UserInfo } from "store/types";
 import { getTodayString } from "utils/lib/getToday";
 import { date } from "yup";
 
-const useOrderHistoryListQuery = (uid: string, dateString: string) => {
+const useOrderHistoryListQuery = (user: UserInfo, dateString: string) => {
   const getOrderHistoryList = async () => {
-    if (!uid || !date) return;
-    const q = query(
-      collection(firestoreDB, "orders"),
-      where("createdDate", "==", dateString),
-      where("userId", "==", uid),
-      orderBy("createdAt", "desc")
-    );
-    return getDocs(q);
+    if (!user.uid || !date) return;
+    if (user.isManager) {
+      const q = query(
+        collection(firestoreDB, "orders"),
+        where("createdDate", "==", dateString),
+        orderBy("createdAt", "desc")
+      );
+      return getDocs(q);
+    } else {
+      const q = query(
+        collection(firestoreDB, "orders"),
+        where("createdDate", "==", dateString),
+        where("userId", "==", user.uid),
+        orderBy("createdAt", "desc")
+      );
+      return getDocs(q);
+    }
   };
 
   const getOrderHistoryListQuery = useQuery(
